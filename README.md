@@ -33,6 +33,21 @@ GitLab CI in `.gitlab-ci.yml`:
 - Installs dependencies
 - Builds Angular app
 - Publishes `dist/st-mina-ui/browser` to GitLab Pages (`public/`)
+- Deploys on both `main` and `qc` branches
+
+## QC Branch (Tester Access)
+
+- Shared tester branch: `qc`
+- Branch URL: `https://gitlab.com/saint-mina-integration-team/St.Mina.com/-/tree/qc`
+- Merge Request target for test-ready work: `qc`
+- Pages deploy is automatic when commits are pushed to `qc`
+
+For testers who want local validation:
+
+1. `git fetch origin`
+2. `git checkout qc`
+3. `npm install`
+4. `npm start`
 
 ## Notes
 
