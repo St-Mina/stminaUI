@@ -1,0 +1,31 @@
+<main class="page">
+  <header class="hero">
+    <h1>{{ siteName }}</h1>
+    <p>Welcome to our church website. Latest announcements are loaded from WordPress.</p>
+  </header>
+
+  <section class="posts" aria-label="Latest posts">
+    <h2>Latest News</h2>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    @if ((posts$ | async); as posts) {
+      @if (posts.length === 0 && !errorMessage()) {
+        <p class="empty">No posts yet.</p>
+      }
+
+      <div class="post-grid">
+        @for (post of posts; track post.id) {
+          <article class="post-card">
+            <h3 [innerHTML]="post.title.rendered"></h3>
+            <p class="meta">{{ post.date | date: 'mediumDate' }}</p>
+            <div class="excerpt" [innerHTML]="post.excerpt.rendered"></div>
+            <a [href]="post.link" target="_blank" rel="noopener noreferrer">Read more</a>
+          </article>
+        }
+      </div>
+    }
+  </section>
+</main>

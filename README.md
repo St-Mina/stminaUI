@@ -1,55 +1,40 @@
-# St.Mina.com
+# St. Mina Church UI (Angular + WordPress)
 
-# Church Website WordPress Theme (UI)
+Angular frontend for the church website, powered by WordPress content via the REST API.
 
-This repository contains the custom WordPress theme for the church website.
+## Stack
 
-It handles:
-- Layout and styling
-- Page templates
-- Front-end scripts
-- UI components
-- Theme-level logic
+- Angular 21 (standalone app)
+- SCSS
+- WordPress REST API (`/wp-json/wp/v2`)
+- GitLab Pages deployment
 
----
+## Quick Start
 
-## 🏗 Tech Stack
+1. Install dependencies:
+   - `npm install`
+2. Set your WordPress API base URL:
+   - Development: edit `src/environments/environment.development.ts`
+   - Production: edit `src/environments/environment.ts`
+3. Run locally:
+   - `npm start`
+4. Build for production:
+   - `npm run build -- --configuration production`
 
-- WordPress Theme
-- PHP
-- HTML / CSS
-- (Optional) Tailwind / Sass / JS build tools
+## WordPress Requirements
 
----
+- WordPress site must expose the REST API:
+  - `https://your-site.com/wp-json/wp/v2/posts`
+- If your WordPress domain differs from Angular domain, enable CORS on WordPress/server.
 
-## 📂 Repository Structure
+## CI / Deployment
 
-theme/
-├── style.css
-├── functions.php
-├── index.php
-├── templates/
-├── assets/
-└── inc/
+GitLab CI in `.gitlab-ci.yml`:
+- Installs dependencies
+- Builds Angular app
+- Publishes `dist/st-mina-ui/browser` to GitLab Pages (`public/`)
 
----
+## Notes
 
-## 🚀 Local Development Setup
-
-### Option 1 (Recommended): LocalWP
-1. Install LocalWP
-2. Create a new WordPress site
-3. Copy this theme into:
-   wp-content/themes/<theme-name>/
-4. Activate in WP Admin → Appearance → Themes
-
----
-
-## 🛠 Development Workflow
-
-### Create a Feature Branch
-
-Never work directly on `main`.
-
-```bash
-git checkout -b feature/short-description
+- Previous static prototype files were moved to `legacy-static/`.
+- Homepage currently shows latest posts from WordPress as a starter integration.
