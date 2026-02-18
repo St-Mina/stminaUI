@@ -1,0 +1,16 @@
+stages:
+  - deploy
+
+pages:
+  image: node:20-alpine
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build -- --configuration production
+    - mkdir -p public
+    - cp -r dist/st-mina-ui/browser/* public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
