@@ -14,3 +14,18 @@ pages:
       - public
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+
+qc_preview:
+  image: node:20-alpine
+  stage: deploy
+  script:
+    - npm ci
+    - npm run build -- --configuration production
+    - mkdir -p qc-preview
+    - cp -r dist/st-mina-ui/browser/* qc-preview/
+  artifacts:
+    paths:
+      - qc-preview
+    expire_in: 14 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == "qc"
