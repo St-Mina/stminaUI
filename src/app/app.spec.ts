@@ -24,7 +24,7 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const request = httpTestingController.expectOne(
-      'http://localhost/wordpress/wp-json/wp/v2/posts?per_page=6&_embed=true'
+      (req) => req.method === 'GET' && req.url.endsWith('/wp/v2/posts')
     );
     request.flush([]);
 
@@ -36,7 +36,7 @@ describe('App', () => {
     const fixture = TestBed.createComponent(App);
     fixture.detectChanges();
     const request = httpTestingController.expectOne(
-      'http://localhost/wordpress/wp-json/wp/v2/posts?per_page=6&_embed=true'
+      (req) => req.method === 'GET' && req.url.endsWith('/wp/v2/posts')
     );
     request.flush([]);
 

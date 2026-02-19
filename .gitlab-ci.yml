@@ -1,11 +1,49 @@
 stages:
+  - verify
+  - test
+  - build
   - deploy
 
-pages:
+default:
   image: node:20-alpine
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .npm/
+  before_script:
+    - npm ci --cache .npm --prefer-offline
+
+typecheck_mr:
+  stage: verify
+  script:
+    - npx tsc --noEmit -p tsconfig.app.json
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+unit_test_mr:
+  stage: test
+  script:
+    - npm run test -- --watch=false
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+build_mr:
+  stage: build
+  script:
+    - npm run build -- --configuration production
+  needs:
+    - typecheck_mr
+    - unit_test_mr
+  artifacts:
+    paths:
+      - dist/st-mina-ui/
+    expire_in: 7 days
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+
+pages:
   stage: deploy
   script:
-    - npm ci
     - npm run build -- --configuration production
     - mkdir -p public
     - cp -r dist/st-mina-ui/browser/* public/
@@ -14,3 +52,16 @@ pages:
       - public
   rules:
     - if: $CI_COMMIT_BRANCH == "main"
+
+qc_preview:
+  stage: deploy
+  script:
+    - npm run build -- --configuration production
+    - mkdir -p qc-preview
+    - cp -r dist/st-mina-ui/browser/* qc-preview/
+  artifacts:
+    paths:
+      - qc-preview
+    expire_in: 14 days
+  rules:
+    - if: $CI_COMMIT_BRANCH == "qc"
