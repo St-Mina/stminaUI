@@ -66,6 +66,17 @@
               "optimization": false,
               "extractLicenses": false,
               "sourceMap": true
+            },
+            "qc": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qc.ts"
+                }
+              ],
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
             }
           },
           "defaultConfiguration": "production"
@@ -78,6 +89,9 @@
             },
             "development": {
               "buildTarget": "st-mina-ui:build:development"
+            },
+            "qc": {
+              "buildTarget": "st-mina-ui:build:qc"
             }
           },
           "defaultConfiguration": "development"

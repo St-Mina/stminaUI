@@ -15,11 +15,14 @@ Angular frontend for the church website, powered by WordPress content via the RE
    - `npm install`
 2. Set your WordPress API base URL:
    - Development: edit `src/environments/environment.development.ts`
+   - QC: edit `src/environments/environment.qc.ts`
    - Production: edit `src/environments/environment.ts`
 3. Run locally:
-   - `npm start`
-4. Build for production:
+   - `npm start` (development)
+   - `npm start -- --configuration=qc` (QC environment)
+4. Build:
    - `npm run build -- --configuration production`
+   - `npm run build -- --configuration qc`
 
 ## WordPress Requirements
 
@@ -42,13 +45,14 @@ GitLab CI in `.gitlab-ci.yml`:
 - Branch URL: `https://gitlab.com/saint-mina-integration-team/St.Mina.com/-/tree/qc`
 - Merge Request target for test-ready work: `qc`
 - Preview build is available from the latest `qc` pipeline in job `qc_preview` artifacts
+- QC uses a staging WordPress site (non-production) configured in `src/environments/environment.qc.ts`
 
 For testers who want local validation:
 
 1. `git fetch origin`
 2. `git checkout qc`
 3. `npm install`
-4. `npm start`
+4. `npm start -- --configuration=qc`
 
 ## Notes
 
