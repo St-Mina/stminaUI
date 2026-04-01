@@ -20,8 +20,8 @@ A **TypeScript / Angular 17** single-page application scaffold with a structured
 
 | Tool | Version |
 |------|---------|
-| Angular | 17 |
-| TypeScript | ~5.4 |
+| Angular | 19.2.20 |
+| TypeScript | ~5.8 |
 | Node.js | 20 (LTS) |
 | Package manager | npm |
 | Style | SCSS |
