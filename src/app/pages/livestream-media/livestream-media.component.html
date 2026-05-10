@@ -180,15 +180,26 @@ class="archive-thumb"
 </div>
 
 <h3>
-<ng-container *ngIf="item.useCopticFont; else normalTitle">
-<span class="coptic-text">{{ item.copticTitle }}</span>
-<span class="english-text"> (Part {{ item.part }})</span>
-</ng-container>
+  <ng-container *ngIf="item.useCopticFont; else normalTitle">
+    <span class="coptic-text">{{ item.copticTitle }}</span>
+
+    <span class="english-text" *ngIf="item.part">
+      (Part {{ item.part }})
+    </span>
+  </ng-container>
 
 <ng-template #normalTitle>
-{{ item.title }}
+  <span>{{ item.title }}</span>
+
+  <span
+    class="coptic-text"
+    *ngIf="item.copticSuffix"
+  >
+    ({{ item.copticSuffix }})
+  </span>
 </ng-template>
 </h3>
+
 <p>{{ item.subtitle }}</p>
 
 <a

@@ -5,24 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 
-type MediaCategory =
-| 'all'
-| 'sermons'
-| 'hymns'
-| 'heritage-videos';
-
-interface ArchiveItem {
-title?: string;
-copticTitle?: string;
-part?: number;
-subtitle: string;
-category: MediaCategory;
-videoId: string;
-thumbnail: string;
-watchUrl: string;
-source: 'channel' | 'manual';
-useCopticFont?: boolean;
-}
+import {
+  ARCHIVE_ITEMS,
+  ArchiveItem,
+  MediaCategory
+} from './archive-items';
 
 @Component({
 selector: 'app-livestream-media',
@@ -51,7 +38,7 @@ private readonly sanitizer: DomSanitizer
 ) {}
 
 ngOnInit(): void {
-this.manualItems = this.getManualItems();
+this.manualItems = ARCHIVE_ITEMS;
 this.initializeLivestream();
 this.fetchRecentVideos();
 }
@@ -244,170 +231,6 @@ error: () => {
 this.loadingArchive = false;
 }
 });
-}
-
-private getManualItems(): ArchiveItem[] {
-return [
-{
-title: 'Divine Liturgy and Celebration: Priesthood Ordination of Fr. Boutros Boutros (February 16, 1997)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'AAVqbo9GdFY',
-thumbnail: 'https://img.youtube.com/vi/AAVqbo9GdFY/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=AAVqbo9GdFY',
-source: 'manual',
-},
-{
-title: 'Divine Liturgy: Fr. Boutros Boutros at St. Mary El-Sourian Monastery (March 24, 1997)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'T5_Q0d353kw',
-thumbnail: 'https://img.youtube.com/vi/T5_Q0d353kw/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=T5_Q0d353kw',
-source: 'manual',
-},
-{
-title: 'Reception Prayer and Receiving of Fr. Boutros Boutros to Nashville, TN (April 4, 1997)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'EnrcVgEGT4w',
-thumbnail: 'https://img.youtube.com/vi/EnrcVgEGT4w/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=EnrcVgEGT4w',
-source: 'manual',
-},
-{
-title: 'First Divine Liturgy for Fr. Boutros Boutros in Nashville, TN (April 5, 1997)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'iH701rcVwMo',
-thumbnail: 'https://img.youtube.com/vi/iH701rcVwMo/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=iH701rcVwMo',
-source: 'manual',
-},
-{
-title: 'Glorious Nativity Feast with His Eminence Metropolitan Youssef (January 6, 1998)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: '4kLCC0P-hGI',
-thumbnail: 'https://img.youtube.com/vi/4kLCC0P-hGI/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=4kLCC0P-hGI',
-source: 'manual',
-},
-{
-title: 'St. Mina Church Consecration and the Priesthood Ordination of the Reposed Fr. Mina Iskander (August 27, 2000)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'nwdAm9pIlXw',
-thumbnail: 'https://img.youtube.com/vi/nwdAm9pIlXw/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=nwdAm9pIlXw',
-source: 'manual',
-},
-{
-title: 'Divine Liturgy: Hegumen Elevation of Fr. Boutros Boutros (February 5, 2017)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'Fw08GjO5S_g',
-thumbnail: 'https://img.youtube.com/vi/Fw08GjO5S_g/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=Fw08GjO5S_g',
-source: 'manual',
-},
-{
-title: 'St. Mina Renovated Church Consecration (November 28, 2022)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'Vhnyzn_fUvY',
-thumbnail: 'https://img.youtube.com/vi/Vhnyzn_fUvY/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=Vhnyzn_fUvY',
-source: 'manual',
-},
-{
-title: 'Divine Liturgy: Deacon Ordination of Fr. Kyrillos Zaki (August 23, 2025)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'lQeZJqXBE9M',
-thumbnail: 'https://img.youtube.com/vi/lQeZJqXBE9M/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=lQeZJqXBE9M',
-source: 'manual',
-},
-{
-title: 'Vespers and Midnight Praises with H.E.M. Youssef, H.E.M. Youannes, H.G.B. Basil, & H.G.B. Gregory (August 23, 2025)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'MPSvz4LM3IQ',
-thumbnail: 'https://img.youtube.com/vi/MPSvz4LM3IQ/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=MPSvz4LM3IQ',
-source: 'manual',
-},
-{
-title: 'Divine Liturgy: Priesthood Ordination of Fr. Kyrillos Zaki (August 24, 2025)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'x0Y6pwzDqqM',
-thumbnail: 'https://img.youtube.com/vi/x0Y6pwzDqqM/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=x0Y6pwzDqqM',
-source: 'manual',
-},
-{
-title: 'Reception Prayer and Receiving of Fr. Kyrillos Zaki (October 3, 2025)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'B9ulu9Jc-sc',
-thumbnail: 'https://img.youtube.com/vi/B9ulu9Jc-sc/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=B9ulu9Jc-sc',
-source: 'manual',
-},
-{
-title: 'Vespers with His Eminence Metropolitan Antonious (November 28, 2025)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: 'OP_AHRwWXYs',
-thumbnail: 'https://img.youtube.com/vi/OP_AHRwWXYs/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=OP_AHRwWXYs',
-source: 'manual',
-},
-{
-title: 'Divine Liturgy with His Eminence Metropolitan Antonious (November 29, 2025)',
-subtitle: 'Heritage Video',
-category: 'heritage-videos',
-videoId: '_JJGD2OFaMQ',
-thumbnail: 'https://img.youtube.com/vi/_JJGD2OFaMQ/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=_JJGD2OFaMQ',
-source: 'manual',
-},
-{
-title: 'Coptic Deacon Responses',
-subtitle: 'Hymns',
-category: 'hymns',
-videoId: 'Wb9QBeSo3o0',
-thumbnail: 'https://img.youtube.com/vi/Wb9QBeSo3o0/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=Wb9QBeSo3o0',
-source: 'manual',
-},
-{
-title: 'Nieqnoc throu (Part 1)',
-copticTitle: 'Nieqnoc throu',
-part: 1,
-subtitle: 'Hymns',
-category: 'hymns',
-videoId: 'GyHISTEfWFI',
-thumbnail: 'https://img.youtube.com/vi/GyHISTEfWFI/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=GyHISTEfWFI',
-source: 'manual',
-useCopticFont: true
-},
-{
-title: 'Nieqnoc throu (Part 2)',
-copticTitle: 'Nieqnoc throu',
-part: 2,
-subtitle: 'Hymns',
-category: 'hymns',
-videoId: 'N5DiOHWpF0Q',
-thumbnail: 'https://img.youtube.com/vi/N5DiOHWpF0Q/hqdefault.jpg',
-watchUrl: 'https://www.youtube.com/watch?v=N5DiOHWpF0Q',
-source: 'manual',
-useCopticFont: true
-},
-];
 }
 
 private inferCategory(title: string): MediaCategory {
