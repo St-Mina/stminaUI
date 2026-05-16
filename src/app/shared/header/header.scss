@@ -1,22 +1,29 @@
-$navy: #1B2A44;
-$gold: #C9A084;
+$navy: #1b2a44;
+$gold: #c9a084;
 
 .navbar {
   width: 100%;
-  background: white;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  background: #fff;
   border-bottom: 1px solid rgba(169, 154, 141, 0.3);
-  padding: 0 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   position: sticky;
   top: 0;
   z-index: 1000;
 }
 
-// ─── Brand ──────────────────────────────────────────────
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
 .nav-brand {
+  justify-self: start;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -33,12 +40,12 @@ $gold: #C9A084;
   font-family: 'Playfair Display', serif;
   font-weight: 700;
   font-size: 24px;
-  line-height: 32px;
+  line-height: 1.2;
   color: $navy;
 }
 
-// ─── Nav Links ──────────────────────────────────────────
 .nav-links {
+  justify-self: center;
   display: flex;
   align-items: center;
   gap: 32px;
@@ -53,21 +60,17 @@ $gold: #C9A084;
     white-space: nowrap;
     transition: color 0.2s;
 
-    &:hover {
-      color: $gold;
-    }
-
+    &:hover,
     &.active {
       color: $gold;
     }
   }
 }
 
-// ─── CTA Button ─────────────────────────────────────────
 .btn-cta {
+  justify-self: end;
   padding: 10px 24px;
   background: $gold;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
   border-radius: 10px;
   font-family: 'Inter', sans-serif;
   font-weight: 700;
@@ -84,9 +87,9 @@ $gold: #C9A084;
   }
 }
 
-// ─── Mobile Toggle ──────────────────────────────────────
 .menu-toggle {
   display: none;
+  justify-self: end;
   background: none;
   border: none;
   cursor: pointer;
@@ -135,10 +138,9 @@ $gold: #C9A084;
   }
 }
 
-// ─── Responsive ─────────────────────────────────────────
-@media (max-width: 1024px) {
-  .navbar {
-    padding: 0 24px;
+@media (max-width: 1280px) {
+  .brand-text {
+    font-size: 20px;
   }
 
   .nav-links {
@@ -146,10 +148,33 @@ $gold: #C9A084;
   }
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-wrap: wrap;
-    padding: 12px 24px;
+@media (max-width: 1024px) {
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .brand-text {
+    font-size: 18px;
+  }
+
+  .nav-links {
+    gap: 14px;
+
+    a {
+      font-size: 13px;
+    }
+  }
+
+  .btn-cta {
+    padding: 9px 16px;
+  }
+}
+
+@media (max-width: 900px) {
+  .nav-container {
+    grid-template-columns: 1fr auto;
+    min-height: 72px;
+    padding: 12px 1rem;
   }
 
   .menu-toggle {
@@ -162,10 +187,12 @@ $gold: #C9A084;
 
   .nav-links {
     display: none;
-    flex-direction: column;
+    grid-column: 1 / -1;
     width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 0;
-    padding: 16px 0;
+    padding: 12px 0 4px;
     border-top: 1px solid rgba(169, 154, 141, 0.3);
 
     &.open {
@@ -173,148 +200,12 @@ $gold: #C9A084;
     }
 
     a {
+      width: 100%;
       padding: 12px 0;
     }
   }
-}
-$navy: #1a2a4a;
-$gold: #c9a84c;
 
-.navbar {
-  background: $navy;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 1.5rem;
-  height: 70px;
-}
-
-.nav-brand {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  text-decoration: none;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.brand-icon {
-  font-size: 1.8rem;
-  color: $gold;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0;
-
-  a {
-    display: block;
-    padding: 0.5rem 1rem;
-    color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-weight: 500;
-    border-radius: 6px;
-    transition: color 0.2s, background 0.2s;
-
-    &:hover {
-      color: #fff;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    &.active {
-      color: $gold;
-      background: rgba(201, 168, 76, 0.1);
-    }
-  }
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0.5rem;
-}
-
-.hamburger {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background: #fff;
-  position: relative;
-  transition: background 0.2s;
-
-  &::before,
-  &::after {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 2px;
-    background: #fff;
-    position: absolute;
-    transition: transform 0.3s;
-  }
-
-  &::before {
-    top: -7px;
-  }
-
-  &::after {
-    top: 7px;
-  }
-
-  &.open {
-    background: transparent;
-
-    &::before {
-      top: 0;
-      transform: rotate(45deg);
-    }
-
-    &::after {
-      top: 0;
-      transform: rotate(-45deg);
-    }
-  }
-}
-
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-
-  .nav-links {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    background: $navy;
-    padding: 1rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
-    &.open {
-      display: flex;
-    }
-
-    a {
-      padding: 0.75rem 1rem;
-    }
+  .brand-text {
+    font-size: 16px;
   }
 }
