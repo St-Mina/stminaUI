@@ -13,9 +13,8 @@ $bg-warm: #f0ebe1;
   align-items: center;
   justify-content: center;
   background:
-    linear-gradient(135deg, rgba(26, 42, 74, 0.92), rgba(26, 42, 74, 0.7)),
-    url('/assets/images/church-hero.jpg') center/cover no-repeat;
-  background-color: $navy;
+    radial-gradient(ellipse at center, rgba(201, 168, 76, 0.18), transparent 60%),
+    linear-gradient(135deg, $navy 0%, $navy-light 60%, #0f1a2e 100%);
   color: #fff;
   text-align: center;
 }
