@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 import { YouTubeService, YouTubeVideo } from '../../services/youtube.service';
+import { environment } from '../../../environments/environment';
 
 interface UpcomingStream {
   icon: string;
@@ -25,6 +26,8 @@ interface UpcomingEvent {
 export class Livestream implements OnInit {
   private readonly youtube = inject(YouTubeService);
   private readonly sanitizer = inject(DomSanitizer);
+
+  readonly channelUrl = `https://www.youtube.com/@${environment.youtubeChannelHandle}`;
 
   activeFilter = signal<string>('all');
   searchQuery = signal('');
