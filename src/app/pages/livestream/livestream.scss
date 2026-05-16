@@ -100,10 +100,28 @@ $bg-light: #F5F5F5;
 .video-loading,
 .video-placeholder {
   display: flex;
+  flex-direction: column;
+  gap: 12px;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+}
+
+a.video-placeholder {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover { opacity: 0.85; }
+
+  .placeholder-label {
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $gold;
+  }
 }
 
 .loading-spinner {

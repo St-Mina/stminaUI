@@ -26,11 +26,12 @@
             title="Featured stream">
           </iframe>
         } @else {
-          <div class="video-placeholder">
+          <a [href]="channelUrl" target="_blank" rel="noopener" class="video-placeholder" aria-label="Open St. Mina Nashville on YouTube">
             <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
               <path d="M0 0L22 14L0 28V0Z" fill="white"/>
             </svg>
-          </div>
+            <span class="placeholder-label">Watch on YouTube</span>
+          </a>
         }
         @if (isLive()) {
           <div class="live-badge">
@@ -80,7 +81,7 @@
       <span class="sidebar-label">Now Live</span>
       <h3 class="sidebar-title">Divine Liturgy</h3>
       <p class="sidebar-desc">Join our community in prayer and worship for the celebration of the Holy Eucharist. Led by Fr. Mina.</p>
-      <a href="#" class="watch-now-btn">
+      <a [href]="channelUrl" target="_blank" rel="noopener" class="watch-now-btn">
         <span>Watch Now</span>
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
           <path d="M1 5H9M9 5L5 1M9 5L5 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
