@@ -1,191 +1,56 @@
-# stminaUI — Frontend (Angular + TypeScript)
+# St. Mina Church UI (Angular + WordPress)
 
-A **TypeScript / Angular 17** single-page application scaffold with a structured Git workflow, automated CI/CD pipelines, and protected branch rules.
+Angular frontend for the church website, powered by WordPress content via the REST API.
 
----
+## Stack
 
-## Table of Contents
+- Angular 21 (standalone app)
+- SCSS
+- WordPress REST API (`/wp-json/wp/v2`)
+- GitLab Pages deployment
 
-1. [Tech Stack](#tech-stack)
-2. [Local Development Setup](#local-development-setup)
-3. [Branch Strategy](#branch-strategy)
-4. [Git Workflow — Step by Step](#git-workflow--step-by-step)
-5. [CI/CD Pipelines](#cicd-pipelines)
-6. [Branch Protection Rules (GitHub Settings)](#branch-protection-rules-github-settings)
-7. [VS Code Configuration](#vs-code-configuration)
+## Quick Start
 
----
+1. Install dependencies:
+   - `npm install`
+2. Set your WordPress API base URL:
+   - Development: edit `src/environments/environment.development.ts`
+   - Production: edit `src/environments/environment.ts`
+3. Run locally:
+   - `npm start`
+4. Build for production:
+   - `npm run build -- --configuration production`
 
-## Tech Stack
+## WordPress Requirements
 
-| Tool | Version |
-|------|---------|
-| Angular | 19.2.20 |
-| TypeScript | ~5.8 |
-| Node.js | 20 (LTS) |
-| Package manager | npm |
-| Style | SCSS |
+- WordPress site must expose the REST API:
+  - `https://your-site.com/wp-json/wp/v2/posts`
+- If your WordPress domain differs from Angular domain, enable CORS on WordPress/server.
 
----
+## CI / Deployment
 
-## Local Development Setup
+GitLab CI in `.gitlab-ci.yml`:
+- Installs dependencies
+- Builds Angular app
+- Publishes `dist/st-mina-ui/browser` to GitLab Pages (`public/`)
+- Deploys GitLab Pages only from `main`
+- Runs `qc_preview` job on `qc` and uploads test artifacts (`qc-preview`)
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/St-Mina/stminaUI.git
-cd stminaUI
+## QC Branch (Tester Access)
 
-# 2. Install dependencies
-npm install
+- Shared tester branch: `qc`
+- Branch URL: `https://gitlab.com/saint-mina-integration-team/St.Mina.com/-/tree/qc`
+- Merge Request target for test-ready work: `qc`
+- Preview build is available from the latest `qc` pipeline in job `qc_preview` artifacts
 
-# 3. Start the dev server on http://localhost:4200 (opens Chrome automatically via VS Code)
-npm start
-```
+For testers who want local validation:
 
-> **VS Code users:** Press **F5** (or use the *Run and Debug* panel → *Launch Chrome (localhost:4200)*) to start the dev server and attach Chrome in one step.
+1. `git fetch origin`
+2. `git checkout qc`
+3. `npm install`
+4. `npm start`
 
----
+## Notes
 
-## Branch Strategy
-
-```
-master  ←── REL YYYY,MM,DD  ←── qc  ←── dev / feature branches
-```
-
-| Branch | Purpose | Direct commits | Merges require |
-|--------|---------|---------------|----------------|
-| `master` | Source of truth — production-ready code | ❌ Blocked | ✅ PR approval + CI pass |
-| `qc` | Quality-control / staging gate | ❌ Blocked | ✅ PR approval |
-| `dev` | Active development integration branch | ✅ Allowed | — |
-| `REL YYYY,MM,DD` | Immutable release snapshot (e.g. `REL 2024,06,15`) | ❌ Once created | Used to open PR → `master` |
-
----
-
-## Git Workflow — Step by Step
-
-### 1 — Developer creates a feature or fix branch off `dev`
-
-```bash
-git checkout dev
-git pull origin dev
-git checkout -b feature/my-new-feature
-```
-
-### 2 — Developer opens a Pull Request into `qc`
-
-Push the branch and open a PR targeting **`qc`**:
-
-```bash
-git push origin feature/my-new-feature
-# Open PR on GitHub: base = qc, compare = feature/my-new-feature
-```
-
-### 3 — Code review on `qc` PR
-
-- At least **one reviewer** must approve the PR before it can be merged.  
-- The CODEOWNERS file automatically requests `@St-Mina` for review.  
-- Address all review comments, then the reviewer approves and merges.
-
-### 4 — QC deployment (manual trigger)
-
-After the PR is merged into `qc`, the **Deploy to QC** workflow is available:
-
-- GitHub → **Actions** → *Deploy to QC* → **Run workflow**  
-  *(The workflow also fires automatically on every merge into `qc`.)*
-
-Verify the build in the QC environment before cutting a release.
-
-### 5 — Create a release branch
-
-Once QC is approved, cut a release branch from `qc` using the naming convention `REL YYYY,MM,DD`:
-
-```bash
-git checkout qc
-git pull origin qc
-git checkout -b "REL 2024,06,15"
-git push origin "REL 2024,06,15"
-```
-
-### 6 — Open a Pull Request from the release branch into `master`
-
-```
-base: master   ←   compare: REL 2024,06,15
-```
-
-- The **CI pipeline** runs automatically:
-  - `npm ci` — clean dependency install  
-  - `npm audit` — security vulnerability scan  
-  - `npm run build -- --configuration production` — production compile  
-  - `npm test -- --watch=false --browsers=ChromeHeadless` — unit tests  
-- A reviewer approves the PR; direct merges to `master` without approval are **blocked**.
-
-### 7 — Merge into `master`
-
-Once CI passes and approval is granted, merge the release PR.
-
-### 8 — Deploy from `master` (manual trigger)
-
-GitHub → **Actions** → *Deploy to Production* → **Run workflow**
-
-Choose the target environment:
-
-| Choice | What happens |
-|--------|-------------|
-| **QC** | Deploys the master build to the QC environment (smoke-test before prod) |
-| **Production** | Deploys the master build to the production environment |
-
----
-
-## CI/CD Pipelines
-
-| Workflow file | Trigger | Purpose |
-|---------------|---------|---------|
-| `.github/workflows/ci.yml` | Push / PR → `master` | Build, audit, test |
-| `.github/workflows/deploy-qc.yml` | Merge into `qc` **or** manual | Deploy to QC environment |
-| `.github/workflows/deploy-prod.yml` | Manual (choose QC or Production) | Deploy to QC or Production from `master` |
-
----
-
-## Branch Protection Rules (GitHub Settings)
-
-The following rules **must be configured manually** in  
-**GitHub → Settings → Branches → Branch protection rules**.
-
-### `master`
-
-| Rule | Value |
-|------|-------|
-| Require a pull request before merging | ✅ |
-| Required approving reviews | **1** (minimum) |
-| Dismiss stale reviews on new push | ✅ |
-| Require status checks to pass (CI) | ✅ — `Build, Lint & Test` |
-| Require branches to be up to date | ✅ |
-| Do not allow bypassing the above settings | ✅ |
-| Restrict who can push (direct commits) | Blocked for all — only PRs allowed |
-
-### `qc`
-
-| Rule | Value |
-|------|-------|
-| Require a pull request before merging | ✅ |
-| Required approving reviews | **1** (minimum) |
-| Dismiss stale reviews on new push | ✅ |
-| Do not allow bypassing the above settings | ✅ |
-
----
-
-## VS Code Configuration
-
-All VS Code config lives in `.vscode/` and is committed to the repository so every developer shares the same setup.
-
-| File | Purpose |
-|------|---------|
-| `.vscode/launch.json` | **F5** launches Chrome at `http://localhost:4200/` after running `npm start` |
-| `.vscode/tasks.json` | Defines the `npm: start` and `npm: test` background tasks used by the debugger |
-| `.vscode/extensions.json` | Recommended extensions (Angular Language Service, etc.) |
-
-Press **F5** in VS Code to:
-1. Run `npm start` (starts Angular dev server on port 4200)
-2. Launch Google Chrome pointed at `http://localhost:4200/`
-3. Attach the VS Code debugger to Chrome (breakpoints in TypeScript work out of the box)
-
+- Previous static prototype files were moved to `legacy-static/`.
+- Homepage currently shows latest posts from WordPress as a starter integration.

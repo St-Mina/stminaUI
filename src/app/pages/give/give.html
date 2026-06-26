@@ -1,0 +1,230 @@
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <h1>Give</h1>
+    <p>Each one must give as he has decided in his heart — 2 Corinthians 9:7</p>
+  </div>
+</section>
+
+<!-- Donation Form + Impact Sidebar -->
+<section class="form-section">
+  <div class="form-container">
+    <!-- Left: Form Card -->
+    <div class="form-card">
+      <div class="form-card-shadow"></div>
+      <div class="form-card-inner">
+        <h2>Make a Gift</h2>
+
+        <!-- Frequency Toggle -->
+        <div class="frequency-toggle">
+          <button
+            [class.active]="frequency() === 'one-time'"
+            (click)="frequency.set('one-time')"
+          >One-Time</button>
+          <button
+            [class.active]="frequency() === 'monthly'"
+            (click)="frequency.set('monthly')"
+          >Monthly</button>
+        </div>
+
+        <!-- Amount Grid -->
+        <div class="amount-grid">
+          @for (amount of amounts; track amount) {
+            <button
+              class="amount-btn"
+              [class.selected]="selectedAmount() === amount"
+              (click)="selectAmount(amount)"
+            >{{'$' + amount}}</button>
+          }
+          <button
+            class="amount-btn"
+            [class.selected]="selectedAmount() === null"
+            (click)="selectCustom()"
+          >Custom</button>
+        </div>
+
+        <!-- Fund Designation -->
+        <div class="designation">
+          <label>Designate Your Gift</label>
+          <div class="select-wrap">
+            <select [value]="fund()" (change)="fund.set($any($event.target).value)">
+              <option value="general">General Operating Fund</option>
+              <option value="building">Building Fund</option>
+              <option value="youth">Youth &amp; Education</option>
+              <option value="outreach">Outreach &amp; Missions</option>
+            </select>
+            <svg class="select-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1L5 5L9 1" stroke="#6B7280" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Give Now Button -->
+        <button class="btn-give">Give Now</button>
+
+        <!-- Security Note -->
+        <div class="security-note">
+          <svg width="10" height="13" viewBox="0 0 10 13" fill="none">
+            <path d="M8.5 5.5H9C9.55 5.5 10 5.95 10 6.5V11.5C10 12.05 9.55 12.5 9 12.5H1C0.45 12.5 0 12.05 0 11.5V6.5C0 5.95 0.45 5.5 1 5.5H1.5V4C1.5 1.79 3.29 0 5.5 0C7.21 0 8.5 1.79 8.5 4V5.5ZM5 9.5C5.83 9.5 6.5 8.83 6.5 8C6.5 7.17 5.83 6.5 5 6.5C4.17 6.5 3.5 7.17 3.5 8C3.5 8.83 4.17 9.5 5 9.5ZM7 5.5V4C7 2.62 6.38 1.5 5 1.5C3.62 1.5 3 2.62 3 4V5.5H7Z" fill="#94A3B8"/>
+          </svg>
+          <span>Secure giving powered by Tithe.ly</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Impact Sidebar -->
+    <div class="impact-sidebar">
+      <span class="impact-label">Your Impact</span>
+      <h2>Every Gift Matters</h2>
+
+      <div class="impact-items">
+        <div class="impact-item">
+          <div class="impact-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55C7.79 13 6 14.79 6 17s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" fill="#C9A084"/>
+            </svg>
+          </div>
+          <div class="impact-text">
+            <h3>Worship</h3>
+            <p>Sustaining our liturgical life and sacred music traditions.</p>
+          </div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-icon">
+            <svg width="24" height="12" viewBox="0 0 24 16" fill="none">
+              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z" fill="#C9A084"/>
+            </svg>
+          </div>
+          <div class="impact-text">
+            <h3>Community</h3>
+            <p>Fostering fellowship through ministries for all ages.</p>
+          </div>
+        </div>
+        <div class="impact-item">
+          <div class="impact-icon">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#C9A084"/>
+            </svg>
+          </div>
+          <div class="impact-text">
+            <h3>Outreach</h3>
+            <p>Serving the Nashville area and global Coptic missions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Other Ways to Give -->
+<section class="other-ways">
+  <div class="other-ways-container">
+    <h2>Other Ways to Give</h2>
+    <div class="ways-grid">
+      <div class="way-card">
+        <div class="way-icon">
+          <svg width="24" height="27" viewBox="0 0 24 24" fill="none">
+            <path d="M18 12.22V9l-5-2.5V5h2V3h-2V1h-2v2H9v2h2v1.5L6 9v3.22L2 14v8h20v-8l-4-1.78z" fill="#C9A084"/>
+          </svg>
+        </div>
+        <h3>In Person</h3>
+        <p>Gifts can be placed in the collection boxes during any of our liturgical services.</p>
+      </div>
+      <div class="way-card">
+        <div class="way-icon">
+          <svg width="30" height="24" viewBox="0 0 24 18" fill="none">
+            <path d="M22 0H2C.9 0 0 .9 0 2v14c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V2c0-1.1-.9-2-2-2zm0 16H2V2h20v14zm-8-7h6v5h-6V9z" fill="#C9A084"/>
+          </svg>
+        </div>
+        <h3>By Check</h3>
+        <p>Mail to: 123 Church Way, Nashville, TN. Please include the fund name in the memo.</p>
+      </div>
+      <div class="way-card">
+        <div class="way-icon">
+          <svg width="24" height="30" viewBox="0 0 24 24" fill="none">
+            <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" fill="#C9A084"/>
+          </svg>
+        </div>
+        <h3>Planned Giving</h3>
+        <p>Contact our treasury team for information on legacies, stocks, or estate gifts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Where Your Gift Goes -->
+<section class="stewardship">
+  <div class="stewardship-container">
+    <div class="stewardship-header">
+      <span class="section-label">Where Your Gift Goes</span>
+      <h2>Transparent Stewardship</h2>
+    </div>
+    <div class="stewardship-grid">
+      <div class="stewardship-card">
+        <h3>General Fund</h3>
+        <p>Operations, utilities, and daily ministry needs.</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 64%"></div>
+        </div>
+      </div>
+      <div class="stewardship-card">
+        <h3>Building Fund</h3>
+        <p>Expansion and maintenance of our sacred space.</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 39%"></div>
+        </div>
+      </div>
+      <div class="stewardship-card">
+        <h3>Youth &amp; Education</h3>
+        <p>Sunday school, retreats, and servant training.</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 84%"></div>
+        </div>
+      </div>
+      <div class="stewardship-card">
+        <h3>Outreach</h3>
+        <p>Supporting local families and global missions.</p>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 25%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="faq-container">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      @for (faq of faqs; track faq.question; let i = $index) {
+        <div class="faq-item" [class.expanded]="expandedFaq() === i">
+          <button class="faq-header" (click)="toggleFaq(i)">
+            <span>{{ faq.question }}</span>
+            <svg class="faq-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none">
+              <path d="M1.41 0.59L6 5.17L10.59 0.59L12 2L6 8L0 2L1.41 0.59Z" fill="#A99A8D"/>
+            </svg>
+          </button>
+          @if (expandedFaq() === i) {
+            <div class="faq-answer">
+              <p>{{ faq.answer }}</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Scripture Quote -->
+<section class="scripture">
+  <div class="scripture-glow"></div>
+  <div class="scripture-content">
+    <svg class="scripture-cross" width="36" height="36" viewBox="0 0 24 24" fill="none">
+      <path d="M11 2v5H6v2h5v13h2V9h5V7h-5V2h-2z" fill="#C9A084"/>
+    </svg>
+    <blockquote>"Do not neglect to do good and to share what you have, for such sacrifices are pleasing to God."</blockquote>
+    <cite>Hebrews 13:16</cite>
+  </div>
+</section>

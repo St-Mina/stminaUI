@@ -1,37 +1,29 @@
-name: Deploy to QC
+name: Deploy QC to GitHub Pages
 
 on:
-  # Manual trigger — available from the Actions tab
-  workflow_dispatch:
-    inputs:
-      reason:
-        description: 'Reason for deploying to QC'
-        required: false
-        default: 'Manual QC deployment'
-
-  # Also fires automatically when a PR is merged into qc
-  pull_request:
+  push:
     branches:
       - qc
-    types:
-      - closed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-qc
+  cancel-in-progress: true
 
 jobs:
-  deploy-qc:
-    name: Deploy to QC Environment
-    # For the pull_request trigger, only run when the PR was actually merged
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+  build:
+    name: Build QC
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    environment:
-      name: QC
-      url: https://qc.stminaui.example.com   # replace with your actual QC URL
-
+    env:
+      # Subpath GitHub Pages serves the site from. Adjust if the repo is renamed.
+      BASE_HREF: /stminaUI/
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Node.js
@@ -43,19 +35,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build (QC / development configuration)
-        run: npm run build -- --configuration development
-
-      - name: Deploy to QC
+      - name: Write environment files from secrets
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          echo "Deploying to QC environment..."
-          # Replace the block below with your actual deployment command, e.g.:
-          #   aws s3 sync dist/ s3://your-qc-bucket --delete
-          #   firebase deploy --only hosting:qc
-          #   scp -r dist/ user@qc-server:/var/www/html
-          echo "Deployment to QC complete."
+          cat > src/environments/environment.ts <<EOF
+          export const environment = {
+            production: true,
+            wordpressApiBaseUrl: 'https://khalilgeorge24-lqsdb.wordpress.com/wp-json',
+            youtubeApiKey: '${YOUTUBE_API_KEY}',
+            youtubeChannelHandle: 'StMinaNashville'
+          };
+          EOF
+          cp src/environments/environment.ts src/environments/environment.development.ts
 
-      - name: Notify deployment
+      - name: Build (production, Pages base-href)
+        run: npm run build -- --configuration production --base-href "${BASE_HREF}"
+
+      - name: Resolve output dir + SPA fallback
+        id: outdir
         run: |
-          echo "QC deployment triggered by: ${{ github.actor }}"
-          echo "Reason: ${{ github.event.inputs.reason || 'Merge into qc branch' }}"
+          OUT_DIR=$(find dist -maxdepth 3 -type d -name browser | head -n 1)
+          if [ -z "$OUT_DIR" ]; then OUT_DIR=$(ls -d dist/*/ | head -n 1 | sed 's:/*$::'); fi
+          echo "Publishing from: $OUT_DIR"
+          cp "$OUT_DIR/index.html" "$OUT_DIR/404.html"
+          echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.outdir.outputs.out_dir }}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

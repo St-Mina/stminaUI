@@ -1,0 +1,411 @@
+$navy: #1a2a4a;
+$navy-light: #243556;
+$gold: #c9a84c;
+$gold-light: #d4b65e;
+$bg-light: #f5f5f0;
+$bg-warm: #f0ebe1;
+
+// --- Hero ---
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at center, rgba(201, 168, 76, 0.18), transparent 60%),
+    linear-gradient(135deg, $navy 0%, $navy-light 60%, #0f1a2e 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 60%, rgba(26, 42, 74, 0.95));
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 700px;
+  padding: 2rem;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .accent {
+    color: $gold;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+// --- Shared section styles ---
+.section {
+  padding: 5rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: $navy;
+  margin: 0 0 0.5rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.05rem;
+  margin: 0 0 2.5rem;
+}
+
+.section-action {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+// --- Buttons ---
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.btn-gold {
+  background: $gold;
+  color: $navy;
+
+  &:hover {
+    background: $gold-light;
+  }
+}
+
+.btn-navy {
+  background: $navy;
+  color: #fff;
+
+  &:hover {
+    background: $navy-light;
+  }
+}
+
+.btn-outline {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  background: transparent;
+
+  &:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// --- Services Preview ---
+.services-preview {
+  background: $bg-light;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: $navy;
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  p {
+    color: $gold;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .service-desc {
+    display: block;
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+// --- About Preview ---
+.about-preview {
+  background: #fff;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-image {
+  .image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, $navy, $navy-light);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    color: $gold;
+  }
+}
+
+.about-text {
+  h2 {
+    font-size: 2rem;
+    color: $navy;
+    margin: 0 0 1.25rem;
+    line-height: 1.3;
+  }
+
+  p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .btn {
+    margin-top: 0.5rem;
+  }
+}
+
+// --- Ministries Preview ---
+.ministries-preview {
+  background: $bg-light;
+}
+
+.ministries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.ministry-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.ministry-image {
+  height: 180px;
+  background: linear-gradient(135deg, $navy, $navy-light);
+
+  &.youth {
+    background: linear-gradient(135deg, #2a4a6a, $navy-light);
+  }
+
+  &.sunday-school {
+    background: linear-gradient(135deg, #3a5a4a, #2a4a3a);
+  }
+
+  &.choir {
+    background: linear-gradient(135deg, #4a3a5a, #3a2a4a);
+  }
+
+  &.outreach {
+    background: linear-gradient(135deg, $gold, #a08030);
+  }
+}
+
+.ministry-info {
+  padding: 1.25rem;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: $navy;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+// --- Deacons Section ---
+.deacons-section {
+  background: #fff;
+}
+
+.deacons-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.deacon-card {
+  text-align: center;
+  width: 160px;
+
+  .deacon-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: $navy;
+    margin: 0 auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    border: 3px solid $gold;
+  }
+
+  h4 {
+    color: $navy;
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+  }
+
+  p {
+    color: #888;
+    margin: 0;
+    font-size: 0.88rem;
+  }
+}
+
+// --- News Section ---
+.news-section {
+  background: $bg-light;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.news-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+
+  .news-date {
+    font-size: 0.85rem;
+    color: $gold;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  h3 {
+    color: $navy;
+    margin: 0 0 0.75rem;
+    font-size: 1.15rem;
+  }
+
+  .news-excerpt {
+    color: #555;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .read-more {
+    color: $gold;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+
+    &:hover {
+      color: $navy;
+    }
+  }
+}
+
+.error {
+  color: #b00020;
+  text-align: center;
+}
+
+.empty {
+  color: #555;
+  text-align: center;
+}
+
+// --- Responsive ---
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+}

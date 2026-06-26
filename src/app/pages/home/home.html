@@ -1,0 +1,171 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1>Welcome<br><span class="accent">Home</span></h1>
+    <p>A place of worship, community, and spiritual growth in the Coptic Orthodox tradition.</p>
+    <div class="hero-actions">
+      <a routerLink="/services" class="btn btn-gold">Our Services</a>
+      <a routerLink="/about" class="btn btn-outline">Learn More</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Preview -->
+<section class="section services-preview">
+  <div class="container">
+    <h2 class="section-title">Our Services</h2>
+    <p class="section-subtitle">Join us in worship and prayer throughout the week</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">⛪</div>
+        <h3>Sunday Liturgy</h3>
+        <p>8:00 AM – 11:00 AM</p>
+        <span class="service-desc">The Divine Liturgy is the heart of our worship — the holy sacrifice of praise and thanksgiving.</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🕯️</div>
+        <h3>Wednesday Vespers</h3>
+        <p>7:00 PM – 8:30 PM</p>
+        <span class="service-desc">Evening prayers of praise, psalms, and spiritual contemplation.</span>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📖</div>
+        <h3>Bible Study</h3>
+        <p>Saturday 6:00 PM</p>
+        <span class="service-desc">Deep dives into Scripture, led by our clergy, for all ages and spiritual levels.</span>
+      </div>
+    </div>
+    <div class="section-action">
+      <a routerLink="/services" class="btn btn-navy">View All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- About Preview -->
+<section class="section about-preview">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image">
+        <div class="image-placeholder church-interior">
+          <span>☦</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <h2>A Church Rooted in<br>Faith &amp; Tradition</h2>
+        <p>
+          St. Mina Coptic Orthodox Church is a vibrant community of believers,
+          united in the ancient faith passed down from the Apostles. Our church
+          welcomes all who seek to grow closer to God through liturgy, sacraments,
+          and fellowship.
+        </p>
+        <p>
+          Named after the great Egyptian martyr St. Mina the Wonder Worker,
+          our parish strives to embody his courage and devotion in our modern lives.
+        </p>
+        <a routerLink="/about" class="btn btn-gold">About Our Church</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Ministries Preview -->
+<section class="section ministries-preview">
+  <div class="container">
+    <h2 class="section-title">Our Ministries</h2>
+    <p class="section-subtitle">Serving God through community, education, and outreach</p>
+    <div class="ministries-grid">
+      <div class="ministry-card">
+        <div class="ministry-image youth"></div>
+        <div class="ministry-info">
+          <h3>Youth Ministry</h3>
+          <p>Engaging programs for teens and young adults to grow in faith.</p>
+        </div>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-image sunday-school"></div>
+        <div class="ministry-info">
+          <h3>Sunday School</h3>
+          <p>Age-appropriate classes teaching the Orthodox faith to our children.</p>
+        </div>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-image choir"></div>
+        <div class="ministry-info">
+          <h3>Choir & Hymns</h3>
+          <p>Preserving the beautiful Coptic hymns and raising voices in worship.</p>
+        </div>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-image outreach"></div>
+        <div class="ministry-info">
+          <h3>Community Outreach</h3>
+          <p>Serving those in need through charity, food drives, and support programs.</p>
+        </div>
+      </div>
+    </div>
+    <div class="section-action">
+      <a routerLink="/ministries" class="btn btn-navy">Explore Ministries</a>
+    </div>
+  </div>
+</section>
+
+<!-- Deacons Section -->
+<section class="section deacons-section">
+  <div class="container">
+    <h2 class="section-title">Our Deacons</h2>
+    <p class="section-subtitle">Faithful servants leading our congregation</p>
+    <div class="deacons-grid">
+      <div class="deacon-card">
+        <div class="deacon-avatar">
+          <span>👤</span>
+        </div>
+        <h4>Deacon Mina</h4>
+        <p>Head Deacon</p>
+      </div>
+      <div class="deacon-card">
+        <div class="deacon-avatar">
+          <span>👤</span>
+        </div>
+        <h4>Deacon George</h4>
+        <p>Deacon</p>
+      </div>
+      <div class="deacon-card">
+        <div class="deacon-avatar">
+          <span>👤</span>
+        </div>
+        <h4>Deacon Mark</h4>
+        <p>Deacon</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest News -->
+<section class="section news-section">
+  <div class="container">
+    <h2 class="section-title">Latest News</h2>
+    <p class="section-subtitle">Stay updated with our church announcements</p>
+
+    @if (errorMessage()) {
+      <p class="error">{{ errorMessage() }}</p>
+    }
+
+    @if ((posts$ | async); as posts) {
+      @if (posts.length === 0 && !errorMessage()) {
+        <p class="empty">No announcements yet.</p>
+      }
+
+      <div class="news-grid">
+        @for (post of posts; track post.id) {
+          <article class="news-card">
+            <div class="news-date">{{ post.date | date: 'mediumDate' }}</div>
+            <h3 [innerHTML]="post.title.rendered"></h3>
+            <div class="news-excerpt" [innerHTML]="post.excerpt.rendered"></div>
+            <a [href]="post.link" target="_blank" rel="noopener noreferrer" class="read-more">Read more →</a>
+          </article>
+        }
+      </div>
+    }
+  </div>
+</section>
