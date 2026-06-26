@@ -1,12 +1,18 @@
-# Angular build output
+# See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+
+# Compiled output
 /dist
 /tmp
+/out-tsc
+/bazel-out
 
-# Node dependencies
+# Node
 /node_modules
+npm-debug.log
+yarn-error.log
 
 # IDEs and editors
-/.idea
+.idea/
 .project
 .classpath
 .c9/
@@ -20,6 +26,7 @@
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/mcp.json
 .history/*
 
 # Miscellaneous
@@ -28,11 +35,14 @@
 /connect.lock
 /coverage
 /libpeerconnection.log
-npm-debug.log
-yarn-error.log
 testem.log
 /typings
+__screenshots__/
 
 # System files
 .DS_Store
 Thumbs.db
+
+# Local environment files (contain API keys) — never commit
+/src/environments/environment.ts
+/src/environments/environment.development.ts

@@ -1,0 +1,31 @@
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+    <a class="nav-brand" routerLink="/" (click)="closeMenu()">
+      <svg class="brand-logo" width="36" height="36" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M18 12.22V9l-5-2.5V5h2V3h-2V1h-2v2H9v2h2v1.5L6 9v3.22L2 14v8h20v-8l-4-1.78z" fill="#C9A084"/>
+      </svg>
+      <span class="brand-text">St. Mina Coptic Orthodox Church</span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="mobileMenuOpen()"
+      aria-label="Toggle navigation menu"
+    >
+      <span class="hamburger" [class.open]="mobileMenuOpen()"></span>
+    </button>
+
+    <div class="nav-links" [class.open]="mobileMenuOpen()">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Home</a>
+      <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a>
+      <a routerLink="/services" routerLinkActive="active" (click)="closeMenu()">Services</a>
+      <a routerLink="/livestream" routerLinkActive="active" (click)="closeMenu()">Live Stream</a>
+      <a routerLink="/ministries" routerLinkActive="active" (click)="closeMenu()">Ministries</a>
+      <a routerLink="/give" routerLinkActive="active" (click)="closeMenu()">Give</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
+    </div>
+
+    <a routerLink="/contact" class="btn-cta" (click)="closeMenu()">New Here?</a>
+  </div>
+</nav>
