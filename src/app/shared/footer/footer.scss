@@ -138,6 +138,16 @@ $muted: #A99A8D;
     font-size: 14px;
     line-height: 20px;
     color: $muted;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: white;
+      }
+    }
   }
 }
 
