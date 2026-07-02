@@ -1,0 +1,29 @@
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+  <div class="nav-container">
+    <a class="nav-brand" routerLink="/" (click)="closeMenu()">
+      <img
+        class="brand-logo"
+        src="assets/images/logo/SVG/Asset 1.svg"
+        alt="St. Mina Coptic Orthodox Church"
+        height="36"
+      />
+    </a>
+
+    <button
+      class="menu-toggle"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="mobileMenuOpen()"
+      aria-label="Toggle navigation menu"
+    >
+      <span class="hamburger" [class.open]="mobileMenuOpen()"></span>
+    </button>
+
+    <div class="nav-links" [class.open]="mobileMenuOpen()">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Home</a>
+      <a routerLink="/about" routerLinkActive="active" (click)="closeMenu()">About</a>
+      <a routerLink="/livestream" routerLinkActive="active" (click)="closeMenu()">Live Stream</a>
+      <a routerLink="/give" routerLinkActive="active" (click)="closeMenu()">Give</a>
+      <a routerLink="/contact" routerLinkActive="active" (click)="closeMenu()">Contact</a>
+    </div>
+  </div>
+</nav>

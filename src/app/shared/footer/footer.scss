@@ -1,0 +1,228 @@
+$navy: #1B2A44;
+$gold: #C9A084;
+$muted: #A99A8D;
+
+.site-footer {
+  background: $navy;
+  padding: 80px 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+// ─── Top Grid ───────────────────────────────────────────
+.footer-top {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  gap: 48px;
+}
+
+.footer-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    line-height: 16px;
+    letter-spacing: 1.20px;
+    color: $gold;
+    margin: 0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  ul a {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: $muted;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+// ─── Brand Column ───────────────────────────────────────
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.footer-brand-icon {
+  flex-shrink: 0;
+}
+
+.footer-brand-text {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+  color: white;
+}
+
+.footer-tagline {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22.75px;
+  color: $muted;
+  margin: 0;
+}
+
+// ─── Service Times Column ───────────────────────────────
+.service-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-item + .service-item {
+  margin-top: 16px;
+}
+
+.service-name {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: white;
+}
+
+.service-time {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: $muted;
+}
+
+// ─── Contact Column ─────────────────────────────────────
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: $muted;
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+
+// ─── Bottom Bar ─────────────────────────────────────────
+.footer-bottom {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 24px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: $muted;
+  }
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+
+  a {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: $muted;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+// ─── Responsive ─────────────────────────────────────────
+@media (max-width: 900px) {
+  .footer-top {
+    flex-wrap: wrap;
+  }
+
+  .footer-col {
+    flex: 1 1 calc(50% - 24px);
+  }
+
+  .footer-col:first-child {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .site-footer {
+    padding: 48px 0 32px;
+    gap: 48px;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .footer-col {
+    flex: 1 1 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 24px;
+    text-align: center;
+  }
+}
