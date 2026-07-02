@@ -26,8 +26,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/give/give').then((m) => m.Give),
   },
   {
-    path: 'livestream',
-    loadComponent: () => import('./pages/livestream/livestream').then((m) => m.Livestream),
+  path: 'livestream',
+  loadComponent: () =>
+    import('./pages/livestream-media/livestream-media.component')
+      .then((m) => m.LivestreamMediaComponent),
   },
   {
     path: 'contact',

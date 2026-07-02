@@ -3,6 +3,6 @@
 export const environment = {
   production: true,
   wordpressApiBaseUrl: 'https://khalilgeorge24-lqsdb.wordpress.com/wp-json',
-  youtubeApiKey: 'YOUR_YOUTUBE_API_KEY',
+  youtubeApiKey: 'AlzaSyAMw7h-J6dW6vU8Ebz2hwbbSlCvQBUkqHc',
   youtubeChannelHandle: 'StMinaNashville'
 };
