@@ -244,11 +244,14 @@ describe('Home hero carousel', () => {
     const heading = element.querySelector('.clergy-section .section-title');
     const cards = element.querySelectorAll<HTMLElement>('.clergy-card');
     const images = element.querySelectorAll<HTMLImageElement>('.clergy-card img');
+    const portraits = element.querySelectorAll<HTMLElement>('.clergy-portrait');
 
     expect(heading?.textContent?.trim()).toBe('Our Clergy');
     expect(cards).toHaveLength(3);
     expect(images).toHaveLength(3);
     expect(images[0].alt).toBe('Fr. Boutros Boutros');
+    expect(portraits).toHaveLength(3);
+    expect(portraits[0].querySelector('img')?.alt).toBe('Fr. Boutros Boutros');
     expect(element.textContent).not.toContain('Our Deacons');
   });
 });

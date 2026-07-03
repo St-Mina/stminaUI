@@ -154,12 +154,14 @@
     <div class="clergy-grid">
       @for (member of clergy; track member.name) {
         <article class="clergy-card">
-          <img
-            [src]="member.imageSrc"
-            [alt]="member.name"
-            [style.object-position]="member.imagePosition ?? 'center top'"
-            loading="lazy"
-          />
+          <div class="clergy-portrait">
+            <img
+              [src]="member.imageSrc"
+              [alt]="member.name"
+              [style.object-position]="member.imagePosition ?? 'center top'"
+              loading="lazy"
+            />
+          </div>
           <div class="clergy-card-content">
             <h3>{{ member.name }}</h3>
             <p class="clergy-role">{{ member.role }}</p>
