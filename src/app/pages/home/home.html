@@ -1,13 +1,51 @@
 <!-- Hero Section -->
-<section class="hero hero-image">
+<section
+  class="hero"
+  aria-roledescription="carousel"
+  aria-label="Featured church images"
+  (mouseenter)="pauseAutoplay()"
+  (mouseleave)="resumeAutoplay()"
+  (focusin)="pauseAutoplay()"
+  (focusout)="resumeAutoplay()"
+>
+  <div class="hero-slides">
+    @for (slide of heroSlides; track slide.src; let index = $index) {
+      <img
+        class="hero-slide"
+        [class.is-active]="index === activeSlideIndex()"
+        [src]="slide.src"
+        [alt]="slide.alt"
+        [attr.aria-hidden]="index !== activeSlideIndex()"
+      />
+    }
+  </div>
   <div class="hero-overlay"></div>
+
+  <button
+    type="button"
+    class="hero-arrow hero-arrow-previous"
+    aria-label="Show previous hero image"
+    (click)="showPreviousSlide()"
+  >
+    <span aria-hidden="true">&#10094;</span>
+  </button>
+
   <div class="hero-content">
-    <h1>Welcome<br><span class="accent">Home</span></h1>
+    <h1>Welcome<br /><span class="accent">Home</span></h1>
     <p>A place of worship, community, and spiritual growth in the Coptic Orthodox tradition.</p>
     <div class="hero-actions">
       <a routerLink="/about" class="btn btn-outline">Learn More</a>
     </div>
   </div>
+
+  <button
+    type="button"
+    class="hero-arrow hero-arrow-next"
+    aria-label="Show next hero image"
+    (click)="showNextSlide()"
+  >
+    <span aria-hidden="true">&#10095;</span>
+  </button>
 </section>
 
 <!-- Calendar -->

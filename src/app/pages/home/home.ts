@@ -25,7 +25,7 @@ export class Home {
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   private autoplayTimer: ReturnType<typeof setInterval> | undefined;
-  private interactionPaused = false;
+  private interactionPauseCount = 0;
 
   readonly heroSlides: readonly HeroSlide[] = [
     {
@@ -69,12 +69,12 @@ export class Home {
   }
 
   pauseAutoplay(): void {
-    this.interactionPaused = true;
+    this.interactionPauseCount += 1;
     this.stopAutoplay();
   }
 
   resumeAutoplay(): void {
-    this.interactionPaused = false;
+    this.interactionPauseCount = Math.max(0, this.interactionPauseCount - 1);
     this.startAutoplay();
   }
 
@@ -84,7 +84,12 @@ export class Home {
   }
 
   private startAutoplay(): void {
-    if (this.prefersReducedMotion || this.interactionPaused || this.heroSlides.length < 2) {
+    if (
+      this.prefersReducedMotion ||
+      this.interactionPauseCount > 0 ||
+      this.heroSlides.length < 2 ||
+      this.autoplayTimer !== undefined
+    ) {
       return;
     }
 

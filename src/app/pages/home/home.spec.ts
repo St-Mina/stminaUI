@@ -89,6 +89,20 @@ describe('Home hero carousel', () => {
     expect(component.activeSlideIndex()).toBe(1);
   });
 
+  it('stays paused until overlapping interactions have both ended', () => {
+    const component = TestBed.createComponent(Home).componentInstance;
+
+    component.pauseAutoplay();
+    component.pauseAutoplay();
+    component.resumeAutoplay();
+    vi.advanceTimersByTime(6_000);
+    expect(component.activeSlideIndex()).toBe(0);
+
+    component.resumeAutoplay();
+    vi.advanceTimersByTime(6_000);
+    expect(component.activeSlideIndex()).toBe(1);
+  });
+
   it('does not autoplay when reduced motion is requested', () => {
     vi.mocked(window.matchMedia).mockReturnValue({
       matches: true,
@@ -114,5 +128,37 @@ describe('Home hero carousel', () => {
     fixture.destroy();
 
     expect(clearIntervalSpy).toHaveBeenCalled();
+  });
+
+  it('renders configured slides and accessible arrow controls', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const slides = element.querySelectorAll<HTMLImageElement>('.hero-slide');
+    const previous = element.querySelector<HTMLButtonElement>(
+      '[aria-label="Show previous hero image"]'
+    );
+    const next = element.querySelector<HTMLButtonElement>('[aria-label="Show next hero image"]');
+
+    expect(slides).toHaveLength(3);
+    expect(slides[0].classList.contains('is-active')).toBe(true);
+    expect(slides[0].alt).toContain('St. Mina');
+    expect(previous).not.toBeNull();
+    expect(next).not.toBeNull();
+  });
+
+  it('updates the rendered active slide when an arrow is clicked', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const next = fixture.nativeElement.querySelector(
+      '[aria-label="Show next hero image"]'
+    ) as HTMLButtonElement;
+    next.click();
+    fixture.detectChanges();
+
+    const slides = fixture.nativeElement.querySelectorAll('.hero-slide');
+    expect(slides[1].classList.contains('is-active')).toBe(true);
   });
 });
