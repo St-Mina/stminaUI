@@ -1,9 +1,14 @@
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { catchError, of } from 'rxjs';
 
 import { WordpressService } from '../../services/wordpress.service';
+
+interface HeroSlide {
+  readonly src: string;
+  readonly alt: string;
+}
 
 @Component({
   selector: 'app-home',
@@ -14,6 +19,29 @@ import { WordpressService } from '../../services/wordpress.service';
 })
 export class Home {
   private readonly wordpressService = inject(WordpressService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly autoplayDelay = 6_000;
+  private readonly prefersReducedMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private autoplayTimer: ReturnType<typeof setInterval> | undefined;
+  private interactionPaused = false;
+
+  readonly heroSlides: readonly HeroSlide[] = [
+    {
+      src: 'assets/images/imgAssets/hero.png',
+      alt: 'St. Mina Coptic Orthodox Church sanctuary',
+    },
+    {
+      src: 'assets/images/imgAssets/afterChurch.png',
+      alt: 'St. Mina church community gathered after the liturgy',
+    },
+    {
+      src: 'assets/images/imgAssets/candle.png',
+      alt: 'A lit candle representing prayer and worship',
+    },
+  ];
+  readonly activeSlideIndex = signal(0);
 
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly posts$ = this.wordpressService.getLatestPosts(3).pipe(
@@ -22,4 +50,53 @@ export class Home {
       return of([]);
     })
   );
+
+  constructor() {
+    this.startAutoplay();
+    this.destroyRef.onDestroy(() => this.stopAutoplay());
+  }
+
+  showNextSlide(): void {
+    this.activeSlideIndex.update((index) => (index + 1) % this.heroSlides.length);
+    this.restartAutoplay();
+  }
+
+  showPreviousSlide(): void {
+    this.activeSlideIndex.update(
+      (index) => (index - 1 + this.heroSlides.length) % this.heroSlides.length
+    );
+    this.restartAutoplay();
+  }
+
+  pauseAutoplay(): void {
+    this.interactionPaused = true;
+    this.stopAutoplay();
+  }
+
+  resumeAutoplay(): void {
+    this.interactionPaused = false;
+    this.startAutoplay();
+  }
+
+  private restartAutoplay(): void {
+    this.stopAutoplay();
+    this.startAutoplay();
+  }
+
+  private startAutoplay(): void {
+    if (this.prefersReducedMotion || this.interactionPaused || this.heroSlides.length < 2) {
+      return;
+    }
+
+    this.autoplayTimer = window.setInterval(() => {
+      this.activeSlideIndex.update((index) => (index + 1) % this.heroSlides.length);
+    }, this.autoplayDelay);
+  }
+
+  private stopAutoplay(): void {
+    if (this.autoplayTimer !== undefined) {
+      window.clearInterval(this.autoplayTimer);
+      this.autoplayTimer = undefined;
+    }
+  }
 }
