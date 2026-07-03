@@ -62,6 +62,27 @@ describe('Home hero carousel', () => {
     expect(component.activeSlideIndex()).toBe(0);
   });
 
+  it('selects a requested slide and restarts autoplay', () => {
+    const component = TestBed.createComponent(Home).componentInstance;
+
+    component.showSlide(2);
+    expect(component.activeSlideIndex()).toBe(2);
+
+    vi.advanceTimersByTime(5_999);
+    expect(component.activeSlideIndex()).toBe(2);
+    vi.advanceTimersByTime(1);
+    expect(component.activeSlideIndex()).toBe(0);
+  });
+
+  it('ignores a direct-selection index outside the slide list', () => {
+    const component = TestBed.createComponent(Home).componentInstance;
+
+    component.showSlide(-1);
+    expect(component.activeSlideIndex()).toBe(0);
+    component.showSlide(component.heroSlides.length);
+    expect(component.activeSlideIndex()).toBe(0);
+  });
+
   it('advances after six seconds and restarts the interval after manual navigation', () => {
     const component = TestBed.createComponent(Home).componentInstance;
 
@@ -160,5 +181,36 @@ describe('Home hero carousel', () => {
 
     const slides = fixture.nativeElement.querySelectorAll('.hero-slide');
     expect(slides[1].classList.contains('is-active')).toBe(true);
+  });
+
+  it('renders one accessible indicator per slide with the first active', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const indicators = element.querySelectorAll<HTMLButtonElement>(
+      '.hero-indicator'
+    );
+
+    expect(indicators).toHaveLength(3);
+    expect(indicators[0].getAttribute('aria-label')).toBe('Show hero image 1');
+    expect(indicators[0].getAttribute('aria-current')).toBe('true');
+    expect(indicators[1].hasAttribute('aria-current')).toBe(false);
+  });
+
+  it('selects the corresponding slide when an indicator is clicked', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const indicators = element.querySelectorAll<HTMLButtonElement>(
+      '.hero-indicator'
+    );
+    indicators[2].click();
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.activeSlideIndex()).toBe(2);
+    expect(indicators[2].getAttribute('aria-current')).toBe('true');
+    expect(indicators[0].hasAttribute('aria-current')).toBe(false);
   });
 });

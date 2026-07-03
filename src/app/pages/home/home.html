@@ -46,6 +46,19 @@
   >
     <span aria-hidden="true">&#10095;</span>
   </button>
+
+  <div class="hero-indicators" role="group" aria-label="Choose hero image">
+    @for (slide of heroSlides; track slide.src; let index = $index) {
+      <button
+        type="button"
+        class="hero-indicator"
+        [class.is-active]="index === activeSlideIndex()"
+        [attr.aria-label]="'Show hero image ' + (index + 1)"
+        [attr.aria-current]="index === activeSlideIndex() ? 'true' : null"
+        (click)="showSlide(index)"
+      ></button>
+    }
+  </div>
 </section>
 
 <!-- Calendar -->

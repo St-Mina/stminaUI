@@ -68,6 +68,15 @@ export class Home {
     this.restartAutoplay();
   }
 
+  showSlide(index: number): void {
+    if (index < 0 || index >= this.heroSlides.length) {
+      return;
+    }
+
+    this.activeSlideIndex.set(index);
+    this.restartAutoplay();
+  }
+
   pauseAutoplay(): void {
     this.interactionPauseCount += 1;
     this.stopAutoplay();

@@ -115,6 +115,57 @@ $bg-warm: #f0ebe1;
   right: clamp(1rem, 4vw, 4rem);
 }
 
+.hero-indicators {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(1.25rem, 3vw, 2.5rem);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transform: translateX(-50%);
+}
+
+.hero-indicator {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &::before {
+    width: 0.6rem;
+    height: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    content: '';
+    transition:
+      background 200ms ease,
+      border-color 200ms ease,
+      transform 200ms ease;
+  }
+
+  &:hover::before {
+    background: #fff;
+  }
+
+  &.is-active::before {
+    border-color: $gold;
+    background: $gold;
+    transform: scale(1.25);
+  }
+
+  &:focus-visible {
+    border-radius: 50%;
+    outline: 3px solid $gold;
+    outline-offset: 1px;
+  }
+}
+
 .hero-actions {
   display: flex;
   gap: 1rem;
@@ -510,7 +561,8 @@ $bg-warm: #f0ebe1;
 
 @media (prefers-reduced-motion: reduce) {
   .hero-slide,
-  .hero-arrow {
+  .hero-arrow,
+  .hero-indicator::before {
     transition: none;
   }
 }
