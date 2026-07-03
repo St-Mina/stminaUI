@@ -1,8 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { of } from 'rxjs';
-
-import { WordpressService } from '../../services/wordpress.service';
 import { Home } from './home';
 
 describe('Home hero carousel', () => {
@@ -24,13 +21,7 @@ describe('Home hero carousel', () => {
 
     TestBed.configureTestingModule({
       imports: [Home],
-      providers: [
-        provideRouter([]),
-        {
-          provide: WordpressService,
-          useValue: { getLatestPosts: () => of([]) },
-        },
-      ],
+      providers: [provideRouter([])],
     });
   });
 
@@ -72,6 +63,24 @@ describe('Home hero carousel', () => {
         imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
       },
     ]);
+  });
+
+  it('defines an explicit crop for every clergy portrait', () => {
+    const component = TestBed.createComponent(Home).componentInstance;
+
+    expect(component.clergy.every((member) => member.imageScale > 0)).toBe(true);
+    expect(component.clergy.every((member) => Number.isFinite(member.imageOffsetY))).toBe(true);
+  });
+
+  it('expands and collapses clergy biographies independently', () => {
+    const component = TestBed.createComponent(Home).componentInstance;
+
+    expect(component.isClergyExpanded('Fr. Boutros Boutros')).toBe(false);
+    component.toggleClergyBiography('Fr. Boutros Boutros');
+    expect(component.isClergyExpanded('Fr. Boutros Boutros')).toBe(true);
+    expect(component.isClergyExpanded('Fr. Kyrillos Zaki')).toBe(false);
+    component.toggleClergyBiography('Fr. Boutros Boutros');
+    expect(component.isClergyExpanded('Fr. Boutros Boutros')).toBe(false);
   });
 
   it('wraps next and previous navigation', () => {
@@ -253,5 +262,60 @@ describe('Home hero carousel', () => {
     expect(portraits).toHaveLength(3);
     expect(portraits[0].querySelector('img')?.alt).toBe('Fr. Boutros Boutros');
     expect(element.textContent).not.toContain('Our Deacons');
+  });
+
+  it('renders three static latest-news cards with feast-first CTA copy', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const cards = element.querySelectorAll<HTMLElement>('.news-section .news-card');
+    const heading = element.querySelector('.news-section .section-title');
+
+    expect(heading?.textContent?.trim()).toBe('Latest News');
+    expect(cards).toHaveLength(3);
+    expect(element.textContent).toContain('St. Febronia the Ascetic');
+    expect(element.textContent).toContain(
+      'Join us in prayer as we remember St. Febronia on July 8.'
+    );
+    expect(element.textContent).not.toContain('No announcements yet.');
+    expect(element.textContent).not.toContain('Unable to load posts right now.');
+  });
+
+  it('renders four ministry teaser cards from the shared ministry data', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const cards = element.querySelectorAll<HTMLElement>('.ministries-preview .ministry-card');
+    const images = element.querySelectorAll<HTMLImageElement>('.ministries-preview .ministry-card img');
+    const explore = element.querySelector<HTMLAnchorElement>('.ministries-preview .section-action a');
+
+    expect(cards).toHaveLength(4);
+    expect(images).toHaveLength(4);
+    expect(images[0].src).toContain('youthMinistry-upscaled-20260702-214734.webp');
+    expect(explore?.getAttribute('href')).toContain('/ministries');
+  });
+
+  it('expands one clergy biography from its accessible toggle', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const toggles = element.querySelectorAll<HTMLButtonElement>('.clergy-toggle');
+    expect(toggles).toHaveLength(3);
+    expect([...toggles].map((button) => button.textContent?.trim())).toEqual([
+      'Read More',
+      'Read More',
+      'Read More',
+    ]);
+    expect(toggles[1].getAttribute('aria-expanded')).toBe('false');
+
+    toggles[1].click();
+    fixture.detectChanges();
+
+    expect(toggles[1].textContent?.trim()).toBe('Show Less');
+    expect(toggles[1].getAttribute('aria-expanded')).toBe('true');
+    expect(toggles[0].textContent?.trim()).toBe('Read More');
   });
 });

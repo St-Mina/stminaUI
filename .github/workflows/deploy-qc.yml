@@ -42,7 +42,6 @@ jobs:
           cat > src/environments/environment.ts <<EOF
           export const environment = {
             production: true,
-            wordpressApiBaseUrl: 'https://khalilgeorge24-lqsdb.wordpress.com/wp-json',
             youtubeApiKey: '${YOUTUBE_API_KEY}',
             youtubeChannelHandle: 'StMinaNashville'
           };

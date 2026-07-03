@@ -111,34 +111,17 @@
     <h2 class="section-title">Our Ministries</h2>
     <p class="section-subtitle">Serving God through community, education, and outreach</p>
     <div class="ministries-grid">
-      <div class="ministry-card">
-        <div class="ministry-image youth"></div>
-        <div class="ministry-info">
-          <h3>Youth Ministry</h3>
-          <p>Engaging programs for teens and young adults to grow in faith.</p>
-        </div>
-      </div>
-      <div class="ministry-card">
-        <div class="ministry-image sunday-school"></div>
-        <div class="ministry-info">
-          <h3>Sunday School</h3>
-          <p>Age-appropriate classes teaching the Orthodox faith to our children.</p>
-        </div>
-      </div>
-      <div class="ministry-card">
-        <div class="ministry-image choir"></div>
-        <div class="ministry-info">
-          <h3>Choir & Hymns</h3>
-          <p>Preserving the beautiful Coptic hymns and raising voices in worship.</p>
-        </div>
-      </div>
-      <div class="ministry-card">
-        <div class="ministry-image outreach"></div>
-        <div class="ministry-info">
-          <h3>Community Outreach</h3>
-          <p>Serving those in need through charity, food drives, and support programs.</p>
-        </div>
-      </div>
+      @for (ministry of ministries; track ministry.title) {
+        <article class="ministry-card">
+          <div class="ministry-image">
+            <img [src]="ministry.imageSrc" [alt]="ministry.alt" loading="lazy" />
+          </div>
+          <div class="ministry-info">
+            <h3>{{ ministry.title }}</h3>
+            <p>{{ ministry.homeSummary }}</p>
+          </div>
+        </article>
+      }
     </div>
     <div class="section-action">
       <a routerLink="/ministries" class="btn btn-navy">Explore Ministries</a>
@@ -159,13 +142,24 @@
               [src]="member.imageSrc"
               [alt]="member.name"
               [style.object-position]="member.imagePosition ?? 'center top'"
+              [style.transform]="'translateY(' + member.imageOffsetY + 'px) scale(' + member.imageScale + ')'"
               loading="lazy"
             />
           </div>
           <div class="clergy-card-content">
             <h3>{{ member.name }}</h3>
             <p class="clergy-role">{{ member.role }}</p>
-            <p class="clergy-summary">{{ member.summary }}</p>
+            <p class="clergy-summary" [class.is-expanded]="isClergyExpanded(member.name)">
+              {{ member.summary }}
+            </p>
+            <button
+              type="button"
+              class="clergy-toggle"
+              [attr.aria-expanded]="isClergyExpanded(member.name)"
+              (click)="toggleClergyBiography(member.name)"
+            >
+              {{ isClergyExpanded(member.name) ? 'Show Less' : 'Read More' }}
+            </button>
           </div>
         </article>
       }
@@ -178,26 +172,16 @@
   <div class="container">
     <h2 class="section-title">Latest News</h2>
     <p class="section-subtitle">Stay updated with our church announcements</p>
-
-    @if (errorMessage()) {
-      <p class="error">{{ errorMessage() }}</p>
-    }
-
-    @if ((posts$ | async); as posts) {
-      @if (posts.length === 0 && !errorMessage()) {
-        <p class="empty">No announcements yet.</p>
+    <div class="news-grid">
+      @for (card of latestNewsCards; track card.title) {
+        <article class="news-card">
+          <div class="news-card-inner">
+            <p class="news-date">{{ card.dateLabel }}</p>
+            <h3>{{ card.title }}</h3>
+            <p class="news-cta">{{ card.cta }}</p>
+          </div>
+        </article>
       }
-
-      <div class="news-grid">
-        @for (post of posts; track post.id) {
-          <article class="news-card">
-            <div class="news-date">{{ post.date | date: 'mediumDate' }}</div>
-            <h3 [innerHTML]="post.title.rendered"></h3>
-            <div class="news-excerpt" [innerHTML]="post.excerpt.rendered"></div>
-            <a [href]="post.link" target="_blank" rel="noopener noreferrer" class="read-more">Read more →</a>
-          </article>
-        }
-      </div>
-    }
+    </div>
   </div>
 </section>

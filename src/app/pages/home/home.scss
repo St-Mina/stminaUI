@@ -381,22 +381,14 @@ $bg-warm: #f0ebe1;
 
 .ministry-image {
   height: 180px;
-  background: linear-gradient(135deg, $navy, $navy-light);
+  overflow: hidden;
+  background: #f2f2ed;
 
-  &.youth {
-    background: linear-gradient(135deg, #2a4a6a, $navy-light);
-  }
-
-  &.sunday-school {
-    background: linear-gradient(135deg, #3a5a4a, #2a4a3a);
-  }
-
-  &.choir {
-    background: linear-gradient(135deg, #4a3a5a, #3a2a4a);
-  }
-
-  &.outreach {
-    background: linear-gradient(135deg, $gold, #a08030);
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -420,6 +412,10 @@ $bg-warm: #f0ebe1;
 // --- Clergy Section ---
 .clergy-section {
   background: #fff;
+
+  > .container > .section-subtitle {
+    color: #4f5663;
+  }
 }
 
 .clergy-grid {
@@ -458,6 +454,8 @@ $bg-warm: #f0ebe1;
 }
 
 .clergy-card-content {
+  display: grid;
+  grid-template-rows: minmax(2rem, auto) minmax(3.25rem, auto) auto auto;
   max-width: 23rem;
   margin-inline: auto;
 
@@ -469,16 +467,53 @@ $bg-warm: #f0ebe1;
 }
 
 .clergy-role {
+  min-height: 2.8em;
   margin: 0 0 0.85rem;
-  color: $gold;
-  font-weight: 700;
+  color: #596579;
+  font-weight: 600;
   line-height: 1.4;
 }
 
 .clergy-summary {
+  display: -webkit-box;
+  min-height: 3.3em;
+  overflow: hidden;
   margin: 0;
-  color: #555;
+  color: #60656f;
   line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  &.is-expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+}
+
+.clergy-toggle {
+  justify-self: center;
+  margin-top: 1rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid $gold;
+  border-radius: 999px;
+  background: transparent;
+  color: $navy;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    background 200ms ease;
+
+  &:hover {
+    background: $gold;
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgba($gold, 0.45);
+    outline-offset: 3px;
+  }
 }
 
 // --- News Section ---
@@ -488,56 +523,50 @@ $bg-warm: #f0ebe1;
 
 .news-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .news-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .news-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-
-  .news-date {
-    font-size: 0.85rem;
-    color: $gold;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  h3 {
-    color: $navy;
-    margin: 0 0 0.75rem;
-    font-size: 1.15rem;
-  }
-
-  .news-excerpt {
-    color: #555;
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-  }
-
-  .read-more {
-    color: $gold;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.92rem;
-
-    &:hover {
-      color: $navy;
-    }
-  }
 }
 
-.error {
-  color: #b00020;
-  text-align: center;
+.news-card-inner {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
 }
 
-.empty {
+.news-date {
+  margin: 0;
+  color: $gold;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.news-card h3 {
+  margin: 0;
+  color: $navy;
+  font-size: 1.15rem;
+}
+
+.news-cta {
+  margin: 0;
   color: #555;
-  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 // --- Responsive ---
@@ -579,6 +608,15 @@ $bg-warm: #f0ebe1;
     margin-inline: auto;
   }
 
+  .clergy-card-content {
+    grid-template-rows: auto;
+  }
+
+  .clergy-role,
+  .clergy-summary {
+    min-height: 0;
+  }
+
   .section {
     padding: 3rem 0;
   }
@@ -586,13 +624,18 @@ $bg-warm: #f0ebe1;
   .section-title {
     font-size: 1.8rem;
   }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-slide,
   .hero-arrow,
   .hero-indicator::before,
-  .clergy-portrait {
+  .clergy-portrait,
+  .clergy-toggle {
     transition: none;
   }
 }

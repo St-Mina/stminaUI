@@ -1,9 +1,8 @@
-import { AsyncPipe, DatePipe } from '@angular/common';
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { catchError, of } from 'rxjs';
 
-import { WordpressService } from '../../services/wordpress.service';
+import { ministries as ministryContent } from '../ministries/ministries.data';
+import { latestNewsCards } from './latest-news.data';
 
 interface HeroSlide {
   readonly src: string;
@@ -16,17 +15,18 @@ interface ClergyMember {
   readonly summary: string;
   readonly imageSrc: string;
   readonly imagePosition?: string;
+  readonly imageScale: number;
+  readonly imageOffsetY: number;
 }
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [AsyncPipe, DatePipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
-  private readonly wordpressService = inject(WordpressService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly autoplayDelay = 6_000;
   private readonly prefersReducedMotion =
@@ -34,6 +34,7 @@ export class Home {
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   private autoplayTimer: ReturnType<typeof setInterval> | undefined;
   private interactionPauseCount = 0;
+  private readonly expandedClergyNames = signal<ReadonlySet<string>>(new Set());
 
   readonly heroSlides: readonly HeroSlide[] = [
     {
@@ -49,6 +50,8 @@ export class Home {
       alt: 'A lit candle representing prayer and worship',
     },
   ];
+  readonly ministries = ministryContent.slice(0, 4);
+  readonly latestNewsCards = latestNewsCards;
   readonly activeSlideIndex = signal(0);
   readonly clergy: readonly ClergyMember[] = [
     {
@@ -58,6 +61,8 @@ export class Home {
         'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades.',
       imageSrc: 'assets/images/clergy/FrBoutrosBoutros.webp',
       imagePosition: 'center 30%',
+      imageScale: 1.08,
+      imageOffsetY: 8,
     },
     {
       name: 'Fr. Kyrillos Zaki',
@@ -65,6 +70,8 @@ export class Home {
       summary:
         'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
       imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
+      imageScale: 1.16,
+      imageOffsetY: -15,
     },
     {
       name: 'Fr. Youaness Seraphim',
@@ -72,16 +79,10 @@ export class Home {
       summary:
         'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness serves churches throughout the Southern Diocese, especially in Nashville.',
       imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
+      imageScale: 1.1,
+      imageOffsetY: -3,
     },
   ];
-
-  protected readonly errorMessage = signal<string | null>(null);
-  protected readonly posts$ = this.wordpressService.getLatestPosts(3).pipe(
-    catchError(() => {
-      this.errorMessage.set('Unable to load posts right now.');
-      return of([]);
-    })
-  );
 
   constructor() {
     this.startAutoplay();
@@ -107,6 +108,18 @@ export class Home {
 
     this.activeSlideIndex.set(index);
     this.restartAutoplay();
+  }
+
+  isClergyExpanded(name: string): boolean {
+    return this.expandedClergyNames().has(name);
+  }
+
+  toggleClergyBiography(name: string): void {
+    this.expandedClergyNames.update((current) => {
+      const next = new Set(current);
+      next.has(name) ? next.delete(name) : next.add(name);
+      return next;
+    });
   }
 
   pauseAutoplay(): void {
