@@ -52,6 +52,28 @@ describe('Home hero carousel', () => {
     expect(component.activeSlideIndex()).toBe(0);
   });
 
+  it('defines the approved clergy content and portraits', () => {
+    const component = TestBed.createComponent(Home).componentInstance;
+
+    expect(component.clergy.map(({ name, role, imageSrc }) => ({ name, role, imageSrc }))).toEqual([
+      {
+        name: 'Fr. Boutros Boutros',
+        role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
+        imageSrc: 'assets/images/clergy/FrBoutrosBoutros.webp',
+      },
+      {
+        name: 'Fr. Kyrillos Zaki',
+        role: 'Priest of St. Mina Coptic Orthodox Church',
+        imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
+      },
+      {
+        name: 'Fr. Youaness Seraphim',
+        role: 'General priest of the Southern Diocese',
+        imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
+      },
+    ]);
+  });
+
   it('wraps next and previous navigation', () => {
     const component = TestBed.createComponent(Home).componentInstance;
 
@@ -212,5 +234,21 @@ describe('Home hero carousel', () => {
     expect(fixture.componentInstance.activeSlideIndex()).toBe(2);
     expect(indicators[2].getAttribute('aria-current')).toBe('true');
     expect(indicators[0].hasAttribute('aria-current')).toBe(false);
+  });
+
+  it('renders the Our Clergy section with three semantic portrait cards', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const heading = element.querySelector('.clergy-section .section-title');
+    const cards = element.querySelectorAll<HTMLElement>('.clergy-card');
+    const images = element.querySelectorAll<HTMLImageElement>('.clergy-card img');
+
+    expect(heading?.textContent?.trim()).toBe('Our Clergy');
+    expect(cards).toHaveLength(3);
+    expect(images).toHaveLength(3);
+    expect(images[0].alt).toBe('Fr. Boutros Boutros');
+    expect(element.textContent).not.toContain('Our Deacons');
   });
 });

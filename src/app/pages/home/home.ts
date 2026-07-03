@@ -10,6 +10,14 @@ interface HeroSlide {
   readonly alt: string;
 }
 
+interface ClergyMember {
+  readonly name: string;
+  readonly role: string;
+  readonly summary: string;
+  readonly imageSrc: string;
+  readonly imagePosition?: string;
+}
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -42,6 +50,30 @@ export class Home {
     },
   ];
   readonly activeSlideIndex = signal(0);
+  readonly clergy: readonly ClergyMember[] = [
+    {
+      name: 'Fr. Boutros Boutros',
+      role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
+      summary:
+        'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades.',
+      imageSrc: 'assets/images/clergy/FrBoutrosBoutros.webp',
+      imagePosition: 'center 30%',
+    },
+    {
+      name: 'Fr. Kyrillos Zaki',
+      role: 'Priest of St. Mina Coptic Orthodox Church',
+      summary:
+        'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
+      imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
+    },
+    {
+      name: 'Fr. Youaness Seraphim',
+      role: 'General priest of the Southern Diocese',
+      summary:
+        'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness serves churches throughout the Southern Diocese, especially in Nashville.',
+      imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
+    },
+  ];
 
   protected readonly errorMessage = signal<string | null>(null);
   protected readonly posts$ = this.wordpressService.getLatestPosts(3).pipe(

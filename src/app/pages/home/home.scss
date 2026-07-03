@@ -417,46 +417,60 @@ $bg-warm: #f0ebe1;
   }
 }
 
-// --- Deacons Section ---
-.deacons-section {
+// --- Clergy Section ---
+.clergy-section {
   background: #fff;
 }
 
-.deacons-grid {
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  flex-wrap: wrap;
+.clergy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
 }
 
-.deacon-card {
-  text-align: center;
-  width: 160px;
+.clergy-card {
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(15, 26, 46, 0.1);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
 
-  .deacon-avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: $navy;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    border: 3px solid $gold;
+  > img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
   }
 
-  h4 {
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(15, 26, 46, 0.16);
+  }
+}
+
+.clergy-card-content {
+  padding: 1.5rem;
+
+  h3 {
+    margin: 0 0 0.5rem;
     color: $navy;
-    margin: 0 0 0.25rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
+}
 
-  p {
-    color: #888;
-    margin: 0;
-    font-size: 0.88rem;
-  }
+.clergy-role {
+  margin: 0 0 0.85rem;
+  color: $gold;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.clergy-summary {
+  margin: 0;
+  color: #555;
+  line-height: 1.65;
 }
 
 // --- News Section ---
@@ -550,6 +564,12 @@ $bg-warm: #f0ebe1;
     gap: 2rem;
   }
 
+  .clergy-grid {
+    grid-template-columns: 1fr;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
   .section {
     padding: 3rem 0;
   }
@@ -562,7 +582,8 @@ $bg-warm: #f0ebe1;
 @media (prefers-reduced-motion: reduce) {
   .hero-slide,
   .hero-arrow,
-  .hero-indicator::before {
+  .hero-indicator::before,
+  .clergy-card {
     transition: none;
   }
 }

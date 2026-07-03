@@ -146,33 +146,27 @@
   </div>
 </section>
 
-<!-- Deacons Section -->
-<section class="section deacons-section">
+<!-- Clergy Section -->
+<section class="section clergy-section">
   <div class="container">
-    <h2 class="section-title">Our Deacons</h2>
-    <p class="section-subtitle">Faithful servants leading our congregation</p>
-    <div class="deacons-grid">
-      <div class="deacon-card">
-        <div class="deacon-avatar">
-          <span>👤</span>
-        </div>
-        <h4>Deacon Mina</h4>
-        <p>Head Deacon</p>
-      </div>
-      <div class="deacon-card">
-        <div class="deacon-avatar">
-          <span>👤</span>
-        </div>
-        <h4>Deacon George</h4>
-        <p>Deacon</p>
-      </div>
-      <div class="deacon-card">
-        <div class="deacon-avatar">
-          <span>👤</span>
-        </div>
-        <h4>Deacon Mark</h4>
-        <p>Deacon</p>
-      </div>
+    <h2 class="section-title">Our Clergy</h2>
+    <p class="section-subtitle">Faithful shepherds serving our parish and the Southern Diocese</p>
+    <div class="clergy-grid">
+      @for (member of clergy; track member.name) {
+        <article class="clergy-card">
+          <img
+            [src]="member.imageSrc"
+            [alt]="member.name"
+            [style.object-position]="member.imagePosition ?? 'center top'"
+            loading="lazy"
+          />
+          <div class="clergy-card-content">
+            <h3>{{ member.name }}</h3>
+            <p class="clergy-role">{{ member.role }}</p>
+            <p class="clergy-summary">{{ member.summary }}</p>
+          </div>
+        </article>
+      }
     </div>
   </div>
 </section>
