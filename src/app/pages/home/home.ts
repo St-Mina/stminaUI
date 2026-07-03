@@ -2,6 +2,7 @@ import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { ministries as ministryContent } from '../ministries/ministries.data';
+import { heroAnnouncementMarqueeCycleCount, heroAnnouncements, heroAnnouncementsPlainText } from './hero-announcement.data';
 import { latestNewsCards } from './latest-news.data';
 
 interface HeroSlide {
@@ -52,6 +53,13 @@ export class Home {
   ];
   readonly ministries = ministryContent.slice(0, 4);
   readonly latestNewsCards = latestNewsCards;
+  readonly heroAnnouncements = heroAnnouncements;
+  readonly heroAnnouncementsPlainText = heroAnnouncementsPlainText;
+  readonly heroAnnouncementMarqueeCycles = Array.from(
+    { length: heroAnnouncementMarqueeCycleCount },
+    (_, index) => index
+  );
+  readonly heroAnnouncementMarqueeCopies = [0, 1] as const;
   readonly activeSlideIndex = signal(0);
   readonly clergy: readonly ClergyMember[] = [
     {

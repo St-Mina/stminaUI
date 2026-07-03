@@ -21,6 +21,25 @@
   </div>
   <div class="hero-overlay"></div>
 
+  <aside class="hero-announcement" role="region" aria-label="Parish announcement">
+    <div class="hero-announcement-viewport" aria-hidden="true">
+      <div class="hero-announcement-track">
+        @for (copy of heroAnnouncementMarqueeCopies; track copy) {
+          <span class="hero-announcement-copy">
+            @for (cycle of heroAnnouncementMarqueeCycles; track cycle) {
+              <span class="hero-announcement-cycle">
+                @for (item of heroAnnouncements; track item.message) {
+                  <span class="hero-announcement-item">{{ item.message }}</span>
+                }
+              </span>
+            }
+          </span>
+        }
+      </div>
+    </div>
+    <p class="hero-announcement-sr">{{ heroAnnouncementsPlainText }}</p>
+  </aside>
+
   <button
     type="button"
     class="hero-arrow hero-arrow-previous"

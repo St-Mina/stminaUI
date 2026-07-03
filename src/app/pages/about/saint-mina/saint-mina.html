@@ -1,0 +1,80 @@
+<!-- Hero -->
+<section class="story-hero">
+  <div class="story-hero-image">
+    <img
+      src="assets/images/imgAssets/stMina.png"
+      alt="Iconographic illustration of Saint Mina the Wonder-Worker in golden desert light"
+      loading="eager"
+    />
+    <div class="story-hero-overlay"></div>
+  </div>
+  <div class="story-hero-content">
+    <p class="story-hero-eyebrow">Our Patron Saint</p>
+    <h1>The Martyrdom of Saint Mina the Wonder-Worker</h1>
+    <p class="story-hero-lead">{{ intro }}</p>
+  </div>
+</section>
+
+<!-- Story -->
+<article class="story">
+  <div class="story-prose">
+    <div class="story-audio" role="region" aria-label="Audio narration">
+      <p class="story-audio-label">Listen to the story</p>
+      <div
+        class="story-audio-progress"
+        role="progressbar"
+        aria-label="Story playback progress"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        [attr.aria-valuenow]="audioProgressPercent()"
+      >
+        <div class="story-audio-progress-fill" [style.width.%]="audioProgress()"></div>
+      </div>
+      <audio
+        controls
+        preload="metadata"
+        [src]="audio.src"
+        [attr.aria-label]="audio.title"
+        (timeupdate)="onAudioTimeUpdate($event)"
+        (pause)="onAudioPause()"
+        (ended)="onAudioEnded()"
+      >
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+
+    @for (section of sections; track section.id) {
+      <section class="chapter" [id]="section.id">
+        <h2>{{ section.title }}</h2>
+        @for (paragraph of section.paragraphs; track $index; let pi = $index) {
+          <p
+            [id]="paragraphId(section.id, pi)"
+            [class.story-paragraph-active]="activeParagraphId() === paragraphId(section.id, pi)"
+          >
+            {{ paragraph }}
+          </p>
+        }
+      </section>
+    }
+
+    <p
+      class="story-closing"
+      [id]="closingParagraphId"
+      [class.story-paragraph-active]="activeParagraphId() === closingParagraphId"
+    >
+      {{ closing }}
+    </p>
+  </div>
+</article>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container text-center">
+    <h2>Named for a Wonder-Worker</h2>
+    <p>
+      Our parish bears the name of this great martyr and intercessor. Come worship with us
+      and ask his prayers for our community.
+    </p>
+    <a routerLink="/contact" class="btn btn-gold">Plan a Visit</a>
+  </div>
+</section>

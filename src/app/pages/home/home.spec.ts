@@ -32,6 +32,26 @@ describe('Home hero carousel', () => {
     vi.restoreAllMocks();
   });
 
+  it('renders a subtle rolling announcement banner at the top of the hero', () => {
+    const fixture = TestBed.createComponent(Home);
+    fixture.detectChanges();
+
+    const element = fixture.nativeElement as HTMLElement;
+    const banner = element.querySelector('.hero-announcement');
+    const track = element.querySelector('.hero-announcement-track');
+    const srCopy = element.querySelector('.hero-announcement-sr');
+
+    expect(banner?.getAttribute('aria-label')).toBe('Parish announcement');
+    expect(track?.querySelectorAll('.hero-announcement-copy')).toHaveLength(2);
+    expect(track?.querySelectorAll('.hero-announcement-item').length).toBeGreaterThan(0);
+    expect(element.textContent).toContain(
+      'Join us for the Heavenly Liturgy every Thursday at 5 a.m.'
+    );
+    expect(element.textContent).toContain('come rise with us in prayer.');
+    expect(element.textContent).not.toContain('—');
+    expect(srCopy?.textContent).toContain('come rise with us in prayer.');
+  });
+
   it('starts with the current hero and keeps slides data-driven', () => {
     const component = TestBed.createComponent(Home).componentInstance;
 
