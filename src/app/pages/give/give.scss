@@ -370,6 +370,7 @@ $security: #94A3B8;
 
 .ways-grid {
   display: flex;
+  flex-wrap: wrap;
   gap: 32px;
   justify-content: center;
 }
@@ -388,7 +389,7 @@ $security: #94A3B8;
 }
 
 .way-icon {
-  margin-bottom: 28px;
+  margin-bottom: 10px;
 }
 
 .way-card h3 {
@@ -407,6 +408,16 @@ $security: #94A3B8;
   line-height: 22.75px;
   color: $slate;
   margin: 0;
+}
+
+.way-card p span {
+  text-align: left;
+  white-space: pre-line;
+  display: block;
+}
+
+.way-card img {
+  width: 75%;
 }
 
 // ─── Stewardship ────────────────────────────────────────
