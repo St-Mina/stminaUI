@@ -132,9 +132,21 @@ $bg-light: #f5f5f0;
 
   p {
     color: #555;
-    margin: 0;
+    margin: 0 0 0.75rem;
     line-height: 1.6;
     font-size: 0.95rem;
+  }
+}
+
+.timeline-link {
+  color: $gold;
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    color: darken($gold, 8%);
+    text-decoration: underline;
   }
 }
 

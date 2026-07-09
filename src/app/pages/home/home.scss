@@ -22,18 +22,106 @@ $bg-warm: #f0ebe1;
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 60%, rgba(26, 42, 74, 0.95));
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, rgba(15, 26, 46, 0.25) 35%, rgba(26, 42, 74, 0.95)),
+    linear-gradient(135deg, rgba(26, 42, 74, 0.55), rgba(15, 26, 46, 0.45));
 }
 
-.hero-image {
-  background:
-    linear-gradient(135deg, rgba(26, 42, 74, 0.85) 0%, rgba(15, 26, 46, 0.75) 100%),
-    url('../../../assets/images/imgAssets/hero.png') center / cover no-repeat;
+.hero-announcement {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba($gold, 0.28);
+  background: rgba(15, 26, 46, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.hero-announcement-viewport {
+  overflow: hidden;
+}
+
+.hero-announcement-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: hero-announcement-scroll 65s linear infinite;
+}
+
+.hero-announcement-copy {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.hero-announcement-cycle {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+.hero-announcement-item {
+  flex: 0 0 auto;
+  padding-block: 0.55rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.72rem, 1.6vw, 0.84rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.hero-announcement-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes hero-announcement-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.hero-slides,
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slides {
+  overflow: hidden;
+}
+
+.hero-slide {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 600ms ease;
+
+  &.is-active {
+    opacity: 1;
+  }
 }
 
 .hero-content {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 700px;
   padding: 2rem;
 
@@ -54,6 +142,96 @@ $bg-warm: #f0ebe1;
     color: rgba(255, 255, 255, 0.85);
     margin-bottom: 2rem;
     line-height: 1.6;
+  }
+}
+
+.hero-arrow {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(15, 26, 46, 0.55);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+
+  &:hover {
+    border-color: $gold;
+    background: rgba(15, 26, 46, 0.85);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $gold;
+    outline-offset: 3px;
+  }
+}
+
+.hero-arrow-previous {
+  left: clamp(1rem, 4vw, 4rem);
+}
+
+.hero-arrow-next {
+  right: clamp(1rem, 4vw, 4rem);
+}
+
+.hero-indicators {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(1.25rem, 3vw, 2.5rem);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transform: translateX(-50%);
+}
+
+.hero-indicator {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &::before {
+    width: 0.6rem;
+    height: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    content: '';
+    transition:
+      background 200ms ease,
+      border-color 200ms ease,
+      transform 200ms ease;
+  }
+
+  &:hover::before {
+    background: #fff;
+  }
+
+  &.is-active::before {
+    border-color: $gold;
+    background: $gold;
+    transform: scale(1.25);
+  }
+
+  &:focus-visible {
+    border-radius: 50%;
+    outline: 3px solid $gold;
+    outline-offset: 1px;
   }
 }
 
@@ -272,22 +450,14 @@ $bg-warm: #f0ebe1;
 
 .ministry-image {
   height: 180px;
-  background: linear-gradient(135deg, $navy, $navy-light);
+  overflow: hidden;
+  background: #f2f2ed;
 
-  &.youth {
-    background: linear-gradient(135deg, #2a4a6a, $navy-light);
-  }
-
-  &.sunday-school {
-    background: linear-gradient(135deg, #3a5a4a, #2a4a3a);
-  }
-
-  &.choir {
-    background: linear-gradient(135deg, #4a3a5a, #3a2a4a);
-  }
-
-  &.outreach {
-    background: linear-gradient(135deg, $gold, #a08030);
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -308,45 +478,110 @@ $bg-warm: #f0ebe1;
   }
 }
 
-// --- Deacons Section ---
-.deacons-section {
+// --- Clergy Section ---
+.clergy-section {
   background: #fff;
+
+  > .container > .section-subtitle {
+    color: #4f5663;
+  }
 }
 
-.deacons-grid {
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  flex-wrap: wrap;
+.clergy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 4rem);
 }
 
-.deacon-card {
+.clergy-card {
   text-align: center;
-  width: 160px;
+}
 
-  .deacon-avatar {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: $navy;
-    margin: 0 auto 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    border: 3px solid $gold;
+.clergy-portrait {
+  width: clamp(11.875rem, 18vw, 13.75rem);
+  aspect-ratio: 1;
+  margin: 0 auto 1.5rem;
+  overflow: hidden;
+  border: 3px solid rgba($gold, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(15, 26, 46, 0.16);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  h4 {
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: 0 12px 30px rgba(15, 26, 46, 0.22);
+  }
+}
+
+.clergy-card-content {
+  display: grid;
+  grid-template-rows: minmax(2rem, auto) minmax(3.25rem, auto) auto auto;
+  max-width: 23rem;
+  margin-inline: auto;
+
+  h3 {
+    margin: 0 0 0.5rem;
     color: $navy;
-    margin: 0 0 0.25rem;
-    font-size: 1rem;
+    font-size: 1.3rem;
+  }
+}
+
+.clergy-role {
+  min-height: 2.8em;
+  margin: 0 0 0.85rem;
+  color: #596579;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.clergy-summary {
+  display: -webkit-box;
+  min-height: 3.3em;
+  overflow: hidden;
+  margin: 0;
+  color: #60656f;
+  line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  &.is-expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+}
+
+.clergy-toggle {
+  justify-self: center;
+  margin-top: 1rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid $gold;
+  border-radius: 999px;
+  background: transparent;
+  color: $navy;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    background 200ms ease;
+
+  &:hover {
+    background: $gold;
+    color: #fff;
   }
 
-  p {
-    color: #888;
-    margin: 0;
-    font-size: 0.88rem;
+  &:focus-visible {
+    outline: 3px solid rgba($gold, 0.45);
+    outline-offset: 3px;
   }
 }
 
@@ -357,67 +592,98 @@ $bg-warm: #f0ebe1;
 
 .news-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .news-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .news-card {
   background: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
+  border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-
-  .news-date {
-    font-size: 0.85rem;
-    color: $gold;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-
-  h3 {
-    color: $navy;
-    margin: 0 0 0.75rem;
-    font-size: 1.15rem;
-  }
-
-  .news-excerpt {
-    color: #555;
-    font-size: 0.92rem;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-  }
-
-  .read-more {
-    color: $gold;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.92rem;
-
-    &:hover {
-      color: $navy;
-    }
-  }
 }
 
-.error {
-  color: #b00020;
-  text-align: center;
+.news-card-inner {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
 }
 
-.empty {
+.news-date {
+  margin: 0;
+  color: $gold;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.news-card h3 {
+  margin: 0;
+  color: $navy;
+  font-size: 1.15rem;
+}
+
+.news-cta {
+  margin: 0;
   color: #555;
-  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 // --- Responsive ---
 @media (max-width: 768px) {
+  .hero {
+    min-height: 75vh;
+  }
+
+  .hero-content {
+    padding-inline: 4.75rem;
+  }
+
   .hero-content h1 {
     font-size: 2.8rem;
+  }
+
+  .hero-arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .hero-arrow-previous {
+    left: 0.75rem;
+  }
+
+  .hero-arrow-next {
+    right: 0.75rem;
   }
 
   .about-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+
+  .clergy-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
+  .clergy-card-content {
+    grid-template-rows: auto;
+  }
+
+  .clergy-role,
+  .clergy-summary {
+    min-height: 0;
   }
 
   .section {
@@ -426,5 +692,51 @@ $bg-warm: #f0ebe1;
 
   .section-title {
     font-size: 1.8rem;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-arrow,
+  .hero-indicator::before,
+  .clergy-portrait,
+  .clergy-toggle {
+    transition: none;
+  }
+
+  .hero-announcement-track {
+    animation: none;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-announcement-copy {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-announcement-cycle {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding-right: 0;
+  }
+
+  .hero-announcement-item {
+    padding: 0.55rem 1rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hero-announcement-copy + .hero-announcement-copy {
+    display: none;
+  }
+
+  .hero-announcement-cycle + .hero-announcement-cycle {
+    display: none;
   }
 }

@@ -10,12 +10,26 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class Header {
   protected readonly mobileMenuOpen = signal(false);
+  protected readonly aboutMenuOpen = signal(false);
 
   toggleMenu() {
     this.mobileMenuOpen.update((v) => !v);
   }
 
+  toggleAboutMenu() {
+    this.aboutMenuOpen.update((v) => !v);
+  }
+
   closeMenu() {
     this.mobileMenuOpen.set(false);
+    this.aboutMenuOpen.set(false);
+  }
+
+  openAboutMenu() {
+    this.aboutMenuOpen.set(true);
+  }
+
+  closeAboutMenu() {
+    this.aboutMenuOpen.set(false);
   }
 }
