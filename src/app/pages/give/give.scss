@@ -1,6 +1,5 @@
 $navy: #1B2A44;
 $gold: #C9A084;
-$muted: #A99A8D;
 $slate: #475569;
 $border-light: #E2E8F0;
 $bg-light: #F5F5F5;
@@ -126,6 +125,7 @@ $bg-light: #F5F5F5;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
@@ -171,7 +171,6 @@ $bg-light: #F5F5F5;
 
 .way-card p span {
   text-align: left;
-  white-space: pre-line;
   display: block;
 }
 
