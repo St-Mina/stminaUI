@@ -7,13 +7,7 @@ import { Component, signal } from '@angular/core';
   styleUrl: './give.scss',
 })
 export class Give {
-  protected readonly frequency = signal<'one-time' | 'monthly'>('one-time');
-  protected readonly selectedAmount = signal<number | null>(50);
-  protected readonly customAmount = signal('');
-  protected readonly fund = signal('general');
   protected readonly expandedFaq = signal<number | null>(null);
-
-  readonly amounts = [25, 50, 100, 250, 500];
 
   readonly faqs = [
     {
@@ -22,25 +16,16 @@ export class Give {
         'Yes. St. Mina Coptic Orthodox Church is a registered 501(c)(3) nonprofit organization. You will receive a year-end giving statement for your records.',
     },
     {
-      question: 'How do I manage my recurring gift?',
+      question: 'How do I set up a recurring gift?',
       answer:
-        'You can manage your recurring gifts through your Tithe.ly account. Log in to update your payment method, change the amount, or cancel at any time.',
+        "You can set up a recurring transfer through Zelle or your bank's direct deposit / bill pay feature using the account details above. For help setting one up, contact our treasury team.",
     },
     {
-      question: 'Is online giving secure?',
+      question: 'Is giving by Zelle or direct deposit secure?',
       answer:
-        'Absolutely. Our giving platform, Tithe.ly, uses bank-level encryption and is PCI compliant to ensure your information is always protected.',
+        "Yes. Both move funds directly between bank accounts using your own bank's encryption and security — there's no third-party platform involved.",
     },
   ];
-
-  selectAmount(amount: number) {
-    this.selectedAmount.set(amount);
-    this.customAmount.set('');
-  }
-
-  selectCustom() {
-    this.selectedAmount.set(null);
-  }
 
   toggleFaq(index: number) {
     this.expandedFaq.update((v) => (v === index ? null : index));
