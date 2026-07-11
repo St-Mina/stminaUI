@@ -2,6 +2,6 @@
 // and fill in the API key. The real env files are git-ignored.
 export const environment = {
   production: true,
-  youtubeApiKey: 'YOUR_YOUTUBE_API_KEY',
-  youtubeChannelHandle: 'StMinaNashville'
+  youtubeApiKey: 'AIzaSyA2T2QGHlCmfCrSzl3NUGzZbV7nIfIjtLs',
+  youtubeChannelHandle: '@StMinaNashville'
 };

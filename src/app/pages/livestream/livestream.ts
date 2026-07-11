@@ -1,165 +1,506 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-
-import { YouTubeService, YouTubeVideo } from '../../services/youtube.service';
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+} from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {
+  DomSanitizer,
+  SafeResourceUrl,
+} from '@angular/platform-browser';
 import { environment } from '../../../environments/environment';
 
-interface UpcomingStream {
-  icon: string;
+type MediaCategory = 'recent' | 'sermons' | 'hymns';
+
+interface MediaItem {
   title: string;
-  date: string;
+  subtitle: string;
+  category: MediaCategory;
+  videoId: string;
+  thumbnail: string;
+  watchUrl: string;
+  publishedAt: string;
 }
 
-interface UpcomingEvent {
-  title: string;
-  time: string;
+interface PlaylistItemResponse {
+  nextPageToken?: string;
+  items?: PlaylistItem[];
+}
+
+interface PlaylistItem {
+  snippet: {
+    title?: string;
+    publishedAt?: string;
+    resourceId?: {
+      videoId?: string;
+    };
+    thumbnails?: {
+      default?: {
+        url?: string;
+      };
+      medium?: {
+        url?: string;
+      };
+      high?: {
+        url?: string;
+      };
+      standard?: {
+        url?: string;
+      };
+      maxres?: {
+        url?: string;
+      };
+    };
+  };
+  contentDetails?: {
+    videoId?: string;
+    videoPublishedAt?: string;
+  };
+}
+
+interface YouTubeSearchResponse {
+  items?: Array<{
+    id: {
+      videoId?: string;
+    };
+    snippet: {
+      title?: string;
+    };
+  }>;
 }
 
 @Component({
-  selector: 'app-livestream',
+  selector: 'app-livestream-media',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule, FormsModule],
   templateUrl: './livestream.html',
   styleUrl: './livestream.scss',
 })
 export class Livestream implements OnInit {
-  private readonly youtube = inject(YouTubeService);
-  private readonly sanitizer = inject(DomSanitizer);
+  readonly channelId = environment.youtubeChannelId;
+  readonly channelHandle = environment.youtubeChannelHandle;
 
-  readonly channelUrl = `https://www.youtube.com/@${environment.youtubeChannelHandle}`;
+  readonly uploadsPlaylistId = this.channelId.startsWith('UC')
+    ? `UU${this.channelId.substring(2)}`
+    : '';
 
-  activeFilter = signal<string>('all');
-  searchQuery = signal('');
-  isLoadingFeatured = signal(true);
-  isLoadingArchive = signal(true);
-  isLive = signal(false);
-  isLoadingMore = signal(false);
+  liveEmbedUrl: SafeResourceUrl | null = null;
+  selectedVideoEmbedUrl: SafeResourceUrl | null = null;
 
-  featuredVideo: YouTubeVideo | null = null;
-  featuredEmbedUrl: SafeResourceUrl | null = null;
-  pastVideos = signal<YouTubeVideo[]>([]);
-  nextPageToken: string | undefined;
+  selectedVideoTitle = '';
+  heroVideoTitle = '';
+  heroLoading = true;
+  heroIsLive = false;
+  heroError = '';
 
-  filters = ['All', 'Past Liturgies', 'Sermons', 'Hymns'];
+  selectedCategory: MediaCategory = 'recent';
+  searchTerm = '';
+  archiveError = '';
 
-  upcomingEvents: UpcomingEvent[] = [
-    { title: 'Youth Meeting', time: 'Today at 7:00 PM' },
-    { title: 'Wednesday Vespers', time: 'Oct 25 at 6:30 PM' },
+  videos: Record<MediaCategory, MediaItem[]> = {
+    recent: [],
+    sermons: [],
+    hymns: [],
+  };
+
+  nextPageTokens: Record<MediaCategory, string> = {
+    recent: '',
+    sermons: '',
+    hymns: '',
+  };
+
+  loadingCategories: Record<MediaCategory, boolean> = {
+    recent: false,
+    sermons: false,
+    hymns: false,
+  };
+
+  loadedCategories: Record<MediaCategory, boolean> = {
+    recent: false,
+    sermons: false,
+    hymns: false,
+  };
+
+  categories: { id: MediaCategory; label: string }[] = [
+    { id: 'recent', label: 'Recent Videos' },
+    { id: 'sermons', label: 'Sermons' },
+    { id: 'hymns', label: 'Hymns Classes' },
   ];
 
-  upcomingStreams: UpcomingStream[] = [
-    { icon: 'calendar', title: 'Saturday Vespers', date: 'Saturday, Oct 28 • 6:00 PM CST' },
-    { icon: 'book', title: 'Bible Study', date: 'Tuesday, Oct 31 • 7:30 PM CST' },
-    { icon: 'star', title: 'Feast of St. Mina', date: 'Friday, Nov 10 • 8:00 AM CST' },
-  ];
+  constructor(
+    private readonly sanitizer: DomSanitizer,
+    private readonly http: HttpClient,
+    private readonly changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.youtube.getLiveStream().subscribe({
-      next: liveVideo => {
-        if (liveVideo) {
-          this.setFeatured(liveVideo, true);
-        } else {
-          this.loadLatestAsFeatured();
-        }
-        this.isLoadingFeatured.set(false);
-      },
-      error: () => {
-        this.loadLatestAsFeatured();
-        this.isLoadingFeatured.set(false);
-      },
-    });
-
-    this.youtube.getVideos(8).subscribe({
-      next: result => {
-        this.pastVideos.set(result.videos);
-        this.nextPageToken = result.nextPageToken;
-        this.isLoadingArchive.set(false);
-      },
-      error: () => this.isLoadingArchive.set(false),
-    });
+    this.loadHeroVideo();
+    this.loadVideos('recent');
   }
 
-  private loadLatestAsFeatured(): void {
-    this.youtube.getVideos(1).subscribe({
-      next: result => {
-        if (result.videos.length > 0) {
-          this.setFeatured(result.videos[0], false);
-        }
-      },
-    });
+  get currentVideos(): MediaItem[] {
+    return this.videos[this.selectedCategory];
   }
 
-  private setFeatured(video: YouTubeVideo, live: boolean): void {
-    this.featuredVideo = video;
-    this.isLive.set(live);
-    this.featuredEmbedUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.youtube.com/embed/${video.id}?rel=0`
+  get currentNextPageToken(): string {
+    return this.nextPageTokens[this.selectedCategory];
+  }
+
+  get isLoading(): boolean {
+    return this.loadingCategories[this.selectedCategory];
+  }
+
+  get filteredArchiveItems(): MediaItem[] {
+    const term = this.searchTerm.toLowerCase().trim();
+
+    return [...this.currentVideos]
+      .sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() -
+          new Date(a.publishedAt).getTime()
+      )
+      .filter((item) => {
+        return (
+          !term ||
+          item.title.toLowerCase().includes(term) ||
+          item.subtitle.toLowerCase().includes(term)
+        );
+      });
+  }
+
+  loadHeroVideo(): void {
+    this.heroLoading = true;
+    this.heroError = '';
+
+    const params = new HttpParams()
+      .set('key', environment.youtubeApiKey)
+      .set('channelId', this.channelId)
+      .set('part', 'snippet,id')
+      .set('eventType', 'live')
+      .set('type', 'video')
+      .set('maxResults', '1');
+
+    this.http
+      .get<YouTubeSearchResponse>(
+        'https://www.googleapis.com/youtube/v3/search',
+        { params }
+      )
+      .subscribe({
+        next: (response) => {
+          const liveVideo = response.items?.[0];
+          const liveVideoId = liveVideo?.id.videoId;
+
+          if (liveVideoId) {
+            this.heroIsLive = true;
+            this.heroVideoTitle =
+              liveVideo.snippet.title || 'Live Stream';
+
+            this.liveEmbedUrl = this.safeUrl(
+              `https://www.youtube.com/embed/${liveVideoId}`
+            );
+
+            this.heroLoading = false;
+            this.changeDetector.markForCheck();
+            return;
+          }
+
+          this.loadLatestUpload();
+        },
+        error: (error) => {
+          console.error('Live stream API error:', error);
+          this.loadLatestUpload();
+        },
+      });
+  }
+
+  private loadLatestUpload(): void {
+    const params = new HttpParams()
+      .set('key', environment.youtubeApiKey)
+      .set('playlistId', this.uploadsPlaylistId)
+      .set('part', 'snippet,contentDetails')
+      .set('maxResults', '1');
+
+    this.http
+      .get<PlaylistItemResponse>(
+        'https://www.googleapis.com/youtube/v3/playlistItems',
+        { params }
+      )
+      .subscribe({
+        next: (response) => {
+          const latestVideo = response.items?.[0];
+
+          const videoId =
+            latestVideo?.contentDetails?.videoId ||
+            latestVideo?.snippet.resourceId?.videoId;
+
+          if (!videoId) {
+            this.heroError = 'No channel video was found.';
+            this.heroLoading = false;
+            this.changeDetector.markForCheck();
+            return;
+          }
+
+          this.heroIsLive = false;
+          this.heroVideoTitle =
+            latestVideo.snippet.title || 'Latest Video';
+
+          this.liveEmbedUrl = this.safeUrl(
+            `https://www.youtube.com/embed/${videoId}`
+          );
+
+          this.heroLoading = false;
+          this.changeDetector.markForCheck();
+        },
+        error: (error) => {
+          console.error('Latest video API error:', error);
+
+          this.heroError = this.getApiErrorMessage(
+            error,
+            'The latest channel video could not be loaded.'
+          );
+
+          this.heroLoading = false;
+          this.changeDetector.markForCheck();
+        },
+      });
+  }
+
+  setCategory(category: MediaCategory): void {
+    this.selectedCategory = category;
+    this.searchTerm = '';
+    this.archiveError = '';
+
+    if (!this.loadedCategories[category]) {
+      this.loadVideos(category);
+    }
+  }
+
+  loadVideos(
+    category: MediaCategory,
+    loadMore = false
+  ): void {
+    if (this.loadingCategories[category]) {
+      return;
+    }
+
+    this.loadingCategories[category] = true;
+    this.archiveError = '';
+
+    const pageToken = loadMore
+      ? this.nextPageTokens[category]
+      : '';
+
+    let params = new HttpParams()
+      .set('key', environment.youtubeApiKey)
+      .set('playlistId', this.uploadsPlaylistId)
+      .set('part', 'snippet,contentDetails')
+      .set('maxResults', '50');
+
+    if (pageToken) {
+      params = params.set('pageToken', pageToken);
+    }
+
+    this.http
+      .get<PlaylistItemResponse>(
+        'https://www.googleapis.com/youtube/v3/playlistItems',
+        { params }
+      )
+      .subscribe({
+        next: (response) => {
+          const newVideos = (response.items || [])
+            .map((video): MediaItem | null => {
+              const videoId =
+                video.contentDetails?.videoId ||
+                video.snippet.resourceId?.videoId;
+
+              if (!videoId) {
+                return null;
+              }
+
+              const title = video.snippet.title || 'Video';
+              const lowercaseTitle = title.toLowerCase();
+
+              if (
+                category === 'sermons' &&
+                !lowercaseTitle.includes('sermon') &&
+                !title.includes('عظة')
+              ) {
+                return null;
+              }
+
+              if (
+                category === 'hymns' &&
+                !lowercaseTitle.includes('hymns class')
+              ) {
+                return null;
+              }
+
+              return {
+                title,
+                subtitle: this.getCategorySubtitle(category),
+                category,
+                videoId,
+                thumbnail:
+                  video.snippet.thumbnails?.maxres?.url ||
+                  video.snippet.thumbnails?.standard?.url ||
+                  video.snippet.thumbnails?.high?.url ||
+                  video.snippet.thumbnails?.medium?.url ||
+                  video.snippet.thumbnails?.default?.url ||
+                  `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+                watchUrl:
+                  `https://www.youtube.com/watch?v=${videoId}`,
+                publishedAt:
+                  video.contentDetails?.videoPublishedAt ||
+                  video.snippet.publishedAt ||
+                  '',
+              };
+            })
+            .filter(
+              (video): video is MediaItem =>
+                video !== null
+            );
+
+          this.videos[category] = loadMore
+            ? this.addUniqueVideos(
+                this.videos[category],
+                newVideos
+              )
+            : newVideos;
+
+          this.nextPageTokens[category] =
+            response.nextPageToken || '';
+
+          this.loadedCategories[category] = true;
+          this.loadingCategories[category] = false;
+          this.changeDetector.markForCheck();
+        },
+        error: (error) => {
+          console.error(
+            `YouTube API error for ${category}:`,
+            error
+          );
+
+          this.archiveError = this.getApiErrorMessage(
+            error,
+            'Videos could not be loaded.'
+          );
+
+          this.loadedCategories[category] = true;
+          this.loadingCategories[category] = false;
+          this.changeDetector.markForCheck();
+        },
+      });
+  }
+
+  loadMoreVideos(): void {
+    if (!this.currentNextPageToken) {
+      return;
+    }
+
+    this.loadVideos(this.selectedCategory, true);
+  }
+
+  openVideo(item: MediaItem): void {
+    this.selectedVideoTitle = item.title;
+
+    this.selectedVideoEmbedUrl = this.safeUrl(
+      `https://www.youtube.com/embed/${item.videoId}?autoplay=1`
     );
   }
 
-  get filteredVideos(): YouTubeVideo[] {
-    const q = this.searchQuery().toLowerCase();
-    const f = this.activeFilter();
-    return this.pastVideos().filter(v => {
-      const matchesSearch = !q || v.title.toLowerCase().includes(q);
-      const matchesFilter = f === 'all' || this.filterMatchesCategory(f, this.getCategory(v));
-      return matchesSearch && matchesFilter;
+  closeVideo(): void {
+    this.selectedVideoEmbedUrl = null;
+    this.selectedVideoTitle = '';
+  }
+
+  trackByVideoId(
+    index: number,
+    item: MediaItem
+  ): string | number {
+    return item.videoId || index;
+  }
+
+  sharePage(): void {
+    const url = window.location.href;
+
+    if (navigator.share) {
+      navigator
+        .share({
+          title: 'St. Mina Livestream & Media',
+          url,
+        })
+        .catch(() => {
+          // The share menu was closed.
+        });
+
+      return;
+    }
+
+    navigator.clipboard
+      .writeText(url)
+      .then(() => {
+        alert('Page link copied!');
+      })
+      .catch(() => {
+        alert('Unable to copy the page link.');
+      });
+  }
+
+  private getCategorySubtitle(
+    category: MediaCategory
+  ): string {
+    switch (category) {
+      case 'sermons':
+        return 'Sermon';
+
+      case 'hymns':
+        return 'Hymns Class';
+
+      default:
+        return 'Recent Video';
+    }
+  }
+
+  private addUniqueVideos(
+    existingVideos: MediaItem[],
+    newVideos: MediaItem[]
+  ): MediaItem[] {
+    const videoMap = new Map<string, MediaItem>();
+
+    [...existingVideos, ...newVideos].forEach((video) => {
+      videoMap.set(video.videoId, video);
     });
+
+    return Array.from(videoMap.values());
   }
 
-  private filterMatchesCategory(filter: string, category: string): boolean {
-    const c = category.toLowerCase();
-    if (filter === 'past-liturgies') return c === 'liturgy';
-    if (filter === 'sermons') return c === 'sermon';
-    if (filter === 'hymns') return c === 'hymns';
-    return true;
+  private getApiErrorMessage(
+    error: unknown,
+    fallbackMessage: string
+  ): string {
+    const apiError = error as {
+      error?: {
+        error?: {
+          message?: string;
+        };
+      };
+      message?: string;
+    };
+
+    const apiMessage =
+      apiError?.error?.error?.message ||
+      apiError?.message;
+
+    return apiMessage
+      ? `${fallbackMessage} ${apiMessage}`
+      : fallbackMessage;
   }
 
-  getCategory(video: YouTubeVideo): string {
-    const t = video.title.toLowerCase();
-    if (t.includes('liturgy') || t.includes('divine') || t.includes('mass')) return 'Liturgy';
-    if (t.includes('sermon') || t.includes('homily') || t.includes('message')) return 'Sermon';
-    if (t.includes('hymn') || t.includes('praise') || t.includes('vesper')) return 'Hymns';
-    if (t.includes('study') || t.includes('bible') || t.includes('teaching')) return 'Study';
-    return 'Service';
-  }
-
-  formatDate(dateStr: string): string {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
-  }
-
-  loadMore(): void {
-    if (!this.nextPageToken || this.isLoadingMore()) return;
-    this.isLoadingMore.set(true);
-    this.youtube.getVideos(8, this.nextPageToken).subscribe({
-      next: result => {
-        this.pastVideos.update(prev => [...prev, ...result.videos]);
-        this.nextPageToken = result.nextPageToken;
-        this.isLoadingMore.set(false);
-      },
-      error: () => this.isLoadingMore.set(false),
-    });
-  }
-
-  setFilter(filter: string): void {
-    this.activeFilter.set(filter.toLowerCase().replace(/ /g, '-'));
-  }
-
-  isActive(filter: string): boolean {
-    if (filter === 'All') return this.activeFilter() === 'all';
-    return this.activeFilter() === filter.toLowerCase().replace(/ /g, '-');
-  }
-
-  onSearchInput(event: Event): void {
-    this.searchQuery.set((event.target as HTMLInputElement).value);
-  }
-
-  youtubeUrl(videoId: string): string {
-    return `https://www.youtube.com/watch?v=${videoId}`;
+  private safeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(
+      url
+    );
   }
 }

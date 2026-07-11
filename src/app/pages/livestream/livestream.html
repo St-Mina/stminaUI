@@ -1,238 +1,199 @@
-<!-- ── Hero ──────────────────────────────────────────── -->
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-content">
-    <h1>Watch & Worship</h1>
-    <p>Join us live or revisit a past service — anytime, anywhere.</p>
-  </div>
-</section>
+<div class="media-page">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Live Stream &amp; Media</p>
 
-<!-- ── Featured Stream ──────────────────────────────── -->
-<section class="featured">
-  <div class="featured-inner">
-    <!-- Video Player -->
-    <div class="video-player">
-      <div class="video-area">
-        @if (isLoadingFeatured()) {
-          <div class="video-loading">
-            <span class="loading-spinner"></span>
+      <h1>Live Stream</h1>
+
+      <p class="hero-subtitle">
+        Join us live or revisit a past service.
+      </p>
+    </div>
+  </section>
+
+  <section class="live-section">
+    <div class="container single-live-grid">
+      <div class="live-main">
+        <div class="live-video-card">
+
+          <div
+            class="hero-video-status"
+            *ngIf="heroLoading">
+            Loading video...
           </div>
-        } @else if (featuredEmbedUrl) {
+
+          <div
+            class="hero-video-status hero-video-error"
+            *ngIf="!heroLoading && heroError">
+            {{ heroError }}
+          </div>
+
           <iframe
-            [src]="featuredEmbedUrl"
+            *ngIf="!heroLoading && !heroError && liveEmbedUrl"
+            class="live-iframe"
+            [src]="liveEmbedUrl"
+            [title]="heroVideoTitle || 'Channel video'"
             frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
-            title="Featured stream">
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
           </iframe>
-        } @else {
-          <a [href]="channelUrl" target="_blank" rel="noopener" class="video-placeholder" aria-label="Open St. Mina Nashville on YouTube">
-            <svg width="22" height="28" viewBox="0 0 22 28" fill="none">
-              <path d="M0 0L22 14L0 28V0Z" fill="white"/>
-            </svg>
-            <span class="placeholder-label">Watch on YouTube</span>
-          </a>
-        }
-        @if (isLive()) {
-          <div class="live-badge">
-            <span class="live-dot"></span>
-            <span class="live-text">LIVE</span>
-          </div>
-        }
-      </div>
-      <div class="video-info">
-        <div class="video-meta">
-          <h2>{{ featuredVideo?.title ?? 'Sunday Divine Liturgy' }}</h2>
-          <span class="video-date">
-            @if (isLive()) {
-              Streaming Live Now
-            } @else if (featuredVideo) {
-              Latest &bull; {{ formatDate(featuredVideo.publishedAt) }}
-            } @else {
-              Streamed Live
-            }
-          </span>
         </div>
-        <div class="video-actions">
-          @if (featuredVideo) {
+
+        <div class="live-meta">
+          <div class="live-actions">
+            <button
+              type="button"
+              (click)="sharePage()">
+              Share
+            </button>
+
             <a
-              [href]="youtubeUrl(featuredVideo.id)"
+              class="live-action-link"
+              [href]="'https://www.youtube.com/' + channelHandle"
               target="_blank"
-              rel="noopener"
-              class="action-btn"
-              aria-label="Open on YouTube">
-              <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
-                <path d="M17.6 2.18a2.26 2.26 0 00-1.59-1.6C14.63 0 9 0 9 0S3.37 0 1.99.58A2.26 2.26 0 00.4 2.18 23.7 23.7 0 000 7a23.7 23.7 0 00.4 4.82 2.26 2.26 0 001.59 1.6C3.37 14 9 14 9 14s5.63 0 7.01-.58a2.26 2.26 0 001.59-1.6A23.7 23.7 0 0018 7a23.7 23.7 0 00-.4-4.82zM7.2 10V4l4.8 3-4.8 3z" fill="#C9A084"/>
-              </svg>
+              rel="noopener noreferrer">
+              Subscribe
             </a>
-          }
-          <button class="action-btn" aria-label="Share">
-            <svg width="18" height="20" viewBox="0 0 18 20" fill="none">
-              <path d="M15 14c-.88 0-1.68.36-2.25.94L6.01 11.23c.05-.23.09-.46.09-.73s-.04-.5-.09-.73l6.66-3.67C13.27 6.67 14.07 7 15 7c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L5.43 8.37C4.87 7.74 4.07 7.35 3.18 7.35 1.52 7.35.18 8.69.18 10.35s1.34 3 3 3c.89 0 1.69-.39 2.25-1.02l6.74 3.71c-.05.21-.08.43-.08.66 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92l-.01.02z" fill="#C9A084"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sidebar -->
-    <div class="stream-sidebar">
-      <div class="sidebar-shadow"></div>
-      <span class="sidebar-label">Now Live</span>
-      <h3 class="sidebar-title">Divine Liturgy</h3>
-      <p class="sidebar-desc">Join our community in prayer and worship for the celebration of the Holy Eucharist. Led by Fr. Mina.</p>
-      <a [href]="channelUrl" target="_blank" rel="noopener" class="watch-now-btn">
-        <span>Watch Now</span>
-        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-          <path d="M1 5H9M9 5L5 1M9 5L5 9" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </a>
-      <div class="sidebar-upcoming">
-        <span class="upcoming-label">Coming Up Next</span>
-        <div class="upcoming-list">
-          @for (event of upcomingEvents; track event.title) {
-            <div class="upcoming-item">
-              <svg class="upcoming-icon" width="17" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" fill="#C9A084"/>
-              </svg>
-              <div class="upcoming-info">
-                <span class="upcoming-name">{{ event.title }}</span>
-                <span class="upcoming-time">{{ event.time }}</span>
-              </div>
-            </div>
-          }
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── Upcoming Streams ─────────────────────────────── -->
-<section class="upcoming-streams">
-  <div class="upcoming-streams-inner">
-    <div class="section-header center">
-      <span class="section-label">Schedule</span>
-      <h2 class="section-title">Upcoming Streams</h2>
-    </div>
-    <div class="schedule-cards">
-      @for (stream of upcomingStreams; track stream.title) {
-        <div class="schedule-card">
-          <div class="schedule-icon">
-            @if (stream.icon === 'calendar') {
-              <svg width="27" height="30" viewBox="0 0 24 24" fill="none">
-                <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z" fill="#C9A084"/>
-              </svg>
-            } @else if (stream.icon === 'book') {
-              <svg width="33" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z" fill="#C9A084"/>
-              </svg>
-            } @else {
-              <svg width="32" height="31" viewBox="0 0 24 24" fill="none">
-                <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="#C9A084"/>
-              </svg>
-            }
           </div>
-          <h3 class="schedule-title">{{ stream.title }}</h3>
-          <span class="schedule-date">{{ stream.date }}</span>
-          <button class="schedule-btn">Set Reminder</button>
         </div>
-      }
-    </div>
-  </div>
-</section>
-
-<!-- ── Browse Past Services ─────────────────────────── -->
-<section class="archive">
-  <div class="archive-inner">
-    <div class="archive-header">
-      <div class="archive-heading">
-        <span class="section-label">Archive</span>
-        <h2 class="section-title">Browse Past Services</h2>
       </div>
-      <div class="filter-pills">
-        @for (filter of filters; track filter) {
+    </div>
+  </section>
+
+  <section class="archive-section">
+    <div class="container">
+      <div class="archive-head">
+        <h2 class="section-title">
+          Browse Recent Videos | Sermons | Hymns Classes
+        </h2>
+
+        <div class="filter-chips">
           <button
-            class="filter-pill"
-            [class.active]="isActive(filter)"
-            (click)="setFilter(filter)">
-            {{ filter }}
+            type="button"
+            *ngFor="let category of categories"
+            [class.active]="selectedCategory === category.id"
+            (click)="setCategory(category.id)">
+            {{ category.label }}
           </button>
-        }
-      </div>
-    </div>
-
-    <div class="archive-controls">
-      <div class="search-box">
-        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none">
-          <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0016 9.5 6.5 6.5 0 109.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" fill="#A99A8D"/>
-        </svg>
-      <input type="text" placeholder="Search services..." (input)="onSearchInput($event)" [value]="searchQuery()" />
-      </div>
-      <div class="dropdown-controls">
-        <div class="dropdown">
-          <span>Sort by Date</span>
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1L5 5L9 1" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div class="dropdown">
-          <span>Year: 2023</span>
-          <svg width="10" height="6" viewBox="0 0 10 6" fill="none">
-            <path d="M1 1L5 5L9 1" stroke="#6B7280" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
         </div>
       </div>
-    </div>
 
-    <div class="video-grid">
-      @if (isLoadingArchive()) {
-        @for (i of [1,2,3,4,5,6,7,8]; track i) {
-          <div class="video-card skeleton-card">
-            <div class="video-thumbnail skeleton-thumb"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line short"></div>
-          </div>
-        }
-      } @else {
-        @for (video of filteredVideos; track video.id) {
-          <div class="video-card">
-            <a [href]="youtubeUrl(video.id)" target="_blank" rel="noopener" class="video-thumbnail-link">
-              <div class="video-thumbnail">
-                <img [src]="video.thumbnailUrl" [alt]="video.title" loading="lazy" />
-                <div class="video-overlay">
-                  <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-                    <path d="M8 6L24 15L8 24V6Z" fill="white"/>
-                  </svg>
-                </div>
-                <span class="video-badge">{{ getCategory(video) }}</span>
-              </div>
-            </a>
-            <span class="card-title">{{ video.title }}</span>
-            <span class="card-date">{{ formatDate(video.publishedAt) }}</span>
-            <a [href]="youtubeUrl(video.id)" target="_blank" rel="noopener" class="card-link">Watch →</a>
-          </div>
-        }
-        @if (filteredVideos.length === 0) {
-          <p class="no-results">No services found. Try a different search or filter.</p>
-        }
-      }
-    </div>
+      <div class="archive-toolbar">
+        <input
+          type="text"
+          placeholder="Search videos..."
+          aria-label="Search videos"
+          [(ngModel)]="searchTerm" />
+      </div>
 
-    <div class="archive-load-more">
-      @if (nextPageToken) {
-        <button class="load-more-btn" (click)="loadMore()" [disabled]="isLoadingMore()">
-          {{ isLoadingMore() ? 'Loading...' : 'Load More Services' }}
+      <div
+        class="loading-state"
+        *ngIf="isLoading && currentVideos.length === 0">
+        Loading videos...
+      </div>
+
+      <div
+        class="empty-state"
+        *ngIf="archiveError">
+        {{ archiveError }}
+      </div>
+
+      <div
+        class="empty-state"
+        *ngIf="
+          !archiveError &&
+          !isLoading &&
+          loadedCategories[selectedCategory] &&
+          filteredArchiveItems.length === 0
+        ">
+        No matching videos were found.
+      </div>
+
+      <div class="archive-grid">
+        <article
+          class="archive-card"
+          *ngFor="
+            let item of filteredArchiveItems;
+            trackBy: trackByVideoId
+          ">
+
+          <button
+            type="button"
+            class="archive-thumb-button"
+            (click)="openVideo(item)"
+            [attr.aria-label]="'Play ' + item.title">
+
+            <span
+              class="archive-badge"
+              *ngIf="item.category !== 'recent'">
+              {{
+                item.category === 'sermons'
+                  ? 'SERMON'
+                  : 'HYMNS CLASS'
+              }}
+            </span>
+
+            <img
+              class="archive-thumb"
+              [src]="item.thumbnail"
+              [alt]="item.title"
+              loading="lazy" />
+
+            <span class="play-overlay">
+              ▶
+            </span>
+          </button>
+
+          <h3>{{ item.title }}</h3>
+
+          <p *ngIf="item.category !== 'recent'">
+            {{ item.subtitle }}
+          </p>
+        </article>
+      </div>
+
+      <div
+        class="show-more-wrap"
+        *ngIf="currentNextPageToken">
+        <button
+          type="button"
+          class="show-more-btn"
+          (click)="loadMoreVideos()"
+          [disabled]="isLoading">
+          {{ isLoading ? 'Loading...' : 'Show More' }}
         </button>
-      }
+      </div>
+    </div>
+  </section>
+
+  <div
+    class="video-modal"
+    *ngIf="selectedVideoEmbedUrl"
+    (click)="closeVideo()">
+
+    <div
+      class="video-modal-card"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="selectedVideoTitle"
+      (click)="$event.stopPropagation()">
+
+      <button
+        type="button"
+        class="modal-close"
+        aria-label="Close video"
+        (click)="closeVideo()">
+        ×
+      </button>
+
+      <iframe
+        class="modal-iframe"
+        [src]="selectedVideoEmbedUrl"
+        [title]="selectedVideoTitle"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
-</section>
-
-<!-- ── CTA ───────────────────────────────────────────── -->
-<section class="cta">
-  <div class="cta-inner">
-    <h2>Looking for Something Specific?</h2>
-    <p>If you are looking for a specific sermon or liturgical service not listed in our archive, or if you're experiencing technical difficulties, please reach out to us.</p>
-    <a routerLink="/contact" class="cta-btn">Contact Us</a>
-  </div>
-</section>
+</div>
