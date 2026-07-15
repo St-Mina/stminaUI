@@ -1,25 +1,13 @@
-import { AsyncPipe, DatePipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import { WordpressService } from './services/wordpress.service';
+import { Header } from './shared/header/header';
+import { Footer } from './shared/footer/footer';
 
 @Component({
   selector: 'app-root',
-  imports: [AsyncPipe, DatePipe],
+  imports: [RouterOutlet, Header, Footer],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  private readonly wordpressService = inject(WordpressService);
-
-  protected readonly siteName = 'St. Mina Church';
-  protected readonly errorMessage = signal<string | null>(null);
-  protected readonly posts$ = this.wordpressService.getLatestPosts(6).pipe(
-    catchError(() => {
-      this.errorMessage.set('Unable to load posts from WordPress right now.');
-      return of([]);
-    })
-  );
-
-}
+export class App {}

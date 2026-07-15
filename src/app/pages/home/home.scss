@@ -1,0 +1,742 @@
+$navy: #1a2a4a;
+$navy-light: #243556;
+$gold: #c9a84c;
+$gold-light: #d4b65e;
+$bg-light: #f5f5f0;
+$bg-warm: #f0ebe1;
+
+// --- Hero ---
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at center, rgba(201, 168, 76, 0.18), transparent 60%),
+    linear-gradient(135deg, $navy 0%, $navy-light 60%, #0f1a2e 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom, rgba(15, 26, 46, 0.25) 35%, rgba(26, 42, 74, 0.95)),
+    linear-gradient(135deg, rgba(26, 42, 74, 0.55), rgba(15, 26, 46, 0.45));
+}
+
+.hero-announcement {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba($gold, 0.28);
+  background: rgba(15, 26, 46, 0.72);
+  backdrop-filter: blur(6px);
+}
+
+.hero-announcement-viewport {
+  overflow: hidden;
+}
+
+.hero-announcement-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: hero-announcement-scroll 65s linear infinite;
+}
+
+.hero-announcement-copy {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.hero-announcement-cycle {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+.hero-announcement-item {
+  flex: 0 0 auto;
+  padding-block: 0.55rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(0.72rem, 1.6vw, 0.84rem);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.hero-announcement-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@keyframes hero-announcement-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.hero-slides,
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slides {
+  overflow: hidden;
+}
+
+.hero-slide {
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 600ms ease;
+
+  &.is-active {
+    opacity: 1;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 2rem;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0 0 1.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .accent {
+    color: $gold;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+}
+
+.hero-arrow {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  background: rgba(15, 26, 46, 0.55);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition:
+    background 200ms ease,
+    border-color 200ms ease;
+
+  &:hover {
+    border-color: $gold;
+    background: rgba(15, 26, 46, 0.85);
+  }
+
+  &:focus-visible {
+    outline: 3px solid $gold;
+    outline-offset: 3px;
+  }
+}
+
+.hero-arrow-previous {
+  left: clamp(1rem, 4vw, 4rem);
+}
+
+.hero-arrow-next {
+  right: clamp(1rem, 4vw, 4rem);
+}
+
+.hero-indicators {
+  position: absolute;
+  z-index: 3;
+  bottom: clamp(1.25rem, 3vw, 2.5rem);
+  left: 50%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transform: translateX(-50%);
+}
+
+.hero-indicator {
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+
+  &::before {
+    width: 0.6rem;
+    height: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    content: '';
+    transition:
+      background 200ms ease,
+      border-color 200ms ease,
+      transform 200ms ease;
+  }
+
+  &:hover::before {
+    background: #fff;
+  }
+
+  &.is-active::before {
+    border-color: $gold;
+    background: $gold;
+    transform: scale(1.25);
+  }
+
+  &:focus-visible {
+    border-radius: 50%;
+    outline: 3px solid $gold;
+    outline-offset: 1px;
+  }
+}
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+// --- Shared section styles ---
+.section {
+  padding: 5rem 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: $navy;
+  margin: 0 0 0.5rem;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: #666;
+  font-size: 1.05rem;
+  margin: 0 0 2.5rem;
+}
+
+.section-action {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+// --- Buttons ---
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.btn-gold {
+  background: $gold;
+  color: $navy;
+
+  &:hover {
+    background: $gold-light;
+  }
+}
+
+.btn-navy {
+  background: $navy;
+  color: #fff;
+
+  &:hover {
+    background: $navy-light;
+  }
+}
+
+.btn-outline {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+  background: transparent;
+
+  &:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// --- Services Preview ---
+.services-preview {
+  background: $bg-light;
+}
+
+// --- Calendar ---
+.calendar-section {
+  background: $bg-light;
+}
+
+.calendar-embed {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+
+  iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .service-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    color: $navy;
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  p {
+    color: $gold;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin: 0 0 0.75rem;
+  }
+
+  .service-desc {
+    display: block;
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+// --- About Preview ---
+.about-preview {
+  background: #fff;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-image {
+  img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+  }
+}
+
+.about-text {
+  h2 {
+    font-size: 2rem;
+    color: $navy;
+    margin: 0 0 1.25rem;
+    line-height: 1.3;
+  }
+
+  p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+  }
+
+  .btn {
+    margin-top: 0.5rem;
+  }
+}
+
+// --- Ministries Preview ---
+.ministries-preview {
+  background: $bg-light;
+}
+
+.ministries-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.ministry-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.ministry-image {
+  height: 180px;
+  overflow: hidden;
+  background: #f2f2ed;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.ministry-info {
+  padding: 1.25rem;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: $navy;
+    font-size: 1.1rem;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+// --- Clergy Section ---
+.clergy-section {
+  background: #fff;
+
+  > .container > .section-subtitle {
+    color: #4f5663;
+  }
+}
+
+.clergy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 4rem);
+}
+
+.clergy-card {
+  text-align: center;
+}
+
+.clergy-portrait {
+  width: clamp(11.875rem, 18vw, 13.75rem);
+  aspect-ratio: 1;
+  margin: 0 auto 1.5rem;
+  overflow: hidden;
+  border: 3px solid rgba($gold, 0.85);
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(15, 26, 46, 0.16);
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    transform: scale(1.025);
+    box-shadow: 0 12px 30px rgba(15, 26, 46, 0.22);
+  }
+}
+
+.clergy-card-content {
+  display: grid;
+  grid-template-rows: minmax(2rem, auto) minmax(3.25rem, auto) auto auto;
+  max-width: 23rem;
+  margin-inline: auto;
+
+  h3 {
+    margin: 0 0 0.5rem;
+    color: $navy;
+    font-size: 1.3rem;
+  }
+}
+
+.clergy-role {
+  min-height: 2.8em;
+  margin: 0 0 0.85rem;
+  color: #596579;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.clergy-summary {
+  display: -webkit-box;
+  min-height: 3.3em;
+  overflow: hidden;
+  margin: 0;
+  color: #60656f;
+  line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  &.is-expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+  }
+}
+
+.clergy-toggle {
+  justify-self: center;
+  margin-top: 1rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid $gold;
+  border-radius: 999px;
+  background: transparent;
+  color: $navy;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    background 200ms ease;
+
+  &:hover {
+    background: $gold;
+    color: #fff;
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgba($gold, 0.45);
+    outline-offset: 3px;
+  }
+}
+
+// --- News Section ---
+.news-section {
+  background: $bg-light;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .news-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.news-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.news-card-inner {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+}
+
+.news-date {
+  margin: 0;
+  color: $gold;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.news-card h3 {
+  margin: 0;
+  color: $navy;
+  font-size: 1.15rem;
+}
+
+.news-cta {
+  margin: 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+// --- Responsive ---
+@media (max-width: 768px) {
+  .hero {
+    min-height: 75vh;
+  }
+
+  .hero-content {
+    padding-inline: 4.75rem;
+  }
+
+  .hero-content h1 {
+    font-size: 2.8rem;
+  }
+
+  .hero-arrow {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .hero-arrow-previous {
+    left: 0.75rem;
+  }
+
+  .hero-arrow-next {
+    right: 0.75rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .clergy-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 32rem;
+    margin-inline: auto;
+  }
+
+  .clergy-card-content {
+    grid-template-rows: auto;
+  }
+
+  .clergy-role,
+  .clergy-summary {
+    min-height: 0;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide,
+  .hero-arrow,
+  .hero-indicator::before,
+  .clergy-portrait,
+  .clergy-toggle {
+    transition: none;
+  }
+
+  .hero-announcement-track {
+    animation: none;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-announcement-copy {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-announcement-cycle {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    padding-right: 0;
+  }
+
+  .hero-announcement-item {
+    padding: 0.55rem 1rem;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .hero-announcement-copy + .hero-announcement-copy {
+    display: none;
+  }
+
+  .hero-announcement-cycle + .hero-announcement-cycle {
+    display: none;
+  }
+}

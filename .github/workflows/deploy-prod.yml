@@ -1,0 +1,76 @@
+name: Deploy to Production
+
+on:
+  # Manual trigger — available from the Actions tab after merging to master
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Target environment'
+        required: true
+        type: choice
+        options:
+          - QC
+          - Production
+        default: 'Production'
+      reason:
+        description: 'Reason for this deployment'
+        required: false
+        default: 'Scheduled release'
+
+jobs:
+  deploy:
+    name: Deploy to ${{ github.event.inputs.environment }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    environment:
+      name: ${{ github.event.inputs.environment }}
+      url: >-
+        ${{
+          github.event.inputs.environment == 'Production'
+            && 'https://stminaui.example.com'
+            || 'https://qc.stminaui.example.com'
+        }}
+
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit dependencies (security check)
+        run: npm audit --audit-level=high
+
+      - name: Build for target environment
+        run: |
+          if [ "${{ github.event.inputs.environment }}" = "Production" ]; then
+            npm run build -- --configuration production
+          else
+            npm run build -- --configuration development
+          fi
+
+      - name: Run unit tests (headless)
+        run: npm test -- --watch=false --browsers=ChromeHeadless
+
+      - name: Deploy
+        run: |
+          echo "Deploying to ${{ github.event.inputs.environment }} environment..."
+          # Replace the block below with your actual deployment command, e.g.:
+          #   aws s3 sync dist/ s3://your-prod-bucket --delete
+          #   firebase deploy --only hosting:prod
+          echo "Deployment to ${{ github.event.inputs.environment }} complete."
+
+      - name: Notify deployment
+        run: |
+          echo "Deployment triggered by: ${{ github.actor }}"
+          echo "Target: ${{ github.event.inputs.environment }}"
+          echo "Reason: ${{ github.event.inputs.reason }}"

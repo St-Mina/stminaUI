@@ -1,0 +1,40 @@
+<!-- Page Hero -->
+<section class="page-hero">
+  <div class="hero-content">
+    <h1>Our Ministries</h1>
+    <p>Serving God through community, education, and outreach</p>
+  </div>
+</section>
+
+<!-- Ministries Grid -->
+<section class="section">
+  <div class="container">
+    <div class="ministries-list">
+      @for (ministry of ministries; track ministry.title; let odd = $odd) {
+        <div class="ministry-block" [class.reverse]="odd">
+          <div class="ministry-image">
+            <img [src]="ministry.imageSrc" [alt]="ministry.alt" loading="lazy" />
+          </div>
+          <div class="ministry-details">
+            <h2>{{ ministry.title }}</h2>
+            <p>{{ ministry.detailSummary }}</p>
+            <ul>
+              @for (bullet of ministry.bullets; track bullet) {
+                <li>{{ bullet }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- Get Involved CTA -->
+<section class="section cta-section">
+  <div class="container text-center">
+    <h2>Get Involved</h2>
+    <p>We have a place for everyone. Join a ministry and serve alongside your church family.</p>
+    <a routerLink="/contact" class="btn btn-gold">Contact Us to Join</a>
+  </div>
+</section>

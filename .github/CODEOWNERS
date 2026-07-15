@@ -1,0 +1,13 @@
+# Code Owners — these users are automatically requested for review
+# when a pull request is opened that modifies the listed paths.
+#
+# See: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Global owner — required review for every PR
+*   @St-Mina
+
+# Source code requires an additional review
+/src/   @St-Mina
+
+# CI/CD workflows require owner approval
+/.github/workflows/   @St-Mina

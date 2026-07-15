@@ -1,0 +1,272 @@
+:host {
+  display: block;
+}
+
+$navy: #1a2a4a;
+$gold: #c9a84c;
+$gold-light: #d4b65e;
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// --- Hero ---
+.story-hero {
+  position: relative;
+  min-height: clamp(320px, 52vh, 520px);
+  display: grid;
+  align-items: end;
+  color: #fff;
+  background: $navy;
+}
+
+.story-hero-image {
+  position: absolute;
+  inset: 0;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+}
+
+.story-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 26, 46, 0.96) 12%,
+    rgba(15, 26, 46, 0.55) 48%,
+    rgba(15, 26, 46, 0.2)
+  );
+}
+
+.story-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  text-align: center;
+}
+
+.story-hero-eyebrow {
+  margin: 0 0 0.75rem;
+  color: $gold;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.story-hero-content h1 {
+  margin: 0 0 1rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.12;
+  font-weight: 700;
+}
+
+.story-hero-lead {
+  margin: 0 auto;
+  max-width: 40rem;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+  line-height: 1.65;
+}
+
+// --- Story ---
+.story {
+  padding: 4.5rem 0 5rem;
+  background: #fff;
+}
+
+.story-prose {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.story-audio {
+  margin-bottom: 3.5rem;
+  text-align: center;
+}
+
+.story-audio-label {
+  margin: 0 0 0.75rem;
+  color: $navy;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.story-audio-progress {
+  height: 2px;
+  margin: 0 0 1rem;
+  background: rgba($navy, 0.1);
+  border-radius: 1px;
+  overflow: hidden;
+}
+
+.story-audio-progress-fill {
+  height: 100%;
+  background: $gold;
+  transition: width 0.2s linear;
+}
+
+.story-audio audio {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+}
+
+.chapter {
+  scroll-margin-top: 6.5rem;
+
+  // ornament divider between chapters
+  & + .chapter {
+    margin-top: 3.5rem;
+    padding-top: 3.5rem;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 3rem;
+      height: 1px;
+      margin: -3.5rem auto 3.5rem;
+      background: $gold;
+      transform: translateY(-1px);
+    }
+  }
+
+  h2 {
+    margin: 0 0 1.5rem;
+    color: $navy;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 1.9rem);
+    line-height: 1.25;
+    text-align: center;
+  }
+
+  p {
+    margin: 0 0 1.35rem;
+    padding: 0.65rem 0.9rem;
+    color: #3d4350;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 1.1rem;
+    line-height: 1.85;
+    border-radius: 4px;
+    transition: background-color 0.5s ease;
+
+    &.story-paragraph-active {
+      background: rgba($gold, 0.14);
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: story-paragraph-glow 2.8s ease-in-out infinite;
+      }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.story-closing {
+  margin: 4rem auto 0;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba($gold, 0.5);
+  max-width: 34rem;
+  color: $navy;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+  line-height: 1.6;
+  text-align: center;
+  border-radius: 4px;
+  padding-left: 0.9rem;
+  padding-right: 0.9rem;
+  transition: background-color 0.35s ease;
+
+  &.story-paragraph-active {
+    background: rgba($gold, 0.1);
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: story-paragraph-glow 2.8s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes story-paragraph-glow {
+  0%,
+  100% {
+    background-color: rgba($gold, 0.1);
+  }
+
+  50% {
+    background-color: rgba($gold, 0.17);
+  }
+}
+
+// drop cap on the story's opening paragraph
+.chapter:first-of-type p:first-of-type::first-letter {
+  float: left;
+  padding: 0.08em 0.12em 0 0;
+  color: $navy;
+  font-family: 'Playfair Display', serif;
+  font-size: 3.4em;
+  line-height: 0.85;
+}
+
+// --- CTA (matches about page) ---
+.cta-section {
+  background: $navy;
+  color: #fff;
+  padding: 4rem 0;
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin: 0 0 0.75rem;
+  }
+
+  p {
+    max-width: 38rem;
+    margin: 0 auto 1.5rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1.05rem;
+    line-height: 1.65;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.btn-gold {
+  background: $gold;
+  color: $navy;
+
+  &:hover {
+    background: $gold-light;
+  }
+}

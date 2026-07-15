@@ -1,0 +1,160 @@
+$navy: #1a2a4a;
+$navy-light: #243556;
+$gold: #c9a84c;
+$gold-light: #d4b65e;
+$bg-light: #f5f5f0;
+
+.page-hero {
+  background: linear-gradient(135deg, $navy, $navy-light);
+  color: #fff;
+  text-align: center;
+  padding: 5rem 1.5rem 4rem;
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0 0 0.75rem;
+  }
+
+  p {
+    font-size: 1.15rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+  }
+}
+
+.section {
+  padding: 4.5rem 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+// Ministry blocks
+.ministries-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.ministry-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+
+  &.reverse {
+    direction: rtl;
+
+    > * {
+      direction: ltr;
+    }
+  }
+}
+
+.ministry-image {
+  height: 100%;
+  min-height: 280px;
+  overflow: hidden;
+  background: #f2f2ed;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.ministry-details {
+  padding: 2rem;
+
+  h2 {
+    color: $navy;
+    font-size: 1.5rem;
+    margin: 0 0 0.75rem;
+  }
+
+  p {
+    color: #555;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+  }
+
+  ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: #555;
+
+    li {
+      margin-bottom: 0.4rem;
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+// CTA
+.cta-section {
+  background: $navy;
+  color: #fff;
+  padding: 4rem 0;
+
+  h2 {
+    font-size: 2rem;
+    margin: 0 0 0.75rem;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0 0 1.5rem;
+    font-size: 1.05rem;
+  }
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-gold {
+  background: $gold;
+  color: $navy;
+
+  &:hover {
+    background: $gold-light;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-hero h1 {
+    font-size: 2rem;
+  }
+
+  .ministry-block,
+  .ministry-block.reverse {
+    grid-template-columns: 1fr;
+    direction: ltr;
+  }
+
+  .ministry-image {
+    min-height: 200px;
+  }
+}

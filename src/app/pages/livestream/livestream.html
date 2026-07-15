@@ -1,0 +1,199 @@
+<div class="media-page">
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Live Stream &amp; Media</p>
+
+      <h1>Live Stream</h1>
+
+      <p class="hero-subtitle">
+        Join us live or revisit a past service.
+      </p>
+    </div>
+  </section>
+
+  <section class="live-section">
+    <div class="container single-live-grid">
+      <div class="live-main">
+        <div class="live-video-card">
+
+          <div
+            class="hero-video-status"
+            *ngIf="heroLoading">
+            Loading video...
+          </div>
+
+          <div
+            class="hero-video-status hero-video-error"
+            *ngIf="!heroLoading && heroError">
+            {{ heroError }}
+          </div>
+
+          <iframe
+            *ngIf="!heroLoading && !heroError && liveEmbedUrl"
+            class="live-iframe"
+            [src]="liveEmbedUrl"
+            [title]="heroVideoTitle || 'Channel video'"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <div class="live-meta">
+          <div class="live-actions">
+            <button
+              type="button"
+              (click)="sharePage()">
+              Share
+            </button>
+
+            <a
+              class="live-action-link"
+              [href]="'https://www.youtube.com/' + channelHandle"
+              target="_blank"
+              rel="noopener noreferrer">
+              Subscribe
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="archive-section">
+    <div class="container">
+      <div class="archive-head">
+        <h2 class="section-title">
+          Browse Recent Videos | Sermons | Hymns Classes
+        </h2>
+
+        <div class="filter-chips">
+          <button
+            type="button"
+            *ngFor="let category of categories"
+            [class.active]="selectedCategory === category.id"
+            (click)="setCategory(category.id)">
+            {{ category.label }}
+          </button>
+        </div>
+      </div>
+
+      <div class="archive-toolbar">
+        <input
+          type="text"
+          placeholder="Search videos..."
+          aria-label="Search videos"
+          [(ngModel)]="searchTerm" />
+      </div>
+
+      <div
+        class="loading-state"
+        *ngIf="isLoading && currentVideos.length === 0">
+        Loading videos...
+      </div>
+
+      <div
+        class="empty-state"
+        *ngIf="archiveError">
+        {{ archiveError }}
+      </div>
+
+      <div
+        class="empty-state"
+        *ngIf="
+          !archiveError &&
+          !isLoading &&
+          loadedCategories[selectedCategory] &&
+          filteredArchiveItems.length === 0
+        ">
+        No matching videos were found.
+      </div>
+
+      <div class="archive-grid">
+        <article
+          class="archive-card"
+          *ngFor="
+            let item of filteredArchiveItems;
+            trackBy: trackByVideoId
+          ">
+
+          <button
+            type="button"
+            class="archive-thumb-button"
+            (click)="openVideo(item)"
+            [attr.aria-label]="'Play ' + item.title">
+
+            <span
+              class="archive-badge"
+              *ngIf="item.category !== 'recent'">
+              {{
+                item.category === 'sermons'
+                  ? 'SERMON'
+                  : 'HYMNS CLASS'
+              }}
+            </span>
+
+            <img
+              class="archive-thumb"
+              [src]="item.thumbnail"
+              [alt]="item.title"
+              loading="lazy" />
+
+            <span class="play-overlay">
+              ▶
+            </span>
+          </button>
+
+          <h3>{{ item.title }}</h3>
+
+          <p *ngIf="item.category !== 'recent'">
+            {{ item.subtitle }}
+          </p>
+        </article>
+      </div>
+
+      <div
+        class="show-more-wrap"
+        *ngIf="currentNextPageToken">
+        <button
+          type="button"
+          class="show-more-btn"
+          (click)="loadMoreVideos()"
+          [disabled]="isLoading">
+          {{ isLoading ? 'Loading...' : 'Show More' }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div
+    class="video-modal"
+    *ngIf="selectedVideoEmbedUrl"
+    (click)="closeVideo()">
+
+    <div
+      class="video-modal-card"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="selectedVideoTitle"
+      (click)="$event.stopPropagation()">
+
+      <button
+        type="button"
+        class="modal-close"
+        aria-label="Close video"
+        (click)="closeVideo()">
+        ×
+      </button>
+
+      <iframe
+        class="modal-iframe"
+        [src]="selectedVideoEmbedUrl"
+        [title]="selectedVideoTitle"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+</div>
