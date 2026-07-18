@@ -43,6 +43,7 @@ jobs:
           export const environment = {
             production: true,
             youtubeApiKey: '${YOUTUBE_API_KEY}',
+            youtubeChannelId: 'UCFHaOwm2upL2fydLiIRsVzg',
             youtubeChannelHandle: 'StMinaNashville'
           };
           EOF
