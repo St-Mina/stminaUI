@@ -1,9 +1,9 @@
-name: Deploy QC to GitHub Pages
+name: Deploy Main to GitHub Pages
 
 on:
   push:
     branches:
-      - qc
+      - main
   workflow_dispatch:
 
 permissions:
@@ -12,12 +12,12 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-qc
+  group: pages-main
   cancel-in-progress: true
 
 jobs:
   build:
-    name: Build QC
+    name: Build Main
     runs-on: ubuntu-latest
     env:
       # Subpath GitHub Pages serves the site from. Adjust if the repo is renamed.
