@@ -294,9 +294,9 @@ describe('Home hero carousel', () => {
 
     expect(heading?.textContent?.trim()).toBe('Latest News');
     expect(cards).toHaveLength(3);
-    expect(element.textContent).toContain('St. Febronia the Ascetic');
+    expect(element.textContent).toContain('The Feast of Transfiguration');
     expect(element.textContent).toContain(
-      'Join us in prayer as we remember St. Febronia on July 8.'
+      'Join us in prayer as we celebrate the Feast of Transfiguration on Wednesday, August 19'
     );
     expect(element.textContent).not.toContain('No announcements yet.');
     expect(element.textContent).not.toContain('Unable to load posts right now.');
