@@ -96,4 +96,4 @@ export const saintMinaStorySections = [
 ] as const satisfies readonly SaintMinaStorySection[];
 
 export const saintMinaStoryClosing =
-  'The intercession of Mari-Mina be with us, and glory be to our God forever. Amen.';
+  'The blessing of the prayers of Mari-Mina be with us all, and glory be to our God forever. Amen.';
