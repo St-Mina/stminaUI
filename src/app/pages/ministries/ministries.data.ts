@@ -72,7 +72,6 @@ export const ministries = [
     imageSrc: 'assets/images/ministries/familyOutreach-upscaled-20260702-220117.webp',
     alt: 'Family Ministry',
     bullets: [
-      'Family retreats and camping trips',
       'Marriage preparation and enrichment programs',
       'Parenting classes rooted in Orthodox principles',
       'Monthly family nights with food and fellowship',
