@@ -74,8 +74,9 @@
 
 .live-video-card {
   position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-  min-height: 320px;
   border-radius: 12px;
   background: #252525;
   box-shadow: var(--shadow-card);
@@ -84,14 +85,14 @@
 .live-iframe {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   border: 0;
 }
 
 .hero-video-status {
   display: grid;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: 100%;
   place-items: center;
   box-sizing: border-box;
   padding: 24px;
