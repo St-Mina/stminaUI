@@ -72,9 +72,10 @@ export const ministries = [
     imageSrc: 'assets/images/ministries/familyOutreach-upscaled-20260702-220117.webp',
     alt: 'Family Ministry',
     bullets: [
-      'Marriage preparation and enrichment programs',
+      'Annual Family Conventions',
+      'Marriage preparation and programs',
       'Parenting classes rooted in Orthodox principles',
-      'Monthly family nights with food and fellowship',
+      'Weekly family meetings with food and fellowship',
     ],
   },
 ] as const satisfies readonly MinistryContent[];
