@@ -81,6 +81,7 @@ interface YouTubeSearchResponse {
 export class Livestream implements OnInit {
   readonly channelId = environment.youtubeChannelId;
   readonly channelHandle = environment.youtubeChannelHandle;
+  readonly subscribeUrl = this.getSubscribeUrl();
 
   readonly uploadsPlaylistId = this.channelId.startsWith('UC')
     ? `UU${this.channelId.substring(2)}`
@@ -498,6 +499,20 @@ export class Livestream implements OnInit {
       : fallbackMessage;
   }
 
+private getSubscribeUrl(): string {
+  const handle = (this.channelHandle || '')
+    .trim()
+    .replace(/^https?:\/\/(www\.)?youtube\.com\//i, '')
+    .replace(/^@/, '')
+    .replace(/\/+$/, '');
+
+  if (handle) {
+    return `https://www.youtube.com/@${handle}?sub_confirmation=1`;
+  }
+
+  return `https://www.youtube.com/channel/${this.channelId}?sub_confirmation=1`;
+}
+  
   private safeUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       url
