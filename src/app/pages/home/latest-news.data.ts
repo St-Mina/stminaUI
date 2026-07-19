@@ -18,6 +18,6 @@ export const latestNewsCards: readonly LatestNewsCard[] = [
   {
     title: '2026 Liturgy and Life Convention',
     dateLabel: 'November 6-8, 2026',
-    cta: "Tickets go on sale: August 2 - September 27. Visit: events.ticketleap.com/tickets/liturgy-and-life-convention/2026-liturgy-and-life-convention",
+    cta: "Tickets go on sale: August 2 - September 27. Visit: https://events.ticketleap.com/tickets/liturgy-and-life-convention/2026-liturgy-and-life-convention",
   },
 ] as const;
