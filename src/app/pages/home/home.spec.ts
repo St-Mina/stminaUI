@@ -57,7 +57,7 @@ describe('Home hero carousel', () => {
 
     expect(component.heroSlides.map((slide) => slide.src)).toEqual([
       'assets/images/imgAssets/hero.png',
-      'assets/images/imgAssets/afterChurch.png',
+      'assets/images/imgAssets/StMinaHome.png',
       'assets/images/imgAssets/candle.png',
     ]);
     expect(component.activeSlideIndex()).toBe(0);
