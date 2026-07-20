@@ -43,8 +43,8 @@ export class Home {
       alt: 'St. Mina Coptic Orthodox Church sanctuary',
     },
     {
-      src: 'assets/images/imgAssets/afterChurch.png',
-      alt: 'St. Mina church community gathered after the liturgy',
+      src: 'assets/images/imgAssets/StMinaHome.png',
+      alt: 'St. Mina Veneration',
     },
     {
       src: 'assets/images/imgAssets/candle.png',
@@ -73,15 +73,6 @@ export class Home {
       imageOffsetY: 8,
     },
     {
-      name: 'Fr. Kyrillos Zaki',
-      role: 'Priest of St. Mina Coptic Orthodox Church',
-      summary:
-        'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
-      imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
-      imageScale: 1.16,
-      imageOffsetY: -15,
-    },
-    {
       name: 'Fr. Youaness Seraphim',
       role: 'General priest of the Southern Diocese',
       summary:
@@ -89,6 +80,15 @@ export class Home {
       imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
       imageScale: 1.1,
       imageOffsetY: -3,
+    },
+    {
+      name: 'Fr. Kyrillos Zaki',
+      role: 'Priest of St. Mina Coptic Orthodox Church',
+      summary:
+        'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
+      imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
+      imageScale: 1.16,
+      imageOffsetY: -15,
     },
   ];
 
