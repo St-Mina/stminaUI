@@ -10,13 +10,14 @@
 >
   <div class="hero-slides">
     @for (slide of heroSlides; track slide.src; let index = $index) {
-      <img
-        class="hero-slide"
-        [class.is-active]="index === activeSlideIndex()"
-        [src]="slide.src"
-        [alt]="slide.alt"
-        [attr.aria-hidden]="index !== activeSlideIndex()"
-      />
+<img
+  class="hero-slide"
+  [class.is-active]="index === activeSlideIndex()"
+  [class.st-mina-slide]="slide.src.includes('StMinaHome')"
+  [src]="slide.src"
+  [alt]="slide.alt"
+  [attr.aria-hidden]="index !== activeSlideIndex()"
+  />
     }
   </div>
   <div class="hero-overlay"></div>
