@@ -153,16 +153,18 @@
       </div>
 
       <div
-        class="show-more-wrap"
-        *ngIf="hasMoreVideos"
-        <button
-          type="button"
-          class="show-more-btn"
-          (click)="loadMoreVideos()"
-          [disabled]="isLoading">
-          {{ isLoading ? 'Loading...' : 'Show More' }}
-        </button>
-      </div>
+     class="show-more-wrap"
+     *ngIf="hasMoreVideos"
+      >
+      <button
+     type="button"
+     class="show-more-btn"
+     (click)="loadMoreVideos()"
+     [disabled]="isLoading"
+     >
+     {{ isLoading ? 'Loading...' : 'Show More' }}
+      </button>
+     </div>
     </div>
   </section>
 
