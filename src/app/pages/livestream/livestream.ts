@@ -297,7 +297,7 @@ export class Livestream implements OnInit {
       .set('key', environment.youtubeApiKey)
       .set('playlistId', this.uploadsPlaylistId)
       .set('part', 'snippet,contentDetails')
-      .set('maxResults', '50');
+      .set('maxResults', '5');
 
     if (pageToken) {
       params = params.set('pageToken', pageToken);
