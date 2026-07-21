@@ -61,14 +61,20 @@
         </div>
 
         <!-- Give Now Button -->
-        <button class="btn-give">Give Now</button>
+        <button
+          type="button"
+          class="btn-give"
+          (click)="openPayPal()"
+         >
+         Give Now
+        </button>
 
         <!-- Security Note -->
         <div class="security-note">
           <svg width="10" height="13" viewBox="0 0 10 13" fill="none">
             <path d="M8.5 5.5H9C9.55 5.5 10 5.95 10 6.5V11.5C10 12.05 9.55 12.5 9 12.5H1C0.45 12.5 0 12.05 0 11.5V6.5C0 5.95 0.45 5.5 1 5.5H1.5V4C1.5 1.79 3.29 0 5.5 0C7.21 0 8.5 1.79 8.5 4V5.5ZM5 9.5C5.83 9.5 6.5 8.83 6.5 8C6.5 7.17 5.83 6.5 5 6.5C4.17 6.5 3.5 7.17 3.5 8C3.5 8.83 4.17 9.5 5 9.5ZM7 5.5V4C7 2.62 6.38 1.5 5 1.5C3.62 1.5 3 2.62 3 4V5.5H7Z" fill="#94A3B8"/>
           </svg>
-          <span>Secure giving powered by Tithe.ly</span>
+          <span>Secure giving powered by PayPal</span>
         </div>
       </div>
     </div>
