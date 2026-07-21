@@ -87,6 +87,14 @@ export class Livestream implements OnInit {
     ? `UU${this.channelId.substring(2)}`
     : '';
 
+  readonly videosPerPage = 5;
+
+  visibleVideoCounts: Record<MediaCategory, number> = {
+    recent: 5,
+    sermons: 5,
+    hymns: 5,
+  };
+
   liveEmbedUrl: SafeResourceUrl | null = null;
   selectedVideoEmbedUrl: SafeResourceUrl | null = null;
 
@@ -154,21 +162,20 @@ export class Livestream implements OnInit {
   }
 
   get filteredArchiveItems(): MediaItem[] {
-    const term = this.searchTerm.toLowerCase().trim();
+    return this.getFilteredCurrentVideos().slice(
+      0,
+      this.visibleVideoCounts[this.selectedCategory]
+    );
+  }
 
-    return [...this.currentVideos]
-      .sort(
-        (a, b) =>
-          new Date(b.publishedAt).getTime() -
-          new Date(a.publishedAt).getTime()
-      )
-      .filter((item) => {
-        return (
-          !term ||
-          item.title.toLowerCase().includes(term) ||
-          item.subtitle.toLowerCase().includes(term)
-        );
-      });
+  get hasMoreVideos(): boolean {
+    const matchingLoadedVideos = this.getFilteredCurrentVideos();
+
+    return (
+      this.visibleVideoCounts[this.selectedCategory] <
+        matchingLoadedVideos.length ||
+      Boolean(this.currentNextPageToken)
+    );
   }
 
   loadHeroVideo(): void {
@@ -297,7 +304,7 @@ export class Livestream implements OnInit {
       .set('key', environment.youtubeApiKey)
       .set('playlistId', this.uploadsPlaylistId)
       .set('part', 'snippet,contentDetails')
-      .set('maxResults', '5');
+      .set('maxResults', '50');
 
     if (pageToken) {
       params = params.set('pageToken', pageToken);
@@ -373,6 +380,11 @@ export class Livestream implements OnInit {
           this.nextPageTokens[category] =
             response.nextPageToken || '';
 
+          if (loadMore) {
+            this.visibleVideoCounts[category] +=
+              this.videosPerPage;
+          }
+
           this.loadedCategories[category] = true;
           this.loadingCategories[category] = false;
           this.changeDetector.markForCheck();
@@ -396,11 +408,24 @@ export class Livestream implements OnInit {
   }
 
   loadMoreVideos(): void {
-    if (!this.currentNextPageToken) {
+    const category = this.selectedCategory;
+    const matchingLoadedVideos =
+      this.getFilteredCurrentVideos();
+
+    if (
+      this.visibleVideoCounts[category] <
+      matchingLoadedVideos.length
+    ) {
+      this.visibleVideoCounts[category] +=
+        this.videosPerPage;
+
+      this.changeDetector.markForCheck();
       return;
     }
 
-    this.loadVideos(this.selectedCategory, true);
+    if (this.currentNextPageToken) {
+      this.loadVideos(category, true);
+    }
   }
 
   openVideo(item: MediaItem): void {
@@ -446,6 +471,24 @@ export class Livestream implements OnInit {
       })
       .catch(() => {
         alert('Unable to copy the page link.');
+      });
+  }
+
+  private getFilteredCurrentVideos(): MediaItem[] {
+    const term = this.searchTerm.toLowerCase().trim();
+
+    return [...this.currentVideos]
+      .sort(
+        (a, b) =>
+          new Date(b.publishedAt).getTime() -
+          new Date(a.publishedAt).getTime()
+      )
+      .filter((item) => {
+        return (
+          !term ||
+          item.title.toLowerCase().includes(term) ||
+          item.subtitle.toLowerCase().includes(term)
+        );
       });
   }
 
@@ -499,20 +542,23 @@ export class Livestream implements OnInit {
       : fallbackMessage;
   }
 
-private getSubscribeUrl(): string {
-  const handle = (this.channelHandle || '')
-    .trim()
-    .replace(/^https?:\/\/(www\.)?youtube\.com\//i, '')
-    .replace(/^@/, '')
-    .replace(/\/+$/, '');
+  private getSubscribeUrl(): string {
+    const handle = (this.channelHandle || '')
+      .trim()
+      .replace(
+        /^https?:\/\/(www\.)?youtube\.com\//i,
+        ''
+      )
+      .replace(/^@/, '')
+      .replace(/\/+$/, '');
 
-  if (handle) {
-    return `https://www.youtube.com/@${handle}?sub_confirmation=1`;
+    if (handle) {
+      return `https://www.youtube.com/@${handle}?sub_confirmation=1`;
+    }
+
+    return `https://www.youtube.com/channel/${this.channelId}?sub_confirmation=1`;
   }
 
-  return `https://www.youtube.com/channel/${this.channelId}?sub_confirmation=1`;
-}
-  
   private safeUrl(url: string): SafeResourceUrl {
     return this.sanitizer.bypassSecurityTrustResourceUrl(
       url
