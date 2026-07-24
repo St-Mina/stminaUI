@@ -66,7 +66,7 @@ export class Home {
       name: 'Fr. Boutros Boutros',
       role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
       summary:
-        'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades.',
+        'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades. Email: frbboutros@gmail.com',
       imageSrc: 'assets/images/clergy/FrBoutrosBoutros.webp',
       imagePosition: 'center 30%',
       imageScale: 1.08,
@@ -74,9 +74,9 @@ export class Home {
     },
     {
       name: 'Fr. Youaness Seraphim',
-      role: 'General priest of the Southern Diocese',
+      role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
       summary:
-        'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness serves churches throughout the Southern Diocese, especially in Nashville.',
+        'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness served churches throughout the Southern Diocese, especially in Nashville. Currently, he serves at St. Mina. Email: fr.yoaness1950@gmail.com',
       imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
       imageScale: 1.1,
       imageOffsetY: -3,
@@ -85,7 +85,7 @@ export class Home {
       name: 'Fr. Kyrillos Zaki',
       role: 'Priest of St. Mina Coptic Orthodox Church',
       summary:
-        'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
+        'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States. Email: frkyrilloszaki@gmail.com',
       imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
       imageScale: 1.16,
       imageOffsetY: -15,
