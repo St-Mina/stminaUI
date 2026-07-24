@@ -197,12 +197,11 @@
 <section class="section news-section">
   <div class="container">
     <h2 class="section-title">Latest News</h2>
-    <p class="section-subtitle">Stay updated with our Church and Diocesan announcements</p>
+    <p class="section-subtitle">Stay updated with our Church announcements</p>
     <div class="news-grid">
       @for (card of latestNewsCards; track card.title) {
         <article class="news-card">
           <div class="news-card-inner">
-            <p class="news-date">{{ card.dateLabel }}</p>
             <h3>{{ card.title }}</h3>
             <p class="news-cta">{{ card.cta }}</p>
           </div>
