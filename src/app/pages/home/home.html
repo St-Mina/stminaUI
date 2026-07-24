@@ -170,7 +170,13 @@
             <h3>{{ member.name }}</h3>
             <p class="clergy-role">{{ member.role }}</p>
             <p class="clergy-summary" [class.is-expanded]="isClergyExpanded(member.name)">
-              {{ member.summary }}
+            {{ member.summary }}
+            <strong class="clergy-email">
+             Email:
+             <a [href]="'mailto:' + member.email">
+              {{ member.email }}
+                </a>
+              </strong>
             </p>
             <button
               type="button"
