@@ -564,6 +564,21 @@ $bg-warm: #f0ebe1;
   }
 }
 
+.clergy-email {
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.clergy-email a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.clergy-email a:hover {
+  text-decoration: underline;
+}
+
 .clergy-toggle {
   justify-self: center;
   margin-top: 1rem;
