@@ -133,6 +133,45 @@
   cursor: pointer;
 }
 
+.coptic-reader-promo {
+  max-width: 850px;
+  margin: 50px auto 70px;
+  padding: 28px 24px;
+  text-align: center;
+  color: #1d3150;
+  background: #f7f8fa;
+  border: 1px solid #e1e4e8;
+  border-radius: 14px;
+
+  p {
+    margin: 0;
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  p + p {
+    margin-top: 8px;
+  }
+
+  a {
+    color: #1d3150;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+@media (max-width: 600px) {
+  .coptic-reader-promo {
+    margin: 40px 20px 55px;
+    padding: 22px 18px;
+
+    p {
+      font-size: 16px;
+    }
+  }
+}
+
 .archive-section {
   padding: 80px 0;
   background: var(--white);
