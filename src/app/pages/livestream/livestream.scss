@@ -161,6 +161,16 @@
   width: 100%;
   max-width: 760px;
   margin: 0;
+  text-align: center;
+}
+
+.coptic-reader-promo p {
+  margin: 0;
+  text-align: center;
+}
+
+.coptic-reader-promo p + p {
+  margin-top: 18px;
 }
 
 @media (max-width: 768px) {
