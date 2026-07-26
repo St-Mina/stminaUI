@@ -133,6 +133,20 @@
   cursor: pointer;
 }
 
+.coptic-reader-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto 16px;
+}
+
+.coptic-reader-logo img {
+  width: 90px;
+  height: 90px;
+  object-fit: contain;
+  display: block;
+}
+
 .coptic-reader-promo {
   max-width: 850px;
   margin: 70px auto;
