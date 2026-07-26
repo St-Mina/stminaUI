@@ -16,7 +16,7 @@ export const ministries = [
     imageSrc: 'assets/images/ministries/youthMinistry-upscaled-20260702-214734.webp',
     alt: 'Youth Ministry',
     bullets: [
-      'Sunday Youth Meetings — Bible studies, games, and fellowship (6:30pm)',
+      'Sunday Youth Meetings — Bible studies, games, and fellowship',
       'Annual Youth Retreats — Spiritual growth in a camp setting',
       'Service Projects — Giving back to the community together',
       'Sports & Social Events — Building bonds through fun activities',
