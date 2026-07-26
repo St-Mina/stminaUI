@@ -16,7 +16,7 @@ export const ministries = [
     imageSrc: 'assets/images/ministries/youthMinistry-upscaled-20260702-214734.webp',
     alt: 'Youth Ministry',
     bullets: [
-      'Friday Youth Meetings — Bible studies, discussions, and fellowship',
+      'Sunday Youth Meetings — Bible studies, games, and fellowship (6:30pm)',
       'Annual Youth Retreats — Spiritual growth in a camp setting',
       'Service Projects — Giving back to the community together',
       'Sports & Social Events — Building bonds through fun activities',
@@ -33,7 +33,7 @@ export const ministries = [
       'Age-appropriate classes every Sunday after Liturgy',
       'Curriculum based on the Coptic Orthodox tradition',
       'Annual competitions and presentations',
-      'Dedicated, trained teachers and volunteers',
+      'Dedicated, trained teachers and pre-servants',
     ],
   },
   {
@@ -47,7 +47,7 @@ export const ministries = [
       'Weekly hymns classes open to all ages',
       'Participation in Sunday Liturgy and special services',
       'Preservation of Coptic, Arabic, and English hymns',
-      'Special presentations during feasts and celebrations',
+      'Special choir presentations during feasts and celebrations',
     ],
   },
   {
