@@ -13,7 +13,7 @@ export const latestNewsCards: readonly LatestNewsCard[] = [
     cta: 'Join us for Vespers and Midnight Praises every Saturday starting at 5:30pm.',
   },
   {
-    title: 'Family Meeting and Elementary/Middle/High School Bible Study Every Friday',
+    title: 'Family Meeting and K-12th Grade Bible Study Every Friday',
     cta: 'Come to our Bible Study fellowships on Friday. All services begin at 6:30pm.',
   },
 ] as const;
