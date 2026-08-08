@@ -1,42 +1,29 @@
-name: Deploy to Production
+name: Deploy to Production (st.mina.org)
 
 on:
-  # Manual trigger — available from the Actions tab after merging to master
+  push:
+    branches:
+      - master
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Target environment'
-        required: true
-        type: choice
-        options:
-          - QC
-          - Production
-        default: 'Production'
-      reason:
-        description: 'Reason for this deployment'
-        required: false
-        default: 'Scheduled release'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-prod
+  cancel-in-progress: true
 
 jobs:
-  deploy:
-    name: Deploy to ${{ github.event.inputs.environment }}
+  build:
+    name: Build Production
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    environment:
-      name: ${{ github.event.inputs.environment }}
-      url: >-
-        ${{
-          github.event.inputs.environment == 'Production'
-            && 'https://stminaui.example.com'
-            || 'https://qc.stminaui.example.com'
-        }}
-
+    env:
+      BASE_HREF: /
     steps:
-      - name: Checkout master
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: master
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -47,30 +34,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Audit dependencies (security check)
-        run: npm audit --audit-level=high
-
-      - name: Build for target environment
+      - name: Write environment files from secrets
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: |
-          if [ "${{ github.event.inputs.environment }}" = "Production" ]; then
-            npm run build -- --configuration production
-          else
-            npm run build -- --configuration development
-          fi
+          cat > src/environments/environment.ts <<EOF
+          export const environment = {
+            production: true,
+            wordpressApiBaseUrl: 'https://khalilgeorge24-lqsdb.wordpress.com/wp-json',
+            youtubeApiKey: '${YOUTUBE_API_KEY}',
+            youtubeChannelHandle: 'StMinaNashville'
+          };
+          EOF
+          cp src/environments/environment.ts src/environments/environment.development.ts
 
-      - name: Run unit tests (headless)
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+      - name: Build (production, Pages base-href)
+        run: npm run build -- --configuration production --base-href "${BASE_HREF}"
 
+      - name: Resolve output dir + SPA fallback
+        id: outdir
+        run: |
+          OUT_DIR=$(find dist -maxdepth 3 -type d -name browser | head -n 1)
+          if [ -z "$OUT_DIR" ]; then OUT_DIR=$(ls -d dist/*/ | head -n 1 | sed 's:/*$::'); fi
+          echo "Publishing from: $OUT_DIR"
+          cp "$OUT_DIR/index.html" "$OUT_DIR/404.html"
+          echo "out_dir=$OUT_DIR" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.outdir.outputs.out_dir }}
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: https://st.mina.org
+    steps:
       - name: Deploy
-        run: |
-          echo "Deploying to ${{ github.event.inputs.environment }} environment..."
-          # Replace the block below with your actual deployment command, e.g.:
-          #   aws s3 sync dist/ s3://your-prod-bucket --delete
-          #   firebase deploy --only hosting:prod
-          echo "Deployment to ${{ github.event.inputs.environment }} complete."
-
-      - name: Notify deployment
-        run: |
-          echo "Deployment triggered by: ${{ github.actor }}"
-          echo "Target: ${{ github.event.inputs.environment }}"
-          echo "Reason: ${{ github.event.inputs.reason }}"
+        id: deployment
+        uses: actions/deploy-pages@v4
