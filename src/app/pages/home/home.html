@@ -171,12 +171,27 @@
             <p class="clergy-role">{{ member.role }}</p>
             <p class="clergy-summary" [class.is-expanded]="isClergyExpanded(member.name)">
             {{ member.summary }}
-            <strong class="clergy-email">
-             Email:
-             <a [href]="'mailto:' + member.email">
-              {{ member.email }}
-                </a>
-              </strong>
+          <strong class="clergy-email">
+           Email:
+          <a [href]="'mailto:' + member.email">
+           {{ member.email }}
+          </a>
+          </strong>
+
+        @if (member.confessionCalendar) {
+        <br><br>
+
+  <strong>
+    Confession Calendar:
+    <a
+      [href]="member.confessionCalendar"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      link
+    </a>
+  </strong>
+}
             </p>
             <button
               type="button"
