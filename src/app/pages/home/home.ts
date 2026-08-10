@@ -15,6 +15,7 @@ interface ClergyMember {
   readonly role: string;
   readonly summary: string;
   readonly email: string;
+  readonly confessionCalendar?: string;
   readonly imageSrc: string;
   readonly imagePosition?: string;
   readonly imageScale: number;
@@ -90,6 +91,7 @@ export class Home {
       summary:
         'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
       email: 'frkyrilloszaki@gmail.com',
+      confessionCalendar: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2ViJLSJ3eEHFsY0EOWxK3Va7pgk4Z-xSF9lmspVGPobptc-p3F7shXkryU2H4K3wExa7mWSKSb',
       imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
       imageScale: 1.16,
       imageOffsetY: -15,
