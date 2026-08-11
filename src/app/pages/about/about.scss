@@ -230,3 +230,73 @@ $bg-light: #f5f5f0;
     gap: 1rem;
   }
 }
+
+// Southern Diocese Section
+.diocese-section {
+  background: #f5f5f5;
+  padding: 4.5rem 0;
+}
+
+.diocese-content {
+  max-width: 850px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.diocese-image {
+  margin-bottom: 1.75rem;
+
+  img {
+    width: 150px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.diocese-text {
+  h2 {
+    color: $navy;
+    font-size: 1.75rem;
+    margin: 0 0 1rem;
+  }
+
+  p {
+    color: #555;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0 auto 1.25rem;
+    max-width: 700px;
+  }
+}
+
+.diocese-link {
+  color: $gold;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-decoration: underline;
+
+  &:hover {
+    color: darken($gold, 8%);
+  }
+}
+
+@media (max-width: 768px) {
+  .diocese-section {
+    padding: 3.5rem 0;
+  }
+
+  .diocese-image img {
+    width: 125px;
+  }
+
+  .diocese-text {
+    h2 {
+      font-size: 1.45rem;
+    }
+
+    p {
+      font-size: 1rem;
+    }
+  }
+}
