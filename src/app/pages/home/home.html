@@ -100,6 +100,57 @@
   </div>
 </section>
 
+<!-- Announcements -->
+<section class="announcements-section" aria-label="Church announcements">
+  <div class="announcements-container">
+    <h2 class="announcements-title">Announcements</h2>
+
+    <div class="announcements-carousel">
+      <button
+        type="button"
+        class="announcement-arrow announcement-arrow-left"
+        aria-label="Previous announcement"
+        (click)="showPreviousAnnouncement()"
+      >
+        &#10094;
+      </button>
+
+      <div class="announcement-image-wrapper">
+        <img
+          class="announcement-image"
+          [src]="announcementSlides[announcementIndex].src"
+          [alt]="announcementSlides[announcementIndex].alt"
+        />
+      </div>
+
+      <button
+        type="button"
+        class="announcement-arrow announcement-arrow-right"
+        aria-label="Next announcement"
+        (click)="showNextAnnouncement()"
+      >
+        &#10095;
+      </button>
+    </div>
+
+    <div
+      class="announcement-progress"
+      role="group"
+      aria-label="Choose announcement"
+    >
+      @for (slide of announcementSlides; track slide.src; let i = $index) {
+        <button
+          type="button"
+          class="announcement-progress-bar"
+          [class.active]="i === announcementIndex"
+          [attr.aria-label]="'Show announcement ' + (i + 1)"
+          (click)="showAnnouncement(i)"
+        ></button>
+      }
+    </div>
+  </div>
+</section>
+
 <!-- About Preview -->
 <section class="section about-preview">
   <div class="container">
