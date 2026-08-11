@@ -53,6 +53,48 @@ export class Home {
       alt: 'A lit candle representing prayer and worship',
     },
   ];
+
+readonly announcementSlides = [
+  {
+    src: 'assets/announcements/IMG_2096.jpeg',
+    alt: 'Church announcement 1',
+  },
+  {
+    src: 'assets/announcements/IMG_2097.jpeg',
+    alt: 'Church announcement 2',
+  },
+  {
+    src: 'assets/announcements/IMG_2098.jpeg',
+    alt: 'Church announcement 3',
+  },
+  {
+    src: 'assets/announcements/IMG_2099.jpeg',
+    alt: 'Church announcement 4',
+  },
+  {
+    src: 'assets/announcements/IMG_2100.jpeg',
+    alt: 'Church announcement 5',
+  },
+  {
+    src: 'assets/announcements/IMG_2102.jpeg',
+    alt: 'Church announcement 6',
+  },
+  {
+    src: 'assets/announcements/IMG_2103.jpeg',
+    alt: 'Church announcement 7',
+  },
+  {
+    src: 'assets/announcements/IMG_2105.jpeg',
+    alt: 'Church announcement 8',
+  },
+  {
+    src: 'assets/announcements/IMG_2108.jpeg',
+    alt: 'Church announcement 9',
+  },
+];
+
+announcementIndex = 0;
+
   readonly ministries = ministryContent.slice(0, 4);
   readonly latestNewsCards = latestNewsCards;
   readonly heroAnnouncements = heroAnnouncements;
@@ -123,6 +165,22 @@ export class Home {
     this.activeSlideIndex.set(index);
     this.restartAutoplay();
   }
+
+showPreviousAnnouncement(): void {
+  this.announcementIndex =
+    this.announcementIndex === 0
+      ? this.announcementSlides.length - 1
+      : this.announcementIndex - 1;
+}
+
+showNextAnnouncement(): void {
+  this.announcementIndex =
+    (this.announcementIndex + 1) % this.announcementSlides.length;
+}
+
+showAnnouncement(index: number): void {
+  this.announcementIndex = index;
+}
 
   isClergyExpanded(name: string): boolean {
     return this.expandedClergyNames().has(name);
