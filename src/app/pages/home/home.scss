@@ -386,6 +386,91 @@ $bg-warm: #f0ebe1;
   }
 }
 
+// --- Announcements ---
+.announcements-section {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.announcements-title {
+  color: #17335b;
+  font-size: 36px;
+  margin-bottom: 25px;
+}
+
+.announcements-carousel {
+  position: relative;
+  max-width: 750px;
+  margin: auto;
+}
+
+.announcement-image {
+  width: 100%;
+  display: block;
+  border-radius: 18px;
+}
+
+.announcement-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  background: rgba(18, 40, 73, 0.85);
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.announcement-arrow-left {
+  left: 10px;
+}
+
+.announcement-arrow-right {
+  right: 10px;
+}
+
+.announcement-progress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 15px;
+}
+
+.announcement-progress-bar {
+  width: 50px;
+  height: 5px;
+  border: none;
+  border-radius: 5px;
+  background: #ccc;
+}
+
+.announcement-progress-bar.active {
+  background: #17335b;
+}
+
+@media (max-width: 600px) {
+  .announcements-section {
+    padding: 30px 15px;
+  }
+
+  .announcements-title {
+    font-size: 30px;
+  }
+
+  .announcement-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 21px;
+  }
+
+  .announcement-progress-bar {
+    width: 28px;
+  }
+}
+
 // --- About Preview ---
 .about-preview {
   background: #fff;
