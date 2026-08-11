@@ -72,24 +72,20 @@ readonly announcementSlides = [
     alt: 'Church announcement 4',
   },
   {
-    src: 'assets/announcements/IMG_2100.jpeg',
+    src: 'assets/announcements/IMG_2102.jpeg',
     alt: 'Church announcement 5',
   },
   {
-    src: 'assets/announcements/IMG_2102.jpeg',
+    src: 'assets/announcements/IMG_2103.jpeg',
     alt: 'Church announcement 6',
   },
   {
-    src: 'assets/announcements/IMG_2103.jpeg',
+    src: 'assets/announcements/IMG_2105.jpeg',
     alt: 'Church announcement 7',
   },
   {
-    src: 'assets/announcements/IMG_2105.jpeg',
-    alt: 'Church announcement 8',
-  },
-  {
     src: 'assets/announcements/IMG_2108.jpeg',
-    alt: 'Church announcement 9',
+    alt: 'Church announcement 8',
   },
 ];
 
