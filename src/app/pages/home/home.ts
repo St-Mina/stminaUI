@@ -300,7 +300,7 @@ private async loadCalendarEvents(): Promise<void> {
       timeMax: timeMaxDate.toISOString(),
       singleEvents: 'true',
       orderBy: 'startTime',
-      maxResults: '16',
+      maxResults: '15',
     });
 
     const response = await fetch(
