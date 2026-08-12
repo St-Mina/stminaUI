@@ -6,7 +6,7 @@ export interface HeroAnnouncementItem {
 export const heroAnnouncements = [
   {
     message:
-      'Join us for Liturgy every Sunday at 8:30 a.m. - All are welcome; come rise with us in prayer.',
+      'Join us for Transfiguration Liturgy on Wednesday, August 19  |  Join us in celebrating the Feast of the Assumption of St. Mary in the church's gym on Sunday, August 23',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
