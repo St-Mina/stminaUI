@@ -760,7 +760,7 @@ $bg-warm: #f0ebe1;
   }
 
   .hero-announcement-track {
-    animation: none;
+    animation: hero-announcement-scroll 65s linear infinite;
     justify-content: center;
     width: 100%;
   }
