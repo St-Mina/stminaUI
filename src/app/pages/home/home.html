@@ -85,18 +85,90 @@
 <!-- Calendar -->
 <section class="section calendar-section">
   <div class="container">
-    <h2 class="section-title">Church Calendar</h2>
-    <p class="section-subtitle">Stay up to date with our services and events</p>
-    <div class="calendar-embed">
-      <iframe
-        title="St. Mina Coptic Orthodox Church Calendar"
-        src="https://calendar.google.com/calendar/embed?src=stminanashvilleit%40gmail.com&ctz=America%2FChicago"
-        style="border:0;"
-        width="100%"
-        height="600"
-        frameborder="0"
-        scrolling="no"
-      ></iframe>
+    <div class="calendar-heading">
+      <span class="calendar-eyebrow">Parish Schedule</span>
+
+      <h2 class="section-title">Church Calendar</h2>
+
+      <p class="section-subtitle">
+        Stay up to date with our services and events
+      </p>
+    </div>
+
+    <div class="church-calendar">
+      <div class="calendar-topbar">
+        <div>
+          <span class="calendar-topbar-label">Upcoming</span>
+          <h3>Services &amp; Events</h3>
+        </div>
+
+        <div class="calendar-cross" aria-hidden="true">✝</div>
+      </div>
+
+      @if (calendarLoading()) {
+        <div class="calendar-status">
+          <div class="calendar-loader"></div>
+          <p>Loading church calendar...</p>
+        </div>
+      } @else if (calendarError()) {
+        <div class="calendar-status">
+          <p>Our calendar could not be loaded right now.</p>
+        </div>
+      } @else if (calendarEvents().length === 0) {
+        <div class="calendar-status">
+          <p>No upcoming events are currently scheduled.</p>
+        </div>
+      } @else {
+        <div class="calendar-events">
+          @for (event of calendarEvents(); track event.id) {
+            <article class="calendar-event">
+              <div class="calendar-event-date">
+                <span class="calendar-event-day">
+                  {{ formatCalendarDay(event.date) }}
+                </span>
+
+                <strong>
+                  {{ event.date.getDate() }}
+                </strong>
+
+                <span>
+                  {{
+                    event.date.toLocaleDateString('en-US', {
+                      month: 'short'
+                    })
+                  }}
+                </span>
+              </div>
+
+              <div class="calendar-event-details">
+                <span class="calendar-event-time">
+                  {{ formatCalendarTime(event) }}
+                </span>
+
+                <h4>{{ event.title }}</h4>
+
+                @if (event.location) {
+                  <p class="calendar-event-location">
+                    {{ event.location }}
+                  </p>
+                }
+              </div>
+
+              @if (event.link) {
+                <a
+                  class="calendar-event-link"
+                  [href]="event.link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View event in Google Calendar"
+                >
+                  &#8250;
+                </a>
+              }
+            </article>
+          }
+        </div>
+      }
     </div>
   </div>
 </section>
