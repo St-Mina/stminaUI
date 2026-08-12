@@ -6,7 +6,7 @@ export interface HeroAnnouncementItem {
 export const heroAnnouncements = [
   {
     message:
-      'Join us for Transfiguration Liturgy on Wednesday, August 19',
+      'Join us for the Feast of Transfiguration Liturgy on Wednesday, August 19',
   },
   {
     message:
