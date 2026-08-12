@@ -176,30 +176,6 @@
   </div>
 </section>
 
-<!-- Ministries Preview -->
-<section class="section ministries-preview">
-  <div class="container">
-    <h2 class="section-title">Our Ministries</h2>
-    <p class="section-subtitle">Serving God through community, education, and outreach</p>
-    <div class="ministries-grid">
-      @for (ministry of ministries; track ministry.title) {
-        <article class="ministry-card">
-          <div class="ministry-image">
-            <img [src]="ministry.imageSrc" [alt]="ministry.alt" loading="lazy" />
-          </div>
-          <div class="ministry-info">
-            <h3>{{ ministry.title }}</h3>
-            <p>{{ ministry.homeSummary }}</p>
-          </div>
-        </article>
-      }
-    </div>
-    <div class="section-action">
-      <a routerLink="/ministries" class="btn btn-navy">Explore Ministries</a>
-    </div>
-  </div>
-</section>
-
 <!-- Clergy Section -->
 <section class="section clergy-section">
   <div class="container">
