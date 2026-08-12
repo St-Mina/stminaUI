@@ -282,7 +282,7 @@ showAnnouncement(index: number): void {
     }
   }
 
-  private async loadCalendarEvents(): Promise<void> {
+private async loadCalendarEvents(): Promise<void> {
   this.calendarLoading.set(true);
   this.calendarError.set(false);
 
@@ -318,7 +318,9 @@ showAnnouncement(index: number): void {
     const events: CalendarEvent[] = (data.items ?? [])
       .filter((event) => event.start?.dateTime || event.start?.date)
       .map((event) => {
-        const allDay = !!event.start?.date && !event.start?.dateTime;
+        const allDay =
+          !!event.start?.date &&
+          !event.start?.dateTime;
 
         const startValue =
           event.start?.dateTime ??
@@ -334,7 +336,9 @@ showAnnouncement(index: number): void {
           id: event.id,
           title: event.summary ?? 'Church Event',
           date: new Date(startValue),
-          endDate: endValue ? new Date(endValue) : undefined,
+          endDate: endValue
+            ? new Date(endValue)
+            : undefined,
           location: event.location,
           link: event.htmlLink,
           allDay,
@@ -342,8 +346,43 @@ showAnnouncement(index: number): void {
       });
 
     this.calendarEvents.set(events);
+
+    const groupedEvents =
+      new Map<string, CalendarEvent[]>();
+
+    for (const event of events) {
+      const dateKey = [
+        event.date.getFullYear(),
+        event.date.getMonth(),
+        event.date.getDate(),
+      ].join('-');
+
+      const eventsForDay =
+        groupedEvents.get(dateKey) ?? [];
+
+      eventsForDay.push(event);
+
+      groupedEvents.set(
+        dateKey,
+        eventsForDay
+      );
+    }
+
+    const groups: CalendarDayGroup[] =
+      Array.from(groupedEvents.values()).map(
+        (dayEvents) => ({
+          date: dayEvents[0].date,
+          events: dayEvents,
+        })
+      );
+
+    this.calendarDayGroups.set(groups);
   } catch (error) {
-    console.error('Unable to load Google Calendar events:', error);
+    console.error(
+      'Unable to load Google Calendar events:',
+      error
+    );
+
     this.calendarError.set(true);
   } finally {
     this.calendarLoading.set(false);
