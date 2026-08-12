@@ -350,7 +350,6 @@ formatCalendarTime(event: CalendarEvent): string {
   return new Intl.DateTimeFormat('en-US', {
     hour: 'numeric',
     minute: '2-digit',
-    }).format(event.date);
-   }
-  }
+  }).format(event.date);
+}
 }
