@@ -334,15 +334,246 @@ $bg-warm: #f0ebe1;
   background: $bg-light;
 }
 
-.calendar-embed {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+.calendar-heading {
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
 
-  iframe {
-    display: block;
-    width: 100%;
-    border: 0;
+.calendar-eyebrow {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: $gold;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.calendar-heading .section-subtitle {
+  margin-bottom: 0;
+}
+
+.church-calendar {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(26, 42, 74, 0.09);
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 12px 32px rgba(15, 26, 46, 0.08),
+    0 2px 8px rgba(15, 26, 46, 0.04);
+}
+
+.calendar-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem 2rem;
+  background:
+    radial-gradient(
+      circle at right top,
+      rgba($gold, 0.18),
+      transparent 38%
+    ),
+    $navy;
+  color: #fff;
+
+  h3 {
+    margin: 0.15rem 0 0;
+    font-size: 1.45rem;
+    font-weight: 700;
+  }
+}
+
+.calendar-topbar-label {
+  color: $gold-light;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.calendar-cross {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid rgba($gold, 0.5);
+  border-radius: 50%;
+  color: $gold;
+  font-size: 1.5rem;
+}
+
+.calendar-events {
+  padding: 0 2rem;
+}
+
+.calendar-event {
+  position: relative;
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) 36px;
+  gap: 1.25rem;
+  align-items: center;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid #e7e8ea;
+
+  &:last-child {
+    border-bottom: 0;
+  }
+}
+
+.calendar-event-date {
+  display: flex;
+  min-height: 72px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba($gold, 0.11);
+  color: $navy;
+  text-align: center;
+
+  strong {
+    margin: 0.05rem 0;
+    font-size: 1.7rem;
+    line-height: 1;
+  }
+
+  > span:last-child {
+    color: #667085;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+.calendar-event-day {
+  color: $gold;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.calendar-event-details {
+  min-width: 0;
+
+  h4 {
+    margin: 0.25rem 0 0;
+    color: $navy;
+    font-size: 1.05rem;
+    line-height: 1.4;
+  }
+}
+
+.calendar-event-time {
+  color: $gold;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.calendar-event-location {
+  margin: 0.35rem 0 0;
+  color: #687386;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.calendar-event-link {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid rgba($navy, 0.16);
+  border-radius: 50%;
+  color: $navy;
+  font-size: 1.7rem;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+
+  &:hover {
+    border-color: $navy;
+    background: $navy;
+    color: #fff;
+  }
+}
+
+.calendar-status {
+  display: flex;
+  min-height: 180px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+  color: #687386;
+  text-align: center;
+
+  p {
+    margin: 0;
+  }
+}
+
+.calendar-loader {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba($navy, 0.15);
+  border-top-color: $gold;
+  border-radius: 50%;
+  animation: calendar-spin 700ms linear infinite;
+}
+
+@keyframes calendar-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .church-calendar {
+    border-radius: 14px;
+  }
+
+  .calendar-topbar {
+    padding: 1.25rem;
+  }
+
+  .calendar-events {
+    padding: 0 1rem;
+  }
+
+  .calendar-event {
+    grid-template-columns: 62px minmax(0, 1fr) 30px;
+    gap: 0.85rem;
+    padding: 1.1rem 0;
+  }
+
+  .calendar-event-date {
+    min-height: 64px;
+
+    strong {
+      font-size: 1.45rem;
+    }
+  }
+
+  .calendar-event-details h4 {
+    font-size: 0.95rem;
+  }
+
+  .calendar-event-location {
+    font-size: 0.78rem;
+  }
+
+  .calendar-event-link {
+    width: 30px;
+    height: 30px;
   }
 }
 
