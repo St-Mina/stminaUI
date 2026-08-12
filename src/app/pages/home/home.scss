@@ -394,17 +394,6 @@ $bg-warm: #f0ebe1;
   text-transform: uppercase;
 }
 
-.calendar-cross {
-  display: grid;
-  width: 46px;
-  height: 46px;
-  place-items: center;
-  border: 1px solid rgba($gold, 0.5);
-  border-radius: 50%;
-  color: $gold;
-  font-size: 1.5rem;
-}
-
 .calendar-events {
   padding: 0 2rem;
 }
