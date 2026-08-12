@@ -514,60 +514,6 @@ $bg-warm: #f0ebe1;
   }
 }
 
-// --- Ministries Preview ---
-.ministries-preview {
-  background: $bg-light;
-}
-
-.ministries-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.ministry-card {
-  border-radius: 12px;
-  overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-}
-
-.ministry-image {
-  height: 180px;
-  overflow: hidden;
-  background: #f2f2ed;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-}
-
-.ministry-info {
-  padding: 1.25rem;
-
-  h3 {
-    margin: 0 0 0.5rem;
-    color: $navy;
-    font-size: 1.1rem;
-  }
-
-  p {
-    margin: 0;
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-}
-
 // --- Clergy Section ---
 .clergy-section {
   background: #fff;
