@@ -48,8 +48,7 @@ export class Home {
       alt: 'St. Mina Veneration',
     },
     {
-      src: 'assets/images/imgAssets/candle.png',
-      alt: 'A lit candle representing prayer and worship',
+      src: 'assets/images/imgAssets/ClergyWorship.jpg',
     },
   ];
 
