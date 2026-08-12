@@ -1,7 +1,6 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { ministries as ministryContent } from '../ministries/ministries.data';
 import { heroAnnouncementMarqueeCycleCount, heroAnnouncements, heroAnnouncementsPlainText } from './hero-announcement.data';
 import { latestNewsCards } from './latest-news.data';
 
