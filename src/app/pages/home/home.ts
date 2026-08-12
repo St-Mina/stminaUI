@@ -1,7 +1,11 @@
 import { Component, DestroyRef, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { heroAnnouncementMarqueeCycleCount, heroAnnouncements, heroAnnouncementsPlainText } from './hero-announcement.data';
+import {
+  heroAnnouncementMarqueeCycleCount,
+  heroAnnouncements,
+  heroAnnouncementsPlainText,
+} from './hero-announcement.data';
 import { latestNewsCards } from './latest-news.data';
 
 interface HeroSlide {
@@ -34,6 +38,11 @@ interface CalendarEvent {
   readonly allDay: boolean;
 }
 
+interface CalendarDayGroup {
+  readonly date: Date;
+  readonly events: readonly CalendarEvent[];
+}
+
 interface ClergyMember {
   readonly name: string;
   readonly role: string;
@@ -56,12 +65,16 @@ interface ClergyMember {
 export class Home {
   private readonly destroyRef = inject(DestroyRef);
   private readonly autoplayDelay = 6_000;
+
   private readonly prefersReducedMotion =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   private autoplayTimer: ReturnType<typeof setInterval> | undefined;
   private interactionPauseCount = 0;
-  private readonly expandedClergyNames = signal<ReadonlySet<string>>(new Set());
+
+  private readonly expandedClergyNames =
+    signal<ReadonlySet<string>>(new Set());
 
   readonly heroSlides: readonly HeroSlide[] = [
     {
@@ -73,19 +86,20 @@ export class Home {
       alt: 'St. Mina Veneration',
     },
     {
-     src: 'assets/images/imgAssets/ClergyWorship.jpg',
-     alt: 'St. Mina clergy during worship',
+      src: 'assets/images/imgAssets/ClergyWorship.jpg',
+      alt: 'St. Mina clergy during worship',
     },
   ];
 
-readonly calendarEvents = signal<readonly CalendarEvent[]>([]);
-readonly calendarLoading = signal(true);
-readonly calendarError = signal(false);
+  readonly calendarEvents = signal<readonly CalendarEvent[]>([]);
+  readonly calendarDayGroups = signal<readonly CalendarDayGroup[]>([]);
+  readonly calendarLoading = signal(true);
+  readonly calendarError = signal(false);
 
-private readonly googleCalendarId = 'stminanashvilleit@gmail.com';
+  private readonly googleCalendarId = 'stminanashvilleit@gmail.com';
 
-private readonly googleCalendarApiKey =
-  'AIzaSyAMw7h-J6dW6vU8Ebz2hwbbSlCvQBUkqHc';
+  private readonly googleCalendarApiKey =
+    'AIzaSyAMw7h-J6dW6vU8Ebz2hwbbSlCvQBUkqHc';
 
 readonly announcementSlides = [
   {
