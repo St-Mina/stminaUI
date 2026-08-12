@@ -94,7 +94,6 @@ readonly announcementSlides = [
 
 announcementIndex = 0;
 
-  readonly ministries = ministryContent.slice(0, 4);
   readonly latestNewsCards = latestNewsCards;
   readonly heroAnnouncements = heroAnnouncements;
   readonly heroAnnouncementsPlainText = heroAnnouncementsPlainText;
