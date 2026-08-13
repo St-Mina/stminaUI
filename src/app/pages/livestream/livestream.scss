@@ -169,8 +169,9 @@
   text-align: center;
 }
 
-.coptic-reader-promo p + p {
-  margin-top: 28px;
+.coptic-reader-link {
+  display: inline-block;
+  margin-top: 18px;
 }
 
 @media (max-width: 768px) {
