@@ -880,6 +880,108 @@ $bg-warm: #f0ebe1;
   }
 }
 
+// --- Prayer Meeting ---
+.prayer-meeting-section {
+  background: #fff;
+}
+
+.prayer-meeting-card {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 3.5rem 2rem;
+  overflow: hidden;
+  border: 1px solid rgba($navy, 0.08);
+  border-radius: 20px;
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba($gold, 0.13),
+      transparent 38%
+    ),
+    #fff;
+  text-align: center;
+  box-shadow:
+    0 12px 32px rgba(15, 26, 46, 0.08),
+    0 2px 8px rgba(15, 26, 46, 0.04);
+}
+
+.prayer-meeting-eyebrow {
+  margin: 0 0 0.75rem;
+  color: $gold;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.prayer-meeting-card .section-title {
+  margin-bottom: 1.5rem;
+}
+
+.prayer-meeting-days {
+  margin: 0 0 0.35rem;
+  color: $navy;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.prayer-meeting-time {
+  margin: 0 0 1.75rem;
+  color: #60656f;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.prayer-meeting-join {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  padding: 0.7rem 1.75rem;
+  border: 1px solid $gold;
+  border-radius: 999px;
+  background: transparent;
+  color: $navy;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    transform 200ms ease;
+
+  &:hover {
+    background: $gold;
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid rgba($gold, 0.45);
+    outline-offset: 3px;
+  }
+}
+
+@media (max-width: 768px) {
+  .prayer-meeting-card {
+    padding: 2.5rem 1.25rem;
+    border-radius: 16px;
+  }
+
+  .prayer-meeting-card .section-title {
+    font-size: 1.8rem;
+  }
+
+  .prayer-meeting-days {
+    font-size: 1.1rem;
+  }
+
+  .prayer-meeting-time {
+    font-size: 1rem;
+  }
+}
+
 // --- News Section ---
 .news-section {
   background: $bg-light;
