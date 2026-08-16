@@ -933,6 +933,21 @@ $bg-warm: #f0ebe1;
   font-weight: 600;
 }
 
+.prayer-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25em;
+}
+
+.zoom-wordmark {
+  height: 1em;
+  width: auto;
+  display: inline-block;
+  object-fit: contain;
+}
+
 .prayer-meeting-join {
   display: inline-flex;
   align-items: center;
