@@ -934,18 +934,21 @@ $bg-warm: #f0ebe1;
 }
 
 .prayer-title {
-  display: flex;
-  flex-wrap: wrap;
+  text-align: center;
+}
+
+.prayer-title-line {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.25em;
+  gap: 0.22em;
+  white-space: nowrap;
 }
 
 .zoom-wordmark {
-  height: 1em;
+  height: 0.9em;
   width: auto;
   display: inline-block;
-  object-fit: contain;
 }
 
 .prayer-meeting-join {
