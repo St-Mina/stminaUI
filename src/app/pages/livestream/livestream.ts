@@ -104,9 +104,11 @@ export class Livestream implements OnInit {
   heroIsLive = false;
   heroError = '';
 
-  selectedCategory: MediaCategory = 'recent';
-  searchTerm = '';
-  archiveError = '';
+selectedCategory: MediaCategory = 'recent';
+selectedSermonLanguage: 'english' | 'arabic' = 'english';
+  
+searchTerm = '';
+archiveError = '';
 
   videos: Record<MediaCategory, MediaItem[]> = {
     recent: [],
@@ -284,6 +286,15 @@ export class Livestream implements OnInit {
       this.loadVideos(category);
     }
   }
+
+  setSermonLanguage(language: 'english' | 'arabic'): void {
+  this.selectedSermonLanguage = language;
+
+  // Reset the visible count when switching languages
+  this.visibleVideoCounts.sermons = this.videosPerPage;
+
+  this.changeDetector.markForCheck();
+}
 
   loadVideos(
     category: MediaCategory,
@@ -474,24 +485,47 @@ export class Livestream implements OnInit {
       });
   }
 
-  private getFilteredCurrentVideos(): MediaItem[] {
-    const term = this.searchTerm.toLowerCase().trim();
+private getFilteredCurrentVideos(): MediaItem[] {
+  const term = this.searchTerm.toLowerCase().trim();
 
-    return [...this.currentVideos]
-      .sort(
-        (a, b) =>
-          new Date(b.publishedAt).getTime() -
-          new Date(a.publishedAt).getTime()
-      )
-      .filter((item) => {
-        return (
-          !term ||
-          item.title.toLowerCase().includes(term) ||
-          item.subtitle.toLowerCase().includes(term)
-        );
-      });
+  return [...this.currentVideos]
+    .sort(
+      (a, b) =>
+        new Date(b.publishedAt).getTime() -
+        new Date(a.publishedAt).getTime()
+    )
+    .filter((item) => {
+
+      // Sermon language filter
+      if (this.selectedCategory === 'sermons') {
+        const isArabicSermon = item.title.includes('عظة');
+        const isEnglishSermon =
+          item.title.toLowerCase().includes('sermon');
+
+        if (
+          this.selectedSermonLanguage === 'english' &&
+          !isEnglishSermon
+        ) {
+          return false;
+        }
+
+        if (
+          this.selectedSermonLanguage === 'arabic' &&
+          !isArabicSermon
+        ) {
+          return false;
+        }
+      }
+
+      // Search filter
+      return (
+        !term ||
+        item.title.toLowerCase().includes(term) ||
+        item.subtitle.toLowerCase().includes(term)
+      );
+    });
   }
-
+  
   private getCategorySubtitle(
     category: MediaCategory
   ): string {
