@@ -78,13 +78,34 @@
         </div>
       </div>
 
-      <div class="archive-toolbar">
-        <input
-          type="text"
-          placeholder="Search videos..."
-          aria-label="Search videos"
-          [(ngModel)]="searchTerm" />
-      </div>
+<div class="archive-toolbar">
+  <input
+    type="text"
+    placeholder="Search videos..."
+    aria-label="Search videos"
+    [(ngModel)]="searchTerm" />
+
+  <div
+    class="sermon-language-filter"
+    *ngIf="selectedCategory === 'sermons'">
+
+    <button
+      type="button"
+      [class.active]="selectedSermonLanguage === 'english'"
+      (click)="setSermonLanguage('english')">
+      English
+    </button>
+
+    <button
+      type="button"
+      lang="ar"
+      dir="rtl"
+      [class.active]="selectedSermonLanguage === 'arabic'"
+      (click)="setSermonLanguage('arabic')">
+      عربي
+    </button>
+  </div>
+</div>
 
       <div
         class="loading-state"
@@ -123,15 +144,15 @@
             (click)="openVideo(item)"
             [attr.aria-label]="'Play ' + item.title">
 
-            <span
-              class="archive-badge"
-              *ngIf="item.category !== 'recent'">
-              {{
-                item.category === 'sermons'
-                  ? 'SERMON'
-                  : 'HYMNS CLASS'
-              }}
-            </span>
+<span
+  class="archive-badge"
+  *ngIf="item.category !== 'recent'">
+  {{
+    item.category === 'sermons'
+      ? (item.title.includes('عظة') ? 'عظة' : 'SERMON')
+      : 'HYMNS CLASS'
+  }}
+</span>
 
             <img
               class="archive-thumb"
