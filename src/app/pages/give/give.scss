@@ -366,6 +366,51 @@ $bg-light: #F5F5F5;
   }
 }
 
+// ─── Treasury Team ──────────────────────────────────────
+.treasury-section {
+  padding: 4rem 1.5rem;
+  background: #f5f5f5;
+}
+
+.treasury-container {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.treasury-container h2 {
+  margin: 0 0 2rem;
+  color: #1b2a44;
+  font-family: Georgia, serif;
+  font-size: 2rem;
+  font-weight: 400;
+}
+
+.treasury-card {
+  padding: 1.75rem 2rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.treasury-person + .treasury-person {
+  margin-top: 1.75rem;
+}
+
+.treasury-name {
+  margin: 0 0 0.5rem;
+  color: #1b2a44;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.treasury-phone {
+  margin: 0;
+  color: #475569;
+  font-size: 1rem;
+}
+
 // ─── Responsive ─────────────────────────────────────────
 @media (max-width: 900px) {
   .methods-row {
