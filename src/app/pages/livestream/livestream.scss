@@ -243,6 +243,43 @@
   font-size: 15px;
 }
 
+.sermon-language-filter {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.sermon-language-filter button {
+  min-width: 100px;
+  padding: 10px 18px;
+  border: 1px solid var(--border-medium);
+  border-radius: 999px;
+  background: #f1efec;
+  color: var(--navy);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.sermon-language-filter button:hover {
+  opacity: 0.92;
+}
+
+.sermon-language-filter button.active {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--white);
+}
+
+.sermon-language-filter button:focus-visible {
+  outline: 2px solid var(--sand);
+  outline-offset: 2px;
+}
+
 .loading-state,
 .empty-state {
   padding: 22px 0;
