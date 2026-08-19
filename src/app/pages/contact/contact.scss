@@ -326,6 +326,25 @@ $bg-light: #F5F5F5;
   }
 }
 
+.soundcloud-logo {
+  width: 20px;
+  height: 20px;
+  display: block;
+  background-color: #C9A084;
+
+  -webkit-mask-image: url('/assets/images/imgAssets/soundcloud.webp');
+  mask-image: url('/assets/images/imgAssets/soundcloud.webp');
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
 // ─── Map Section ────────────────────────────────────────
 .map-section {
   padding: 80px 0;
