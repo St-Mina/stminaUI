@@ -38,6 +38,8 @@ $bg-warm: #f0ebe1;
   border-bottom: 1px solid rgba($gold, 0.28);
   background: rgba(15, 26, 46, 0.72);
   backdrop-filter: blur(6px);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 .hero-announcement-viewport {
