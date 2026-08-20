@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
+import {
+  DomSanitizer,
+  SafeResourceUrl
+} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-about',
@@ -13,8 +17,17 @@ export class About {
   historyVideoPlaying = false;
 
   historyVideoId = 'X7HBTiH7CHE';
+
   historyVideoThumbnail =
-    'https://img.youtube.com/vi/X7HBTiH7CHE/maxresdefault.jpg';
+    `https://img.youtube.com/vi/${this.historyVideoId}/maxresdefault.jpg`;
+
+  historyVideoUrl: SafeResourceUrl;
+
+  constructor(private sanitizer: DomSanitizer) {
+    this.historyVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+      `https://www.youtube.com/embed/${this.historyVideoId}?autoplay=1`
+    );
+  }
 
   playHistoryVideo(): void {
     this.historyVideoPlaying = true;
