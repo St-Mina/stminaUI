@@ -71,6 +71,54 @@
   </div>
 </section>
 
+<!-- Church History Video -->
+<section class="history-video-section">
+  <div class="container">
+    <div class="history-video-wrap">
+
+      <h2 class="section-title">Our Church Through the Years</h2>
+
+      <p class="section-subtitle">
+        Watch the story and history of St. Mina Coptic Orthodox Church.
+      </p>
+
+      <div class="history-video-card">
+
+        <!-- Thumbnail before video starts -->
+        <button
+          *ngIf="!historyVideoPlaying"
+          type="button"
+          class="history-video-thumbnail"
+          (click)="playHistoryVideo()"
+          aria-label="Play church history video"
+        >
+          <img
+            [src]="historyVideoThumbnail"
+            alt="St. Mina Coptic Orthodox Church history video"
+          />
+
+          <div class="history-play-overlay">
+            <span class="history-play-icon">▶</span>
+          </div>
+        </button>
+
+        <!-- YouTube player after clicking -->
+      <iframe
+        *ngIf="historyVideoPlaying"
+        class="history-video-iframe"
+        [src]="historyVideoUrl"
+        title="The History of St. Mina Coptic Orthodox Church"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- What We Believe -->
 <section class="section">
   <div class="container">
