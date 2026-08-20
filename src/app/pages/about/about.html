@@ -76,15 +76,10 @@
   <div class="container">
     <div class="history-video-wrap">
 
-      <h2 class="section-title">Our Church Through the Years</h2>
-
-      <p class="section-subtitle">
-        Watch the story and history of St. Mina Coptic Orthodox Church.
-      </p>
+      <h2 class="section-title">Our Church History (1987-2016)</h2>
 
       <div class="history-video-card">
 
-        <!-- Thumbnail before video starts -->
         <button
           *ngIf="!historyVideoPlaying"
           type="button"
@@ -107,7 +102,7 @@
         *ngIf="historyVideoPlaying"
         class="history-video-iframe"
         [src]="historyVideoUrl"
-        title="The History of St. Mina Coptic Orthodox Church"
+        title="Trip to St Mina Coptic Orthodox Church, Nashville, TN"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
