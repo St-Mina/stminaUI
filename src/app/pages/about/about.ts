@@ -25,7 +25,7 @@ export class About {
 
   constructor(private sanitizer: DomSanitizer) {
     this.historyVideoUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
-      `https://www.youtube.com/embed/${this.historyVideoId}?autoplay=1&start=21`
+      `https://www.youtube.com/embed/${this.historyVideoId}?autoplay=1&start=21&cc_load_policy=0`
   );
 }
 
