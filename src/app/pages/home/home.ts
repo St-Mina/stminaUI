@@ -103,44 +103,48 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/OpenHouse.jpg',
+    src: 'assets/announcements/OpenHouse2.JPG',
     alt: 'Church announcement 1',
+  },
+  {
+    src: 'assets/announcements/OpenHouse.jpg',
+    alt: 'Church announcement 2',
   },  
   {
     src: 'assets/announcements/IMG_2096.jpeg',
-    alt: 'Church announcement 2',
-  },
-  {
-    src: 'assets/announcements/IMG_2097.jpeg',
     alt: 'Church announcement 3',
   },
   {
-    src: 'assets/announcements/IMG_2098.jpeg',
+    src: 'assets/announcements/IMG_2097.jpeg',
     alt: 'Church announcement 4',
+  },
+  {
+    src: 'assets/announcements/IMG_2098.jpeg',
+    alt: 'Church announcement 5',
   },
      {
     src: 'assets/announcements/IMG_2133.jpeg',
-    alt: 'Church announcement 5',
+    alt: 'Church announcement 6',
   }, 
   {
     src: 'assets/announcements/IMG_2099.jpeg',
-    alt: 'Church announcement 6',
-  },
-  {
-    src: 'assets/announcements/IMG_2102.jpeg',
     alt: 'Church announcement 7',
   },
   {
-    src: 'assets/announcements/IMG_2103.jpeg',
+    src: 'assets/announcements/IMG_2102.jpeg',
     alt: 'Church announcement 8',
   },
   {
-    src: 'assets/announcements/IMG_2105.jpeg',
+    src: 'assets/announcements/IMG_2103.jpeg',
     alt: 'Church announcement 9',
   },
   {
-    src: 'assets/announcements/IMG_2108.jpeg',
+    src: 'assets/announcements/IMG_2105.jpeg',
     alt: 'Church announcement 10',
+  },
+  {
+    src: 'assets/announcements/IMG_2108.jpeg',
+    alt: 'Church announcement 11',
   },
 ];
 
