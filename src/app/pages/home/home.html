@@ -298,12 +298,21 @@
             <p class="clergy-role">{{ member.role }}</p>
             <p class="clergy-summary" [class.is-expanded]="isClergyExpanded(member.name)">
             {{ member.summary }}
-          <strong class="clergy-email">
-           Email:
-          <a [href]="'mailto:' + member.email">
-           {{ member.email }}
+            
+<strong class="clergy-email">
+  Email:
+  <a [href]="'mailto:' + member.email">
+    {{ member.email }}
+  </a>
+</strong>
+
+        <br><br>
+
+    <strong class="clergy-phone">
+      <a [href]="'tel:' + member.phone">
+        {{ member.phone }}
           </a>
-          </strong>
+         </strong>
 
           @if (member.confessionCalendar) {
           <br><br>
