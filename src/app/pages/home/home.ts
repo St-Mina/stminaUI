@@ -48,6 +48,7 @@ interface ClergyMember {
   readonly role: string;
   readonly summary: string;
   readonly email: string;
+  readonly phone: string;
   readonly confessionCalendar?: string;
   readonly imageSrc: string;
   readonly imagePosition?: string;
@@ -166,6 +167,7 @@ announcementIndex = 0;
       summary:
         'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades.',
       email: 'frbboutros@gmail.com',
+      phone: '(615) 293-1008',
       imageSrc: 'assets/images/clergy/FrBoutrosBoutros.webp',
       imagePosition: 'center 30%',
       imageScale: 1.08,
@@ -177,6 +179,7 @@ announcementIndex = 0;
       summary:
         'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness served churches throughout the Southern Diocese, especially in Nashville. Currently, he serves at St. Mina.',
       email: 'fr.yoaness1950@gmail.com',
+      phone: '(615) 500-1950',
       imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
       imageScale: 1.1,
       imageOffsetY: -3,
@@ -187,6 +190,7 @@ announcementIndex = 0;
       summary:
         'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
       email: 'frkyrilloszaki@gmail.com',
+      phone: '(615) 243-5636',
       confessionCalendar: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2ViJLSJ3eEHFsY0EOWxK3Va7pgk4Z-xSF9lmspVGPobptc-p3F7shXkryU2H4K3wExa7mWSKSb',
       imageSrc: 'assets/images/clergy/FrKyrillosZaki.webp',
       imageScale: 1.16,
