@@ -186,8 +186,36 @@
      {{ isLoading ? 'Loading...' : 'Show More' }}
       </button>
      </div>
-    </div>
-  </section>
+    
+    <!-- Sermons Playlist Promo -->
+  <section
+  class="sermons-playlist-section"
+  *ngIf="selectedCategory === 'sermons'"
+>
+  <div class="sermons-playlist-banner">
+    <img
+      src="assets/images/imgAssets/Banner.jpg"
+      alt="Sermons playlist"
+    />
+  </div>
+
+  <div class="sermons-playlist-content">
+    <h3>برنامج شجرة نور</h3>
+
+    <p>
+  للقمص يوأنس سيرافيم
+    </p>
+
+    <a
+      class="sermons-playlist-link"
+      href="https://youtube.com/playlist?list=PLZsNPKxPta4diJxUFt8QSi58StCPqO4Zt"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Playlist
+    </a>
+  </div>
+</section>
 
   <section class="coptic-reader-section">
   <div class="coptic-reader-logo">
