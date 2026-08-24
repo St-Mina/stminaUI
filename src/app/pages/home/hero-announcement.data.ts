@@ -10,7 +10,7 @@ export const heroAnnouncements = [
   },
   {
     message:
-      'Join us in celebrating the Feast of the Assumption of St. Mary in the gym on Sunday, August 23',
+      'We will pray one Liturgy only this Sunday with H.G. Bishop Philopateer at 8 am',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
