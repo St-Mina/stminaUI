@@ -11,6 +11,7 @@ import { latestNewsCards } from './latest-news.data';
 interface HeroSlide {
   readonly src: string;
   readonly alt: string;
+  readonly className?: string;
 }
 
 interface GoogleCalendarEvent {
@@ -89,6 +90,7 @@ export class Home {
     {
       src: 'assets/images/imgAssets/ClergyImage.jpg',
       alt: 'St. Mina clergy during worship',
+      className: 'clergy-worship-slide',
     },
   ];
 
