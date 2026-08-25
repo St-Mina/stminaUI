@@ -130,14 +130,13 @@ $bg-warm: #f0ebe1;
   object-position: center 15%;
 }
 
-/* Phone portrait */
 @media (max-width: 768px) and (orientation: portrait) {
-  .hero-slide.clergy-worship-slide {
-    object-position: center 15%;
+  .hero-content {
+    padding-inline: 4.75rem;
+    transform: translateY(5rem);
   }
 }
 
-/* Phone/tablet landscape */
 @media (max-width: 1024px) and (orientation: landscape) {
   .hero-slide.clergy-worship-slide {
     object-position: center 42%;
