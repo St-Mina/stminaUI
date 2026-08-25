@@ -87,7 +87,7 @@ export class Home {
       alt: 'St. Mina Veneration',
     },
     {
-      src: 'assets/images/imgAssets/ClergyWorship.jpg',
+      src: 'assets/images/imgAssets/ClergyImage.jpg',
       alt: 'St. Mina clergy during worship',
     },
   ];
