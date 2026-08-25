@@ -127,20 +127,20 @@ $bg-warm: #f0ebe1;
 
 .hero-slide.clergy-worship-slide {
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
 }
 
-/* Portrait phone */
+/* Phone portrait */
 @media (max-width: 768px) and (orientation: portrait) {
   .hero-slide.clergy-worship-slide {
-    object-position: center top;
+    object-position: center 15%;
   }
 }
 
 /* Phone/tablet landscape */
 @media (max-width: 1024px) and (orientation: landscape) {
   .hero-slide.clergy-worship-slide {
-    object-position: center top;
+    object-position: center 42%;
   }
 }
 
