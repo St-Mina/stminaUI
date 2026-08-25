@@ -130,6 +130,13 @@ $bg-warm: #f0ebe1;
   object-position: center 15%;
 }
 
+@media (max-width: 1024px) and (orientation: landscape) {
+  .hero-slide.clergy-worship-slide {
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
 .hero-content {
   position: relative;
   z-index: 2;
