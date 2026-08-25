@@ -16,9 +16,9 @@ export class Give {
         'Yes. St. Mina Coptic Orthodox Church is a registered 501(c)(3) nonprofit organization. You will receive a year-end giving statement for your records.',
     },
     {
-      question: 'How do I set up a recurring gift?',
+      question: 'How do I set up a recurring donation?',
       answer:
-        "You can set up a recurring transfer through Zelle or your bank's direct deposit / bill pay feature using the account details above. For help setting one up, contact our treasury team.",
+        "You can set up a recurring donation through your bank’s bill pay or recurring transfer feature using the account details above. If your bank supports recurring Zelle payments, you may also set one up through Zelle. For help setting one up, please contact our treasury team.",
     },
     {
       question: 'Is giving by Zelle or direct deposit secure?',
