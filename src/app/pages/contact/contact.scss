@@ -271,6 +271,32 @@ $bg-light: #F5F5F5;
   }
 }
 
+.clergy-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-top: 10px;
+  padding: 9px 18px;
+
+  background: $navy;
+  color: white;
+  border-radius: 8px;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 18px;
+
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.2s;
+
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+  }
+}
+
 .info-label {
   font-family: 'Inter', sans-serif;
   font-weight: 700;
