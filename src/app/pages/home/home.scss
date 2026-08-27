@@ -121,6 +121,10 @@ $bg-warm: #f0ebe1;
   }
 }
 
+.hero-slide:first-child {
+  object-position: center 15%;
+}
+
 .hero-slide.st-mina-slide {
   object-position: center 9%;
 }
