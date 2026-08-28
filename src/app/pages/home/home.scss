@@ -1151,33 +1151,19 @@ $bg-warm: #f0ebe1;
   }
 
   .hero-announcement-track {
-    animation: hero-announcement-scroll 65s linear infinite;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .hero-announcement-copy {
-    justify-content: center;
-    width: 100%;
-  }
-
-  .hero-announcement-cycle {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-    padding-right: 0;
-  }
-
-  .hero-announcement-item {
-    padding: 0.55rem 1rem;
-    white-space: normal;
-    text-align: center;
+    animation: none;
+    transform: none;
+    width: max-content;
   }
 
   .hero-announcement-copy + .hero-announcement-copy {
     display: none;
   }
 
+  .hero-announcement-cycle + .hero-announcement-cycle {
+    display: none;
+  }
+}
   .hero-announcement-cycle + .hero-announcement-cycle {
     display: none;
   }
