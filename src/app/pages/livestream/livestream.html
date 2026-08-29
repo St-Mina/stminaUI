@@ -79,11 +79,12 @@
       </div>
 
 <div class="archive-toolbar">
-  <input
-    type="text"
-    placeholder="Search videos..."
-    aria-label="Search videos"
-    [(ngModel)]="searchTerm" />
+ <input
+  type="text"
+  placeholder="Search videos..."
+  aria-label="Search videos"
+  [(ngModel)]="searchTerm"
+  (ngModelChange)="onSearchTermChange()" />
 
   <div
     class="sermon-language-filter"
