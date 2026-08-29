@@ -296,148 +296,252 @@ archiveError = '';
   this.changeDetector.markForCheck();
 }
 
-  loadVideos(
-    category: MediaCategory,
-    loadMore = false
-  ): void {
-    if (this.loadingCategories[category]) {
-      return;
-    }
+loadVideos(
+  category: MediaCategory,
+  loadMore = false,
+  searchTarget?: number
+): void {
+  if (this.loadingCategories[category]) {
+    return;
+  }
 
-    this.loadingCategories[category] = true;
-    this.archiveError = '';
+  this.loadingCategories[category] = true;
+  this.archiveError = '';
 
-    const pageToken = loadMore
-      ? this.nextPageTokens[category]
-      : '';
+  const pageToken = loadMore
+    ? this.nextPageTokens[category]
+    : '';
 
-    let params = new HttpParams()
-      .set('key', environment.youtubeApiKey)
-      .set('playlistId', this.uploadsPlaylistId)
-      .set('part', 'snippet,contentDetails')
-      .set('maxResults', '50');
+  let params = new HttpParams()
+    .set('key', environment.youtubeApiKey)
+    .set('playlistId', this.uploadsPlaylistId)
+    .set('part', 'snippet,contentDetails')
+    .set('maxResults', '50');
 
-    if (pageToken) {
-      params = params.set('pageToken', pageToken);
-    }
+  if (pageToken) {
+    params = params.set('pageToken', pageToken);
+  }
 
-    this.http
-      .get<PlaylistItemResponse>(
-        'https://www.googleapis.com/youtube/v3/playlistItems',
-        { params }
-      )
-      .subscribe({
-        next: (response) => {
-          const newVideos = (response.items || [])
-            .map((video): MediaItem | null => {
-              const videoId =
-                video.contentDetails?.videoId ||
-                video.snippet.resourceId?.videoId;
+  this.http
+    .get<PlaylistItemResponse>(
+      'https://www.googleapis.com/youtube/v3/playlistItems',
+      { params }
+    )
+    .subscribe({
+      next: (response) => {
+        const newVideos = (response.items || [])
+          .map((video): MediaItem | null => {
+            const videoId =
+              video.contentDetails?.videoId ||
+              video.snippet.resourceId?.videoId;
 
-              if (!videoId) {
-                return null;
-              }
+            if (!videoId) {
+              return null;
+            }
 
-              const title = video.snippet.title || 'Video';
-              const lowercaseTitle = title.toLowerCase();
+            const title =
+              video.snippet.title || 'Video';
 
-              if (
-                category === 'sermons' &&
-                !lowercaseTitle.includes('sermon') &&
-                !title.includes('عظة')
-              ) {
-                return null;
-              }
+            const lowercaseTitle =
+              title.toLowerCase();
 
-              if (
-                category === 'hymns' &&
-                !lowercaseTitle.includes('hymns class')
-              ) {
-                return null;
-              }
+            // Sermons only
+            if (
+              category === 'sermons' &&
+              !lowercaseTitle.includes('sermon') &&
+              !title.includes('عظة')
+            ) {
+              return null;
+            }
 
-              return {
-                title,
-                subtitle: this.getCategorySubtitle(category),
-                category,
-                videoId,
-                thumbnail:
-                  video.snippet.thumbnails?.maxres?.url ||
-                  video.snippet.thumbnails?.standard?.url ||
-                  video.snippet.thumbnails?.high?.url ||
-                  video.snippet.thumbnails?.medium?.url ||
-                  video.snippet.thumbnails?.default?.url ||
-                  `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
-                watchUrl:
-                  `https://www.youtube.com/watch?v=${videoId}`,
-                publishedAt:
-                  video.contentDetails?.videoPublishedAt ||
-                  video.snippet.publishedAt ||
-                  '',
-              };
-            })
-            .filter(
-              (video): video is MediaItem =>
-                video !== null
-            );
+            // Hymns classes only
+            if (
+              category === 'hymns' &&
+              !lowercaseTitle.includes('hymns class')
+            ) {
+              return null;
+            }
 
-          this.videos[category] = loadMore
-            ? this.addUniqueVideos(
-                this.videos[category],
-                newVideos
-              )
-            : newVideos;
+            return {
+              title,
+              subtitle:
+                this.getCategorySubtitle(category),
+              category,
+              videoId,
 
-          this.nextPageTokens[category] =
-            response.nextPageToken || '';
+              thumbnail:
+                video.snippet.thumbnails?.maxres?.url ||
+                video.snippet.thumbnails?.standard?.url ||
+                video.snippet.thumbnails?.high?.url ||
+                video.snippet.thumbnails?.medium?.url ||
+                video.snippet.thumbnails?.default?.url ||
+                `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
 
-          if (loadMore) {
-            this.visibleVideoCounts[category] +=
-              this.videosPerPage;
-          }
+              watchUrl:
+                `https://www.youtube.com/watch?v=${videoId}`,
 
-          this.loadedCategories[category] = true;
-          this.loadingCategories[category] = false;
-          this.changeDetector.markForCheck();
-        },
-        error: (error) => {
-          console.error(
-            `YouTube API error for ${category}:`,
-            error
+              publishedAt:
+                video.contentDetails?.videoPublishedAt ||
+                video.snippet.publishedAt ||
+                '',
+            };
+          })
+          .filter(
+            (video): video is MediaItem =>
+              video !== null
           );
 
-          this.archiveError = this.getApiErrorMessage(
+        this.videos[category] = loadMore
+          ? this.addUniqueVideos(
+              this.videos[category],
+              newVideos
+            )
+          : newVideos;
+
+        this.nextPageTokens[category] =
+          response.nextPageToken || '';
+
+        this.loadedCategories[category] = true;
+        this.loadingCategories[category] = false;
+
+        if (
+          searchTarget !== undefined &&
+          this.searchTerm.trim() &&
+          this.selectedCategory === category
+        ) {
+          const matches =
+            this.getFilteredCurrentVideos();
+
+          if (
+            matches.length < searchTarget &&
+            this.nextPageTokens[category]
+          ) {
+            this.changeDetector.markForCheck();
+
+            this.loadVideos(
+              category,
+              true,
+              searchTarget
+            );
+
+            return;
+          }
+        }
+
+        this.changeDetector.markForCheck();
+      },
+
+      error: (error) => {
+        console.error(
+          `YouTube API error for ${category}:`,
+          error
+        );
+
+        this.archiveError =
+          this.getApiErrorMessage(
             error,
             'Videos could not be loaded.'
           );
 
-          this.loadedCategories[category] = true;
-          this.loadingCategories[category] = false;
-          this.changeDetector.markForCheck();
-        },
-      });
+        this.loadedCategories[category] = true;
+        this.loadingCategories[category] = false;
+
+        this.changeDetector.markForCheck();
+      },
+    });
+}
+
+  onSearchTermChange(): void {
+  const category = this.selectedCategory;
+
+  // Every new search starts by showing 5 results
+  this.visibleVideoCounts[category] =
+    this.videosPerPage;
+
+  const term = this.searchTerm.trim();
+
+  // Normal browsing again
+  if (!term) {
+    this.changeDetector.markForCheck();
+    return;
   }
 
-  loadMoreVideos(): void {
-    const category = this.selectedCategory;
-    const matchingLoadedVideos =
-      this.getFilteredCurrentVideos();
+  const matchingLoadedVideos =
+    this.getFilteredCurrentVideos();
 
-    if (
-      this.visibleVideoCounts[category] <
-      matchingLoadedVideos.length
-    ) {
-      this.visibleVideoCounts[category] +=
-        this.videosPerPage;
-
-      this.changeDetector.markForCheck();
-      return;
-    }
-
-    if (this.currentNextPageToken) {
-      this.loadVideos(category, true);
-    }
+  /*
+   * We already have 5 matching videos loaded.
+   * No reason to call YouTube again yet.
+   */
+  if (
+    matchingLoadedVideos.length >=
+    this.videosPerPage
+  ) {
+    this.changeDetector.markForCheck();
+    return;
   }
+
+  if (
+    this.currentNextPageToken &&
+    !this.isLoading
+  ) {
+    this.loadVideos(
+      category,
+      true,
+      this.videosPerPage
+    );
+  }
+}
+
+loadMoreVideos(): void {
+  const category = this.selectedCategory;
+
+  const matchingLoadedVideos =
+    this.getFilteredCurrentVideos();
+
+  const currentVisible =
+    this.visibleVideoCounts[category];
+
+  const newVisibleTarget =
+    currentVisible + this.videosPerPage;
+
+  if (
+    matchingLoadedVideos.length >
+    currentVisible
+  ) {
+    this.visibleVideoCounts[category] =
+      newVisibleTarget;
+
+    this.changeDetector.markForCheck();
+    return;
+  }
+
+  if (
+    this.searchTerm.trim() &&
+    this.currentNextPageToken
+  ) {
+    this.visibleVideoCounts[category] =
+      newVisibleTarget;
+
+    this.loadVideos(
+      category,
+      true,
+      newVisibleTarget
+    );
+
+    return;
+  }
+
+  if (this.currentNextPageToken) {
+    this.visibleVideoCounts[category] =
+      newVisibleTarget;
+
+    this.loadVideos(
+      category,
+      true
+    );
+  }
+}
 
   openVideo(item: MediaItem): void {
     this.selectedVideoTitle = item.title;
@@ -469,7 +573,6 @@ archiveError = '';
           url,
         })
         .catch(() => {
-          // The share menu was closed.
         });
 
       return;
