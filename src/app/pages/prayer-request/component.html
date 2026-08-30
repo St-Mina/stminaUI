@@ -17,7 +17,7 @@
       </p>
 
       <div class="anonymous-note">
-        You may remain completely anonymous.
+        You may remain completely anonymous | يمكنك ان لا تذكر إسمك
       </div>
 
     </div>
@@ -135,14 +135,14 @@
         <div class="form-group">
 
           <label for="phone">
-            Phone Number
+            Phone Number | رقم تليفون
           </label>
 
           <input
             id="phone"
             type="tel"
             formControlName="phone"
-            placeholder="(615) 555-1234"
+            placeholder="(615) 123-1234"
             autocomplete="tel"
             inputmode="tel"
           />
@@ -165,17 +165,13 @@
             <span class="required">*</span>
           </h2>
 
-          <p>
-            Write the prayer request you would like to send.
-          </p>
-
         </div>
 
 
         <div class="form-group prayer-field">
 
           <label for="prayerRequest">
-            Your Prayer
+            Prayer Request | طلب صلاتك
           </label>
 
           <div class="textarea-wrapper">
@@ -200,33 +196,11 @@
               prayerForm.get('prayerRequest')?.hasError('required')
             "
           >
-            Please enter your prayer request.
+            Enter your prayer request | اكتب طلب صلاتك
           </p>
 
         </div>
 
-      </div>
-
-
-      <!-- =========================
-           PRIVACY NOTICE
-      ========================== -->
-
-      <div class="privacy-card">
-
-        <div class="privacy-icon">
-
-          <svg
-            viewBox="0 0 24 24"
-            aria-hidden="true"
-          >
-            <path
-              d="M17 8h-1V6a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-9a2 2 0 0 0-2-2ZM10 6a2 2 0 1 1 4 0v2h-4V6Zm7 13H7v-9h10v9Z"
-            />
-          </svg>
-
-        </div>
-        
       </div>
 
       <!-- =========================
@@ -269,7 +243,7 @@
         </svg>
 
         <span>
-          Continue to Messages
+          Continue to Messages | واصل إلى الرسائل
         </span>
 
       </button>
@@ -277,7 +251,7 @@
 
       <p class="submit-note">
         Your Messages app will open with the prayer request ready
-        to send | سيتم فتح تطبيق الرسائل مع طلب الصلاة جاهزًا للإرسال.
+        to send | سيتم فتح تطبيق الرسائل مع طلب الصلاة جاهزًا للإرسال
       </p>
 
     </form>
