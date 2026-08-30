@@ -14,8 +14,8 @@ import {
     CommonModule,
     ReactiveFormsModule
   ],
-  templateUrl: './prayer-request.component.html',
-  styleUrl: './prayer-request.component.scss'
+  templateUrl: './prayer-request/component.html',
+  styleUrl: './prayer-request/component.scss'
 })
 export class PrayerRequestComponent {
 
