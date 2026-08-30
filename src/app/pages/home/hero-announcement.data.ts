@@ -10,7 +10,7 @@ export const heroAnnouncements = [
   },
   {
     message:
-      'We will pray one Liturgy only this Sunday with H.G. Bishop Philopateer at 8 am',
+      'اجتماع الأسرة مع نيافة الأنبا فيلوباتير الساعة ٦:٣٠',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
