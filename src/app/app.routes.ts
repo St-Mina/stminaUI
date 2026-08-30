@@ -34,6 +34,13 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact),
   },
   {
+    path: 'prayer-request',
+    loadComponent: () =>
+      import('./pages/prayer-request/component').then(
+        (m) => m.PrayerRequestComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: '',
   },
