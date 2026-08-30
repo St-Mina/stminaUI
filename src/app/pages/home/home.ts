@@ -80,7 +80,7 @@ export class Home {
 
   readonly heroSlides: readonly HeroSlide[] = [
     {
-      src: 'assets/images/imgAssets/MainImage.jpg',
+      src: 'assets/images/imgAssets/MainImage.JPG',
       alt: 'St. Mina Coptic Orthodox Church sanctuary',
     },
     {
