@@ -90,12 +90,12 @@ export class PrayerRequestComponent {
       this.prayerForm.value.prayerRequest?.trim();
 
     const message =
-`St. Mina Prayer Request
+`Prayer Request | طلب صلاة
 
 Name: ${name}
 Phone: ${contactPhone}
 
-Prayer Request:
+Prayer Request | طلب صلاة:
 ${prayerRequest}
 
 Submitted through St. Mina Nashville`;
