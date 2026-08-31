@@ -6,11 +6,11 @@ export interface HeroAnnouncementItem {
 export const heroAnnouncements = [
   {
     message:
-      'Join us in the Coptic New Year Liturgy on Friday, September 11',
+      'Family Meeting with H.G. Bishop Philopateer on Friday at 6:30 pm',
   },
   {
     message:
-      'اجتماع الأسرة مع نيافة الأنبا فيلوباتير الساعة ٦:٣٠',
+      'اجتماع الأسرة مع نيافة الأنبا فيلوباتير يوم الجمعة الساعة ٦:٣٠',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
