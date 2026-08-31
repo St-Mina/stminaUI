@@ -909,22 +909,33 @@ $bg-warm: #f0ebe1;
   }
 }
 
-// --- Pastoral Services ---
+// PASTORAL SERVICES
+
 .pastoral-services-section {
   background: $bg-light;
+
+  // Prevent iPhone/Safari text-size controls
+  // from enlarging this section's text.
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
 
 .pastoral-services-card {
   display: flex;
-  min-height: 290px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2.25rem;
 
+  width: 100%;
   max-width: 900px;
+  min-height: 290px;
+
   margin: 0 auto;
-  padding: 4rem 2rem;
+  padding: 3.5rem 2rem;
+
+  gap: 2rem;
+
+  box-sizing: border-box;
 
   border: 1px solid rgba($navy, 0.08);
   border-radius: 20px;
@@ -942,30 +953,42 @@ $bg-warm: #f0ebe1;
   box-shadow:
     0 12px 32px rgba(15, 26, 46, 0.08),
     0 2px 8px rgba(15, 26, 46, 0.04);
+
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
 }
+
+// TITLE
 
 .pastoral-services-title {
   margin: 0;
+
   color: $navy;
-  font-size: 2.2rem;
+
+  font-size: 28px !important;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.25;
+
   white-space: nowrap;
+
+  -webkit-text-size-adjust: none !important;
+  text-size-adjust: none !important;
 }
 
-@media (max-width: 768px) {
-  .pastoral-services-title {
-    font-size: 1rem;
-  }
-}
+// PRAYER REQUEST BUTTON
 
 .pastoral-prayer-link {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
-  min-width: 360px;
-  padding: 1rem 2rem;
+  width: 100%;
+  max-width: 600px;
+  min-height: 58px;
+
+  padding: 10px 20px;
+
+  box-sizing: border-box;
 
   border: 2px solid $gold;
   border-radius: 10px;
@@ -973,24 +996,25 @@ $bg-warm: #f0ebe1;
   background: transparent;
   color: $navy;
 
-  font-size: 1.15rem;
+  font-size: 17px !important;
   font-weight: 700;
+  line-height: 1.2;
+
+  text-align: center;
   text-decoration: none;
+
+  -webkit-text-size-adjust: none !important;
+  text-size-adjust: none !important;
 
   transition:
     background 200ms ease,
     color 200ms ease,
-    transform 200ms ease,
-    box-shadow 200ms ease;
+    transform 200ms ease;
 
   &:hover {
     background: $gold;
     color: #fff;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-      0 8px 20px rgba(15, 26, 46, 0.12);
+    transform: translateY(-1px);
   }
 
   &:focus-visible {
@@ -999,28 +1023,39 @@ $bg-warm: #f0ebe1;
   }
 }
 
-@media (max-width: 768px) {
-  .pastoral-services-card {
-    min-height: 250px;
-    gap: 1.75rem;
+// MOBILE
 
-    padding: 3rem 1.25rem;
+@media (max-width: 768px) {
+
+  .pastoral-services-card {
+    min-height: 230px;
+
+    padding: 2.5rem 1rem;
+
+    gap: 1.6rem;
 
     border-radius: 16px;
   }
 
   .pastoral-services-title {
-    font-size: clamp(1.35rem, 6vw, 1.9rem);
+    font-size: 20px !important;
+
+    line-height: 1.2;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
   }
 
   .pastoral-prayer-link {
-    min-width: 0;
-    width: 100%;
     max-width: 340px;
+    min-height: 52px;
 
-    padding: 0.9rem 1.2rem;
+    padding: 8px 12px;
 
-    font-size: 1rem;
+    font-size: 15px !important;
+
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
   }
 }
 
