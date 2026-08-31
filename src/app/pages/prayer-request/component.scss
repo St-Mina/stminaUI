@@ -9,10 +9,7 @@ $text-muted: #687080;
 $border: #d9dce2;
 $error: #a64242;
 
-
-// ============================================
 // PAGE
-// ============================================
 
 .prayer-page {
   min-height: 100vh;
@@ -33,10 +30,7 @@ $error: #a64242;
   margin: 0 auto;
 }
 
-
-// ============================================
 // HEADING
-// ============================================
 
 .prayer-heading {
   max-width: 720px;
@@ -70,31 +64,7 @@ $error: #a64242;
   line-height: 1.8;
 }
 
-.anonymous-note {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 1.4rem;
-
-  padding: 0.6rem 1.1rem;
-
-  border: 1px solid rgba($gold, 0.35);
-  border-radius: 999px;
-
-  background: rgba($gold, 0.1);
-
-  color: $navy;
-
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-
-// ============================================
 // FORM
-// ============================================
 
 .prayer-form {
   display: flex;
@@ -102,10 +72,7 @@ $error: #a64242;
   gap: 1.5rem;
 }
 
-
-// ============================================
 // FORM CARDS
-// ============================================
 
 .form-card {
   padding: 2rem;
@@ -119,10 +86,7 @@ $error: #a64242;
     0 8px 26px rgba(20, 32, 54, 0.06);
 }
 
-
-// ============================================
 // SECTION HEADINGS
-// ============================================
 
 .section-heading {
   margin-bottom: 1.75rem;
@@ -168,10 +132,7 @@ $error: #a64242;
   line-height: 1.8;
 }
 
-
-// ============================================
 // FORM GROUPS
-// ============================================
 
 .form-group {
   display: flex;
@@ -184,10 +145,7 @@ $error: #a64242;
   margin-top: 0;
 }
 
-
-// ============================================
 // LABELS
-// ============================================
 
 label {
   margin-bottom: 0.55rem;
@@ -213,10 +171,7 @@ label {
   font-weight: 600;
 }
 
-
-// ============================================
 // INPUTS
-// ============================================
 
 input,
 select,
@@ -281,10 +236,7 @@ textarea:focus {
     0 0 0 3px rgba($gold, 0.14);
 }
 
-
-// ============================================
 // SELECT
-// ============================================
 
 .select-wrapper {
   position: relative;
@@ -320,10 +272,7 @@ textarea:focus {
   pointer-events: none;
 }
 
-
-// ============================================
 // TEXTAREA
-// ============================================
 
 .textarea-wrapper {
   position: relative;
@@ -346,10 +295,7 @@ textarea:focus {
   font-size: 0.78rem;
 }
 
-
-// ============================================
 // ERRORS
-// ============================================
 
 .field-error {
   margin: 0.45rem 0 0;
@@ -360,10 +306,7 @@ textarea:focus {
   line-height: 1.5;
 }
 
-
-// ============================================
 // SELECTED PRIEST
-// ============================================
 
 .selected-priest {
   display: flex;
@@ -392,10 +335,7 @@ textarea:focus {
   font-weight: 700;
 }
 
-
-// ============================================
 // SUBMIT BUTTON
-// ============================================
 
 .submit-button {
   display: flex;
@@ -458,10 +398,7 @@ textarea:focus {
   cursor: not-allowed;
 }
 
-
-// ============================================
 // SUBMIT NOTE
-// ============================================
 
 .submit-note {
   max-width: 680px;
@@ -476,10 +413,7 @@ textarea:focus {
   text-align: center;
 }
 
-
-// ============================================
 // TABLETS / MOBILE
-// ============================================
 
 @media (max-width: 600px) {
   .prayer-page {
@@ -503,18 +437,6 @@ textarea:focus {
 
     font-size: 0.97rem;
     line-height: 1.75;
-  }
-
-  .anonymous-note {
-    margin-top: 1.15rem;
-
-    padding:
-      0.55rem
-      0.9rem;
-
-    font-size: 0.84rem;
-
-    border-radius: 10px;
   }
 
   .prayer-form {
@@ -591,10 +513,7 @@ textarea:focus {
   }
 }
 
-
-// ============================================
 // VERY SMALL PHONES
-// ============================================
 
 @media (max-width: 380px) {
   .prayer-page {
@@ -610,10 +529,6 @@ textarea:focus {
 
   .intro {
     font-size: 0.92rem;
-  }
-
-  .anonymous-note {
-    font-size: 0.8rem;
   }
 
   .form-card {
