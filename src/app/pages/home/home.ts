@@ -160,7 +160,7 @@ announcementIndex = 0;
   readonly activeSlideIndex = signal(0);
   readonly clergy: readonly ClergyMember[] = [
     {
-      name: 'Fr. Boutros Boutros',
+      name: 'Fr. Boutros Boutros | أبونا بطرس بطرس',
       role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
       summary:
         'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades.',
@@ -172,7 +172,7 @@ announcementIndex = 0;
       imageOffsetY: 8,
     },
     {
-      name: 'Fr. Youaness Seraphim',
+      name: 'Fr. Youaness Seraphim | أبونا يوأنس سيرافيم',
       role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
       summary:
         'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness served churches throughout the Southern Diocese, especially in Nashville. Currently, he serves at St. Mina.',
@@ -183,7 +183,7 @@ announcementIndex = 0;
       imageOffsetY: -3,
     },
     {
-      name: 'Fr. Kyrillos Zaki',
+      name: 'Fr. Kyrillos Zaki | أبونا كيرلس زكي',
       role: 'Priest of St. Mina Coptic Orthodox Church',
       summary:
         'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States.',
