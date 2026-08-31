@@ -106,7 +106,7 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/Bishop.heic',
+    src: 'assets/announcements/BishopSchedule.jpg',
     alt: 'Church announcement 1',
   },
   {
