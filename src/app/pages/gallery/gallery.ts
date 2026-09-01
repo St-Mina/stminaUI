@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-interface Gallery {
+interface GalleryItem {
   title: string;
   slug: string;
   image: string;
@@ -24,7 +24,7 @@ export class Gallery {
 
   searchTerm = signal('');
 
-  galleries: Gallery[] = [
+  galleries: GalleryItem[] = [
     {
       title: "H.G. Bishop Philopateer's Visit (2026)",
       slug: 'bishop-philopateer-visit-2026',
