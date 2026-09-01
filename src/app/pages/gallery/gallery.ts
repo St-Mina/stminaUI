@@ -28,7 +28,7 @@ export class Gallery {
     {
       title: "H.G. Bishop Philopateer's Visit (2026)",
       slug: 'bishop-philopateer-visit-2026',
-      image: 'assets/gallery/BishopPhilopateer2026/DSC_3063'
+      image: 'assets/gallery/BishopPhilopateer2026/DSC_3063.JPG'
     }
   ];
 
