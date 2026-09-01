@@ -135,9 +135,9 @@ archiveError = '';
   };
 
   categories: { id: MediaCategory; label: string }[] = [
-    { id: 'recent', label: 'Recent Videos | أحدث الڤيديوهات' },
-    { id: 'sermons', label: 'Sermons | عظات' },
-    { id: 'hymns', label: 'Hymns Classes | دروس للألحان' },
+    { id: 'recent', label: 'Recent Videos' },
+    { id: 'sermons', label: 'Sermons' },
+    { id: 'hymns', label: 'Hymns Classes' },
   ];
 
   constructor(
