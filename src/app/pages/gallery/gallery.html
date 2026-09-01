@@ -1,1 +1,104 @@
+<div class="gallery-page">
 
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="gallery-hero">
+    <div class="gallery-hero-content">
+      <h1>Gallery</h1>
+    </div>
+  </section>
+
+
+  <!-- =========================
+       GALLERY CONTENT
+  ========================== -->
+
+  <section class="gallery-section">
+
+    <div class="gallery-container">
+
+      <!-- Search -->
+      <div class="gallery-search">
+
+        <div class="search-box">
+
+          <input
+            type="text"
+            placeholder="Search Gallery"
+            [ngModel]="searchTerm()"
+            (ngModelChange)="searchTerm.set($event)"
+            aria-label="Search Gallery"
+          />
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M11 4a7 7 0 1 0 0 14
+                 7 7 0 0 0 0-14zm0-2
+                 a9 9 0 1 1 0 18
+                 9 9 0 0 1 0-18zm6.5
+                 14.1 4.2 4.2-1.4 1.4-4.2-4.2
+                 1.4-1.4z"
+            />
+          </svg>
+
+        </div>
+
+      </div>
+
+
+      <!-- Gallery Grid -->
+      @if (filteredGalleries().length > 0) {
+
+        <div class="gallery-grid">
+
+          @for (gallery of filteredGalleries(); track gallery.slug) {
+
+            <a
+              class="gallery-card"
+              [routerLink]="['/gallery', gallery.slug]"
+              [attr.aria-label]="gallery.title"
+            >
+
+              <img
+                [src]="gallery.image"
+                [alt]="gallery.title"
+                loading="lazy"
+              />
+
+              <div class="gallery-overlay">
+
+                <div class="gallery-title">
+                  {{ gallery.title }}
+                </div>
+
+                <div class="gallery-view">
+                  View Gallery
+                </div>
+
+              </div>
+
+            </a>
+
+          }
+
+        </div>
+
+      } @else {
+
+        <div class="gallery-empty">
+          <h2>No galleries found</h2>
+          <p>Try searching for another gallery.</p>
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+</div>
