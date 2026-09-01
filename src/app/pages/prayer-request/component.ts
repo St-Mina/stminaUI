@@ -24,17 +24,17 @@ export class PrayerRequestComponent {
   priests = [
     {
       value: 'boutros',
-      label: 'Fr. Boutros | أبونا بطرس',
+      label: 'Fr. Boutros',
       phone: '+16152931008'
     },
     {
       value: 'youaness',
-      label: 'Fr. Youaness | أبونا يوأنس',
+      label: 'Fr. Youaness',
       phone: '+16155001950'
     },
     {
       value: 'kyrillos',
-      label: 'Fr. Kyrillos | أبونا كيرلس',
+      label: 'Fr. Kyrillos',
       phone: '+16152435636'
     }
   ];
