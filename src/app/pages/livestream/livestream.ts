@@ -135,7 +135,7 @@ archiveError = '';
   };
 
   categories: { id: MediaCategory; label: string }[] = [
-    { id: 'recent', label: 'Recent Videos' },
+    { id: 'recent', label: 'Recent Services' },
     { id: 'sermons', label: 'Sermons' },
     { id: 'hymns', label: 'Hymns Classes' },
   ];
