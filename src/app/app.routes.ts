@@ -26,15 +26,16 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/livestream/livestream').then((m) => m.Livestream),
   },
   {
+    path: 'gallery',
+    loadComponent: () => import('./pages/gallery/gallery').then((m) => m.Gallery),
+  },
+  {
     path: 'contact',
     loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact),
   },
   {
     path: 'prayer-request',
-    loadComponent: () =>
-      import('./pages/prayer-request/component').then(
-        (m) => m.PrayerRequestComponent
-      ),
+    loadComponent: () => import('./pages/prayer-request/component').then((m) => m.PrayerRequestComponent),
   },
   {
     path: '**',
