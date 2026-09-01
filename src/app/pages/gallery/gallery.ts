@@ -20,7 +20,7 @@ interface Gallery {
   templateUrl: './gallery.html',
   styleUrl: './gallery.scss'
 })
-export class GalleryComponent {
+export class Gallery {
 
   searchTerm = signal('');
 
