@@ -1,1 +1,140 @@
+@if (gallery) {
 
+  <div class="gallery-detail-page">
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="gallery-detail-hero">
+
+      <div class="gallery-detail-hero-content">
+
+        <a
+          routerLink="/gallery"
+          class="back-to-gallery"
+        >
+          ← GALLERIES
+        </a>
+
+        <h1>
+          {{ gallery.title }}
+        </h1>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         PHOTOS
+    ========================== -->
+
+    <section class="photos-section">
+
+      <div class="photos-container">
+
+        <div class="photos-grid">
+
+          @for (
+            image of gallery.images;
+            track image;
+            let index = $index
+          ) {
+
+            <button
+              type="button"
+              class="photo-card"
+              (click)="openImage(index)"
+              [attr.aria-label]="'Open photo ' + (index + 1)"
+            >
+
+              <img
+                [src]="image"
+                [alt]="gallery.title + ' photo ' + (index + 1)"
+                loading="lazy"
+              />
+
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         LIGHTBOX
+    ========================== -->
+
+    @if (selectedImageIndex() !== null) {
+
+      <div
+        class="lightbox"
+        (click)="closeImage()"
+      >
+
+        <button
+          type="button"
+          class="lightbox-close"
+          (click)="closeImage(); $event.stopPropagation()"
+          aria-label="Close image"
+        >
+          ×
+        </button>
+
+
+        <button
+          type="button"
+          class="lightbox-arrow lightbox-arrow-left"
+          (click)="previousImage(); $event.stopPropagation()"
+          aria-label="Previous image"
+        >
+          ‹
+        </button>
+
+
+        <div
+          class="lightbox-image-wrapper"
+          (click)="$event.stopPropagation()"
+        >
+
+          <img
+            [src]="gallery.images[selectedImageIndex()!]"
+            [alt]="gallery.title"
+          />
+
+        </div>
+
+
+        <button
+          type="button"
+          class="lightbox-arrow lightbox-arrow-right"
+          (click)="nextImage(); $event.stopPropagation()"
+          aria-label="Next image"
+        >
+          ›
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+} @else {
+
+  <div class="gallery-not-found">
+
+    <h1>Gallery not found</h1>
+
+    <a routerLink="/gallery">
+      Return to Gallery
+    </a>
+
+  </div>
+
+}
