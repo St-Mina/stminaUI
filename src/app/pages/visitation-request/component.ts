@@ -45,6 +45,7 @@ export class VisitationRequestComponent {
   constructor(private fb: FormBuilder) {
 
     this.visitationForm = this.fb.group({
+
       fullName: [
         '',
         [
@@ -82,9 +83,15 @@ export class VisitationRequestComponent {
           Validators.minLength(9)
         ]
       ]
+
     });
+
   }
 
+
+  /* =========================
+     SELECTED PRIEST
+  ========================== */
 
   get selectedPriestName(): string {
 
@@ -95,11 +102,12 @@ export class VisitationRequestComponent {
     );
 
     return selected?.label || '';
+
   }
 
 
   /* =========================
-     ADDRESS VALIDATOR
+     ADDRESS VALIDATION
   ========================== */
 
   private addressValidator(): ValidatorFn {
@@ -119,13 +127,17 @@ export class VisitationRequestComponent {
       const hasLetters = /[A-Za-z]/.test(value);
 
       if (!hasNumber || !hasLetters) {
+
         return {
           invalidAddress: true
         };
+
       }
 
       return null;
+
     };
+
   }
 
 
@@ -137,6 +149,10 @@ export class VisitationRequestComponent {
 
     const input =
       event.target as HTMLInputElement;
+
+    /*
+     * Remove everything except numbers.
+     */
 
     const numbersOnly =
       input.value.replace(/\D/g, '');
@@ -151,6 +167,7 @@ export class VisitationRequestComponent {
           emitEvent: false
         }
       );
+
   }
 
 
@@ -165,7 +182,9 @@ export class VisitationRequestComponent {
       this.visitationForm.markAllAsTouched();
 
       return;
+
     }
+
 
     const selectedPriest = this.priests.find(
       priest =>
@@ -173,21 +192,23 @@ export class VisitationRequestComponent {
         this.visitationForm.value.priest
     );
 
+
     if (!selectedPriest) {
       return;
     }
 
+
     const fullName =
-      this.visitationForm.value.fullName.trim();
+      this.visitationForm.value.fullName?.trim();
 
     const address =
-      this.visitationForm.value.address.trim();
+      this.visitationForm.value.address?.trim();
 
     const phone =
-      this.visitationForm.value.phone.trim();
+      this.visitationForm.value.phone?.trim();
 
     const familyMembers =
-      this.visitationForm.value.familyMembers.trim();
+      this.visitationForm.value.familyMembers?.trim();
 
 
     const message =
@@ -195,8 +216,7 @@ export class VisitationRequestComponent {
 
 Full Name: ${fullName}
 
-Phone Number:
-${phone}
+Phone Number: ${phone}
 
 Full Address:
 ${address}
@@ -206,7 +226,42 @@ ${familyMembers}
 
 Submitted through St. Mina Nashville`;
 
-    console.log(message);
-    console.log(selectedPriest.phone);
+
+    const encodedMessage =
+      encodeURIComponent(message);
+
+
+    const userAgent =
+      navigator.userAgent ||
+      navigator.vendor ||
+      '';
+
+
+    const isIOS =
+      /iPad|iPhone|iPod/.test(userAgent) ||
+      (
+        navigator.platform === 'MacIntel' &&
+        navigator.maxTouchPoints > 1
+      );
+
+
+    let smsUrl: string;
+
+
+    if (isIOS) {
+
+
+      smsUrl =
+        `sms:${selectedPriest.phone}&body=${encodedMessage}`;
+
+    } else {
+
+      smsUrl =
+        `sms:${selectedPriest.phone}?body=${encodedMessage}`;
+
+    }
+
+    window.location.href = smsUrl;
+
   }
 }
