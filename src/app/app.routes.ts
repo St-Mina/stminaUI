@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/gallery/gallery').then((m) => m.Gallery),
   },
   {
+  path: 'gallery/BishopPhilopateer2026',
+  loadComponent: () => import('./pages/gallery/BishopPhilopateer2026/component').then((m) => m.BishopPhilopateer2026),
+  },
+  {
     path: 'contact',
     loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact),
   },
