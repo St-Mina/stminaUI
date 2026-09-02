@@ -4,7 +4,6 @@
   color: #0c1834;
 }
 
-
 /* =========================
    HERO
 ========================= */
@@ -48,7 +47,7 @@
 }
 
 .gallery-detail-hero h1 {
-  max-width: 980px;
+  max-width: 900px;
 
   margin: 0;
 
@@ -56,13 +55,23 @@
 
   font-family: Georgia, 'Times New Roman', serif;
 
-  font-size: clamp(2.8rem, 5vw, 5rem);
+  font-size: clamp(2.4rem, 4vw, 4rem);
 
   font-weight: 400;
 
-  line-height: 1.05;
+  line-height: 1.08;
 }
 
+.photo-credit {
+  margin: 14px 0 0;
+
+  color: #c9a084;
+
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  letter-spacing: 0.02em;
+}
 
 /* =========================
    PHOTOS SECTION
@@ -78,7 +87,6 @@
 
   margin: 0 auto;
 }
-
 
 /* =========================
    PHOTO GRID
@@ -308,7 +316,12 @@
   }
 
   .gallery-detail-hero h1 {
-    font-size: 2.7rem;
+    font-size: 2.25rem;
+  }
+
+  .photo-credit {
+    margin-top: 10px;
+    font-size: 0.85rem;
   }
 
   .photos-section {
