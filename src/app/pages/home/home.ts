@@ -175,7 +175,7 @@ announcementIndex = 0;
       name: 'Fr. Youaness Seraphim',
       role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
       summary:
-        'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness served churches throughout the Southern Diocese, especially in Nashville. Currently, he serves at St. Mina. He was ordained priest by the Reposed H.E. Metropolitan Arsanious at St. Mary Church in Abu Qurqas, Minya.',
+        'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness served churches throughout the Southern Diocese, especially in Nashville. Currently, he serves at St. Mina. He was ordained priest by the Reposed H.E. Metropolitan Arsanious at St. Mary Church in Abu Qurqas, Egypt.',
       email: 'fr.yoaness1950@gmail.com',
       phone: '(615) 500-1950',
       imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
