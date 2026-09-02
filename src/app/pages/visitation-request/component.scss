@@ -335,6 +335,7 @@ textarea.ng-invalid.ng-touched:focus {
   color: $text-muted;
 
   font-size: 0.9rem;
+
   text-align: center;
 }
 
@@ -343,6 +344,7 @@ textarea.ng-invalid.ng-touched:focus {
 
   font-weight: 700;
 }
+
 
 /* =========================
    SUBMIT BUTTON
@@ -410,6 +412,11 @@ textarea.ng-invalid.ng-touched:focus {
   cursor: not-allowed;
 }
 
+
+/* =========================
+   SUBMIT NOTE
+========================= */
+
 .submit-note {
   max-width: 680px;
 
@@ -423,8 +430,9 @@ textarea.ng-invalid.ng-touched:focus {
   text-align: center;
 }
 
+
 /* =========================
-   TABLET / MOBILE
+   MOBILE
 ========================= */
 
 @media (max-width: 600px) {
@@ -526,7 +534,13 @@ textarea.ng-invalid.ng-touched:focus {
 
     font-size: 0.8rem;
   }
+
 }
+
+
+/* =========================
+   VERY SMALL PHONES
+========================= */
 
 @media (max-width: 380px) {
 
@@ -558,4 +572,5 @@ textarea.ng-invalid.ng-touched:focus {
   .submit-button {
     font-size: 0.9rem;
   }
+
 }
