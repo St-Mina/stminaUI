@@ -26,6 +26,7 @@
   padding: 56px 0 34px;
   background: var(--navy);
   color: var(--white);
+  text-align: center;
 }
 
 .hero h1,
@@ -38,14 +39,6 @@
   font-size: 48px;
   line-height: 1.05;
   font-weight: 600;
-}
-
-.hero-subtitle {
-  margin: 10px 0 0;
-  color: var(--sand);
-  font-size: 18px;
-  line-height: 28px;
-  font-weight: 500;
 }
 
 .eyebrow {
