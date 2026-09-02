@@ -30,6 +30,10 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/prayer-request/component').then((m) => m.PrayerRequestComponent),
   },
   {
+    path: 'visitation-request',
+    loadComponent: () => import('./pages/visitation-request/component').then((m) => m.VisitationRequestComponent),
+  },
+  {
     path: 'gallery',
     loadComponent: () => import('./pages/gallery/gallery').then((m) => m.Gallery),
   },
