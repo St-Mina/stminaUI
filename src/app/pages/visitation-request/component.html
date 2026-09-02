@@ -1,1 +1,288 @@
+<section class="visitation-page">
 
+  <div class="visitation-container">
+
+    <!-- =========================
+         PAGE HEADING
+    ========================== -->
+
+    <div class="visitation-heading">
+
+      <h1>
+        Visitation Request
+      </h1>
+
+      <p class="intro">
+        Request a pastoral visit for you and your family
+      </p>
+
+    </div>
+
+    <!-- =========================
+         FORM
+    ========================== -->
+
+    <form
+      class="visitation-form"
+      [formGroup]="visitationForm"
+      (ngSubmit)="submitVisitationRequest()"
+    >
+
+      <!-- =========================
+           CONTACT INFORMATION
+      ========================== -->
+
+      <div class="form-card">
+
+        <div class="section-heading">
+
+          <h2>
+            Contact Information
+          </h2>
+
+          <p>
+            Please provide your contact and household information
+            so we can properly arrange your visitation.
+          </p>
+
+        </div>
+
+        <!-- FULL NAME -->
+
+        <div class="form-group">
+
+          <label for="fullName">
+            Full Name
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="fullName"
+            type="text"
+            formControlName="fullName"
+            placeholder="Enter your full name"
+            autocomplete="name"
+          />
+
+          <p
+            class="field-error"
+            *ngIf="
+              visitationForm.get('fullName')?.touched &&
+              visitationForm.get('fullName')?.invalid
+            "
+          >
+            Please enter your full name.
+          </p>
+
+        </div>
+
+
+        <!-- CHOOSE A PRIEST -->
+
+        <div class="form-group">
+
+          <label for="priest">
+            Choose a Priest
+            <span class="required">*</span>
+          </label>
+
+          <div class="select-wrapper">
+
+            <select
+              id="priest"
+              formControlName="priest"
+            >
+
+              <option
+                value=""
+                disabled
+              >
+                Select a priest
+              </option>
+
+              <option
+                *ngFor="let priest of priests"
+                [value]="priest.value"
+              >
+                {{ priest.label }}
+              </option>
+
+            </select>
+
+          </div>
+
+          <p
+            class="field-error"
+            *ngIf="
+              visitationForm.get('priest')?.touched &&
+              visitationForm.get('priest')?.invalid
+            "
+          >
+            Choose a priest.
+          </p>
+
+        </div>
+
+
+        <!-- FULL ADDRESS -->
+
+        <div class="form-group">
+
+          <label for="address">
+            Full Address
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="address"
+            type="text"
+            formControlName="address"
+            placeholder="Street address, city, state, ZIP code"
+            autocomplete="street-address"
+          />
+
+          <p
+            class="field-error"
+            *ngIf="
+              visitationForm.get('address')?.touched &&
+              visitationForm.get('address')?.invalid
+            "
+          >
+            Please enter a valid full address.
+          </p>
+
+        </div>
+
+
+        <!-- PHONE NUMBER -->
+
+        <div class="form-group">
+
+          <label for="phone">
+            Phone Number
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="phone"
+            type="tel"
+            formControlName="phone"
+            placeholder="6151231234"
+            autocomplete="tel"
+            inputmode="numeric"
+            maxlength="15"
+            (input)="onPhoneInput($event)"
+          />
+
+          <p
+            class="field-error"
+            *ngIf="
+              visitationForm.get('phone')?.touched &&
+              visitationForm.get('phone')?.invalid
+            "
+          >
+            Please enter a valid phone number using numbers only.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           FAMILY MEMBERS
+      ========================== -->
+
+      <div class="form-card">
+
+        <div class="section-heading">
+
+          <h2>
+            Family Members
+            <span class="required">*</span>
+          </h2>
+
+          <p>
+            Please list the names of all family members who will
+            be part of the visitation.
+          </p>
+
+        </div>
+
+
+        <div class="form-group family-field">
+
+          <textarea
+            id="familyMembers"
+            formControlName="familyMembers"
+            placeholder="Enter the names of your family members..."
+          ></textarea>
+
+          <p
+            class="field-error"
+            *ngIf="
+              visitationForm.get('familyMembers')?.touched &&
+              visitationForm.get('familyMembers')?.invalid
+            "
+          >
+            Please enter the names of your family members.
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- =========================
+           SELECTED PRIEST
+      ========================== -->
+
+      <div
+        class="selected-priest"
+        *ngIf="selectedPriestName"
+      >
+
+        <span>
+          Sending to:
+        </span>
+
+        <strong>
+          {{ selectedPriestName }}
+        </strong>
+
+      </div>
+
+      <!-- =========================
+           SUBMIT
+      ========================== -->
+
+      <button
+        class="submit-button"
+        type="submit"
+        [disabled]="visitationForm.invalid"
+      >
+
+        <svg
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M3.4 20.4 22 12 3.4 3.6 3 10l13 2-13 2 .4 6.4Z"
+          />
+        </svg>
+
+        <span>
+          Continue
+        </span>
+
+      </button>
+
+
+      <p class="submit-note">
+        All required information must be completed before continuing.
+      </p>
+
+    </form>
+    
+  </div>
+  
+</section>
