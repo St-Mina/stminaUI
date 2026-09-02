@@ -1,139 +1,127 @@
-@if (gallery) {
+<div class="gallery-detail-page">
 
-  <div class="gallery-detail-page">
+  <!-- =========================
+       HERO
+  ========================== -->
 
-    <!-- =========================
-         HERO
-    ========================== -->
+  <section class="gallery-detail-hero">
 
-    <section class="gallery-detail-hero">
+    <div class="gallery-detail-hero-content">
 
-      <div class="gallery-detail-hero-content">
+      <a
+        routerLink="/gallery"
+        class="back-to-gallery"
+      >
+        ← GALLERIES
+      </a>
 
-        <a
-          routerLink="/gallery"
-          class="back-to-gallery"
-        >
-          ← GALLERIES
-        </a>
+      <h1>
+        {{ title }}
+      </h1>
 
-        <h1>
-          {{ gallery.title }}
-        </h1>
+    </div>
 
-      </div>
-
-    </section>
+  </section>
 
 
-    <!-- =========================
-         PHOTOS
-    ========================== -->
+  <!-- =========================
+       PHOTOS
+  ========================== -->
 
-    <section class="photos-section">
+  <section class="photos-section">
 
-      <div class="photos-container">
+    <div class="photos-container">
 
-        <div class="photos-grid">
+      <div class="photos-grid">
 
-          @for (
-            image of gallery.images;
-            track image;
-            let index = $index
-          ) {
+        @for (
+          image of images;
+          track image;
+          let index = $index
+        ) {
 
-            <button
-              type="button"
-              class="photo-card"
-              (click)="openImage(index)"
-              [attr.aria-label]="'Open photo ' + (index + 1)"
-            >
+          <button
+            type="button"
+            class="photo-card"
+            (click)="openImage(index)"
+            [attr.aria-label]="'Open photo ' + (index + 1)"
+          >
 
-              <img
-                [src]="image"
-                [alt]="gallery.title + ' photo ' + (index + 1)"
-                loading="lazy"
-              />
+            <img
+              [src]="image"
+              [alt]="title + ' photo ' + (index + 1)"
+              loading="lazy"
+            />
 
-            </button>
+          </button>
 
-          }
-
-        </div>
+        }
 
       </div>
 
-    </section>
+    </div>
+
+  </section>
 
 
-    <!-- =========================
-         LIGHTBOX
-    ========================== -->
+  <!-- =========================
+       LIGHTBOX
+  ========================== -->
 
-    @if (selectedImageIndex() !== null) {
+  @if (selectedImageIndex() !== null) {
+
+    <div
+      class="lightbox"
+      (click)="closeImage()"
+    >
+
+      <button
+        type="button"
+        class="lightbox-close"
+        (click)="closeImage(); $event.stopPropagation()"
+        aria-label="Close image"
+      >
+        ×
+      </button>
+
+
+      <button
+        type="button"
+        class="lightbox-arrow lightbox-arrow-left"
+        (click)="previousImage(); $event.stopPropagation()"
+        aria-label="Previous image"
+      >
+        ‹
+      </button>
+
 
       <div
-        class="lightbox"
-        (click)="closeImage()"
+        class="lightbox-image-wrapper"
+        (click)="$event.stopPropagation()"
       >
 
-        <button
-          type="button"
-          class="lightbox-close"
-          (click)="closeImage(); $event.stopPropagation()"
-          aria-label="Close image"
-        >
-          ×
-        </button>
-
-
-        <button
-          type="button"
-          class="lightbox-arrow lightbox-arrow-left"
-          (click)="previousImage(); $event.stopPropagation()"
-          aria-label="Previous image"
-        >
-          ‹
-        </button>
-
-
-        <div
-          class="lightbox-image-wrapper"
-          (click)="$event.stopPropagation()"
-        >
-
-          <img
-            [src]="gallery.images[selectedImageIndex()!]"
-            [alt]="gallery.title"
-          />
-
-        </div>
-
-
-        <button
-          type="button"
-          class="lightbox-arrow lightbox-arrow-right"
-          (click)="nextImage(); $event.stopPropagation()"
-          aria-label="Next image"
-        >
-          ›
-        </button>
+        <img
+          [src]="images[selectedImageIndex()!]"
+          [alt]="title"
+        />
 
       </div>
 
-    }
 
-  </div>
+      <button
+        type="button"
+        class="lightbox-arrow lightbox-arrow-right"
+        (click)="nextImage(); $event.stopPropagation()"
+        aria-label="Next image"
+      >
+        ›
+      </button>
 
-} @else {
+    </div>
 
-  <div class="gallery-not-found">
+  }
 
-    <h1>Gallery not found</h1>
-
-    <a routerLink="/gallery">
-      Return to Gallery
-    </a>
+</div>
 
   </div>
 
