@@ -1,1 +1,561 @@
+$navy: #1a2a4a;
+$navy-light: #243556;
+$gold: #c9a84c;
+$cream: #f5f5f0;
+$white: #ffffff;
 
+$text: #253047;
+$text-muted: #687080;
+$border: #d9dce2;
+$error: #a64242;
+
+
+/* =========================
+   PAGE
+========================= */
+
+.visitation-page {
+  min-height: 100vh;
+
+  padding: 9rem 1.25rem 6rem;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      $cream 100%
+    );
+}
+
+.visitation-container {
+  width: 100%;
+  max-width: 780px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.visitation-heading {
+  max-width: 720px;
+
+  margin: 0 auto 3rem;
+
+  text-align: center;
+}
+
+.visitation-heading h1 {
+  margin: 0;
+
+  color: $navy;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.intro {
+  max-width: 680px;
+
+  margin: 1.25rem auto 0;
+
+  color: $text-muted;
+
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.visitation-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 1.5rem;
+}
+
+
+/* =========================
+   FORM CARDS
+========================= */
+
+.form-card {
+  padding: 2rem;
+
+  border: 1px solid rgba($navy, 0.1);
+  border-radius: 14px;
+
+  background: $white;
+
+  box-shadow:
+    0 8px 26px rgba(20, 32, 54, 0.06);
+}
+
+
+/* =========================
+   SECTION HEADINGS
+========================= */
+
+.section-heading {
+  margin-bottom: 1.75rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+
+  color: $navy;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 1.45rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.section-heading p {
+  margin: 0.7rem 0 0;
+
+  color: $text-muted;
+
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+
+/* =========================
+   FORM GROUPS
+========================= */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 1.45rem;
+}
+
+.form-group:first-of-type {
+  margin-top: 0;
+}
+
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+  margin-bottom: 0.55rem;
+
+  color: $navy;
+
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.required {
+  margin-left: 0.15rem;
+
+  color: #b64b42;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+input,
+select,
+textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  border: 1px solid $border;
+  border-radius: 9px;
+
+  background: $white;
+
+  color: $text;
+
+  font-family: inherit;
+  font-size: 1rem;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+input,
+select {
+  min-height: 56px;
+
+  padding: 0 1rem;
+}
+
+textarea {
+  min-height: 190px;
+
+  padding: 1rem;
+
+  resize: vertical;
+
+  line-height: 1.65;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ba1ab;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: rgba($navy, 0.3);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: $gold;
+
+  box-shadow:
+    0 0 0 3px rgba($gold, 0.14);
+}
+
+
+/* =========================
+   SELECT
+========================= */
+
+.select-wrapper {
+  position: relative;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+
+  padding-right: 3rem;
+
+  cursor: pointer;
+}
+
+.select-wrapper::after {
+  content: '';
+
+  position: absolute;
+
+  top: 50%;
+  right: 1.2rem;
+
+  width: 8px;
+  height: 8px;
+
+  border-right: 2px solid $navy;
+  border-bottom: 2px solid $navy;
+
+  transform:
+    translateY(-70%)
+    rotate(45deg);
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   INVALID FIELDS
+========================= */
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border-color: rgba($error, 0.7);
+}
+
+input.ng-invalid.ng-touched:focus,
+select.ng-invalid.ng-touched:focus,
+textarea.ng-invalid.ng-touched:focus {
+  border-color: $error;
+
+  box-shadow:
+    0 0 0 3px rgba($error, 0.1);
+}
+
+
+/* =========================
+   ERRORS
+========================= */
+
+.field-error {
+  margin: 0.45rem 0 0;
+
+  color: $error;
+
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+
+/* =========================
+   SELECTED PRIEST
+========================= */
+
+.selected-priest {
+  display: flex;
+  flex-wrap: wrap;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.4rem;
+
+  padding: 0.95rem 1rem;
+
+  border: 1px solid rgba($gold, 0.3);
+  border-radius: 9px;
+
+  background: rgba($gold, 0.08);
+
+  color: $text-muted;
+
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.selected-priest strong {
+  color: $navy;
+
+  font-weight: 700;
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.submit-button {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.7rem;
+
+  width: 100%;
+
+  min-height: 60px;
+
+  padding: 0.85rem 1.5rem;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: $navy;
+
+  color: $white;
+
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.4;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.submit-button svg {
+  width: 21px;
+  height: 21px;
+
+  flex-shrink: 0;
+
+  fill: currentColor;
+}
+
+.submit-button:hover:not(:disabled) {
+  background: $navy-light;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 20px rgba($navy, 0.18);
+}
+
+.submit-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-button:disabled {
+  opacity: 0.48;
+
+  cursor: not-allowed;
+}
+
+.submit-note {
+  max-width: 680px;
+
+  margin: -0.25rem auto 0;
+
+  color: $text-muted;
+
+  font-size: 0.84rem;
+  line-height: 1.7;
+
+  text-align: center;
+}
+
+/* =========================
+   TABLET / MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+  .visitation-page {
+    padding:
+      4.75rem
+      1rem
+      4rem;
+  }
+
+  .visitation-heading {
+    margin-bottom: 2.25rem;
+  }
+
+  .visitation-heading h1 {
+    font-size: 2.15rem;
+
+    line-height: 1.35;
+  }
+
+  .intro {
+    margin-top: 1rem;
+
+    font-size: 0.97rem;
+    line-height: 1.75;
+  }
+
+  .visitation-form {
+    gap: 1.25rem;
+  }
+
+  .form-card {
+    padding:
+      1.5rem
+      1.2rem;
+  }
+
+  .section-heading {
+    margin-bottom: 1.4rem;
+  }
+
+  .section-heading h2 {
+    font-size: 1.28rem;
+  }
+
+  .section-heading p {
+    font-size: 0.9rem;
+
+    line-height: 1.75;
+  }
+
+  .form-group {
+    margin-top: 1.3rem;
+  }
+
+  label {
+    font-size: 0.93rem;
+  }
+
+  input,
+  select {
+    min-height: 54px;
+
+    font-size: 16px;
+  }
+
+  textarea {
+    min-height: 190px;
+
+    font-size: 16px;
+  }
+
+  .selected-priest {
+    padding:
+      0.9rem
+      0.8rem;
+
+    font-size: 0.85rem;
+  }
+
+  .submit-button {
+    min-height: 58px;
+
+    padding:
+      0.9rem
+      1rem;
+
+    font-size: 0.95rem;
+  }
+
+  .submit-button svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .submit-note {
+    padding: 0 0.25rem;
+
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .visitation-page {
+    padding:
+      4.5rem
+      0.8rem
+      3.5rem;
+  }
+
+  .visitation-heading h1 {
+    font-size: 1.9rem;
+  }
+
+  .intro {
+    font-size: 0.92rem;
+  }
+
+  .form-card {
+    padding:
+      1.3rem
+      1rem;
+  }
+
+  .section-heading h2 {
+    font-size: 1.2rem;
+  }
+
+  .submit-button {
+    font-size: 0.9rem;
+  }
+}
