@@ -914,8 +914,6 @@ $bg-warm: #f0ebe1;
 .pastoral-services-section {
   background: $bg-light;
 
-  // Prevent iPhone/Safari text-size controls
-  // from enlarging this section's text.
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
 }
@@ -975,9 +973,19 @@ $bg-warm: #f0ebe1;
   text-size-adjust: none !important;
 }
 
-// PRAYER REQUEST BUTTON
+// PASTORAL SERVICE BUTTONS
 
-.pastoral-prayer-link {
+.pastoral-services-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+
+  gap: 1rem;
+}
+
+.pastoral-service-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1046,17 +1054,21 @@ $bg-warm: #f0ebe1;
     text-size-adjust: none !important;
   }
 
-  .pastoral-prayer-link {
-    max-width: 340px;
-    min-height: 52px;
+.pastoral-services-links {
+  gap: 0.9rem;
+}
 
-    padding: 8px 12px;
+.pastoral-service-link {
+  max-width: 340px;
+  min-height: 52px;
 
-    font-size: 15px !important;
+  padding: 8px 12px;
 
-    -webkit-text-size-adjust: none !important;
-    text-size-adjust: none !important;
-  }
+  font-size: 15px !important;
+
+  -webkit-text-size-adjust: none !important;
+  text-size-adjust: none !important;
+ }
 }
 
 // --- Prayer Meeting ---
