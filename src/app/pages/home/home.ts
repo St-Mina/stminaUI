@@ -186,7 +186,7 @@ announcementIndex = 0;
       name: 'Fr. Kyrillos Zaki',
       role: 'Priest of St. Mina Coptic Orthodox Church',
       summary:
-        'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States. He was ordained by H.E. Metropolitan Youssef, H.E. Metropolitan Youannes, H.G. Bishop Basil, and H.G. Bishop Gregory at St. Mina Church',
+        'Ordained in 2025, Fr. Kyrillos serves the St. Mina congregation in Nashville within the Diocese of the Southern United States. He was ordained by H.E. Metropolitan Youssef, H.E. Metropolitan Youannes, H.G. Bishop Basil, and H.G. Bishop Gregory at St. Mina Church.',
       email: 'frkyrilloszaki@gmail.com',
       phone: '(615) 243-5636',
       confessionCalendar: 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2ViJLSJ3eEHFsY0EOWxK3Va7pgk4Z-xSF9lmspVGPobptc-p3F7shXkryU2H4K3wExa7mWSKSb',
