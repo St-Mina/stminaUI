@@ -295,12 +295,12 @@
             <p class="clergy-summary" [class.is-expanded]="isClergyExpanded(member.name)">
             {{ member.summary }}
             
-<strong class="clergy-email">
-  Email:
-  <a [href]="'mailto:' + member.email">
-    {{ member.email }}
-  </a>
-</strong>
+       <strong class="clergy-email">
+         Email:
+         <a [href]="'mailto:' + member.email">
+           {{ member.email }}
+         </a>
+       </strong>
 
         <br><br>
 
@@ -352,13 +352,6 @@
       <div class="pastoral-services-links">
 
         <a
-          routerLink="/prayer-request"
-          class="pastoral-service-link"
-        >
-          Prayer Request
-        </a>
-
-        <a
           routerLink="/visitation-request"
           class="pastoral-service-link"
         >
@@ -405,7 +398,7 @@
   </div>
 </section>
 
-<!-- Featured Website -->
+<!-- St. Clement Academy Website -->
 <section class="section featured-website-section">
   <div class="container">
     <div class="featured-website-card">
