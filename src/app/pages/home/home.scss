@@ -926,12 +926,12 @@ $bg-warm: #f0ebe1;
 
   width: 100%;
   max-width: 900px;
-  min-height: 290px;
+  min-height: 230px;
 
   margin: 0 auto;
-  padding: 3.5rem 2rem;
+  padding: 3rem 2rem;
 
-  gap: 2rem;
+  gap: 1.75rem;
 
   box-sizing: border-box;
 
@@ -1036,39 +1036,35 @@ $bg-warm: #f0ebe1;
 @media (max-width: 768px) {
 
   .pastoral-services-card {
-    min-height: 230px;
-
-    padding: 2.5rem 1rem;
-
-    gap: 1.6rem;
-
+    min-height: 190px;
+    padding: 2.25rem 1rem;
+    gap: 1.4rem;
     border-radius: 16px;
   }
 
   .pastoral-services-title {
     font-size: 20px !important;
-
     line-height: 1.2;
 
     -webkit-text-size-adjust: none !important;
     text-size-adjust: none !important;
   }
 
-.pastoral-services-links {
-  gap: 0.9rem;
-}
+  .pastoral-services-links {
+    gap: 0.9rem;
+  }
 
-.pastoral-service-link {
-  max-width: 340px;
-  min-height: 52px;
+  .pastoral-service-link {
+    max-width: 340px;
+    min-height: 52px;
 
-  padding: 8px 12px;
+    padding: 8px 12px;
 
-  font-size: 15px !important;
+    font-size: 15px !important;
 
-  -webkit-text-size-adjust: none !important;
-  text-size-adjust: none !important;
- }
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+  }
 }
 
 // --- Prayer Meeting ---
