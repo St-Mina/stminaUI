@@ -6,11 +6,11 @@ export interface HeroAnnouncementItem {
 export const heroAnnouncements = [
   {
     message:
-      'Family Meeting with H.G. Bishop Philopateer on Friday at 6:30 pm',
+      'Mahragan El-Keraza Carnival Registeration is open',
   },
   {
     message:
-      'اجتماع الأسرة مع نيافة الأنبا فيلوباتير يوم الجمعة الساعة ٦:٣٠',
+      ' التسجيل مفتوح لكرنفال مهرجان الكرازة',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
