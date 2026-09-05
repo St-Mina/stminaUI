@@ -106,7 +106,7 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/BishopSchedule.jpg',
+    src: 'assets/announcements/Carnival.jpg',
     alt: 'Church announcement 1',
   },
   {
@@ -122,7 +122,7 @@ readonly announcementSlides = [
     alt: 'Church announcement 5',
   },
      {
-    src: 'assets/announcements/IMG_2133.jpeg',
+    src: 'assets/announcements/Convention.JPG',
     alt: 'Church announcement 6',
   }, 
   {
