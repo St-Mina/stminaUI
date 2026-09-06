@@ -134,16 +134,12 @@ readonly announcementSlides = [
     alt: 'Church announcement 8',
   },
   {
-    src: 'assets/announcements/IMG_2103.jpeg',
+    src: 'assets/announcements/IMG_2105.jpeg',
     alt: 'Church announcement 9',
   },
   {
-    src: 'assets/announcements/IMG_2105.jpeg',
-    alt: 'Church announcement 10',
-  },
-  {
     src: 'assets/announcements/IMG_2108.jpeg',
-    alt: 'Church announcement 11',
+    alt: 'Church announcement 10',
   },
 ];
 
