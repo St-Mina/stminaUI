@@ -6,7 +6,7 @@ export interface HeroAnnouncementItem {
 export const heroAnnouncements = [
   {
     message:
-      'Mahragan El-Keraza Carnival Registeration is open',
+      'St. Mark Festival Carnival Registeration is open',
   },
   {
     message:
