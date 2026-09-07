@@ -10,7 +10,15 @@ export const heroAnnouncements = [
   },
   {
     message:
-      ' التسجيل مفتوح لكرنفال مهرجان الكرازة',
+      'التسجيل مفتوح لكرنفال مهرجان الكرازة',
+  },
+  {
+    message:
+      'Family Meeting with H.G. Bishop Elarion',
+  },
+  {
+    message:
+      'اجتماع الأسرة مع نيافة الأنبا إيلاريون',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
