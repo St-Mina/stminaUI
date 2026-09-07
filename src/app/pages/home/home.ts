@@ -159,7 +159,7 @@ announcementIndex = 0;
       name: 'Fr. Boutros Boutros',
       role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
       summary:
-        'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades. He was ordained priest by H.E. Metropolitan Youssef, H.E. Metropolitan Serapion, and the Reposed H.G. Bishop Karas at St. Mary Church in Colleyville, Texas.',
+        'Ordained in 1997 and elevated to hegumen in 2017, Fr. Boutros has served St. Mina and the Southern Diocese for more than two decades. He was ordained priest by H.E. Metropolitan Youssef, H.E. Metropolitan Serapion, and the reposed H.G. Bishop Karas at St. Mary Church in Colleyville, Texas.',
       email: 'frbboutros@gmail.com',
       phone: '(615) 293-1008',
       imageSrc: 'assets/images/clergy/FrBoutrosBoutros.webp',
@@ -171,7 +171,7 @@ announcementIndex = 0;
       name: 'Fr. Youaness Seraphim',
       role: 'Hegumen and priest of St. Mina Coptic Orthodox Church',
       summary:
-        'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness served churches throughout the Southern Diocese, especially in Nashville. Currently, he serves at St. Mina. He was ordained priest by the Reposed H.E. Metropolitan Arsanious at St. Mary Church in Abu Qurqas, Egypt.',
+        'Ordained in 1978 and elevated to hegumen in 2005, Fr. Youaness served churches throughout the Southern Diocese, especially in Nashville. Currently, he serves at St. Mina. He was ordained priest by the reposed H.E. Metropolitan Arsanious at St. Mary Church in Abu Qurqas, Egypt.',
       email: 'fr.yoaness1950@gmail.com',
       phone: '(615) 500-1950',
       imageSrc: 'assets/images/clergy/FrYoanessSerafeem.webp',
