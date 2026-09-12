@@ -14,11 +14,11 @@ export const heroAnnouncements = [
   },
   {
     message:
-      'Family Meeting with H.G. Bishop Elarion',
+      'Friday Liturgy will be with H.G. Bishop Elarion',
   },
   {
     message:
-      'اجتماع الأسرة مع نيافة الأنبا إيلاريون',
+      'قداس يوم الجمعة بحضور نيافة الأنبا إيلاريون',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
