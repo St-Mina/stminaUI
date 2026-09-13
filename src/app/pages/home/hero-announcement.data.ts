@@ -18,7 +18,7 @@ export const heroAnnouncements = [
   },
   {
     message:
-      'قداس يوم الجمعة بحضور نيافة الأنبا إيلاريون',
+      'قداس يوم الجمعة مع نيافة الأنبا إيلاريون',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
