@@ -139,7 +139,7 @@ $bg-warm: #f0ebe1;
 @media (max-width: 768px) and (orientation: portrait) {
   .hero-content {
     padding-inline: 4.75rem;
-    transform: translateY(5rem);
+    transform: translateY(6rem);
   }
 }
 
@@ -281,6 +281,8 @@ $bg-warm: #f0ebe1;
   flex-wrap: wrap;
   gap: 1rem;
   width: 100%;
+
+  transform: translateX(12px);
 }
 
 // Shared Button Styling
@@ -354,17 +356,27 @@ $bg-warm: #f0ebe1;
 
 @media (max-width: 768px) {
 
+  .hero {
+    min-height: 85vh;
+    min-height: 85svh;
+  }
+
+  .hero-content {
+    transform: translateY(3rem);
+  }
+
   .hero-actions {
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.6rem;
+    transform: none;
   }
 
   .hero-actions .btn {
     width: 100%;
-    max-width: 260px;
-    min-height: 46px;
-    padding: 0.7rem 1rem;
-    font-size: 0.9rem;
+    max-width: 245px;
+    min-height: 40px;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -1282,9 +1294,6 @@ $bg-warm: #f0ebe1;
 
 // --- Responsive ---
 @media (max-width: 768px) {
-  .hero {
-    min-height: 75vh;
-  }
 
   .hero-content {
     padding-inline: 4.75rem;
