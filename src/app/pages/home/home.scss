@@ -136,13 +136,6 @@ $bg-warm: #f0ebe1;
   object-position: center 15%;
 }
 
-@media (max-width: 768px) and (orientation: portrait) {
-  .hero-content {
-    padding-inline: 4.75rem;
-    transform: translateY(6rem);
-  }
-}
-
 @media (max-width: 768px) {
   .hero-slide.st-mina-slide {
     object-position: 48% center;
@@ -1347,6 +1340,13 @@ $bg-warm: #f0ebe1;
 
   .news-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+// --- Desktop Hero Content Position ---
+@media (min-width: 769px) {
+  .hero-content {
+    transform: translateY(-2rem);
   }
 }
 
