@@ -29,7 +29,7 @@ export class Gallery {
       title: "H.G. Bishop Philopateer's Visit (2026)",
       slug: 'BishopPhilopateer2026',
       image: 'assets/gallery/BishopPhilopateer2026/DSC_3063.JPG'
-    }
+    },
     {
       title: "H.G. Bishop Makar's Visit (2026)",
       slug: 'BishopMakar2026',
