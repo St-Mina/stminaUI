@@ -12,14 +12,6 @@ export const heroAnnouncements = [
     message:
       'التسجيل مفتوح لكرنفال مهرجان الكرازة',
   },
-  {
-    message:
-      'Friday Liturgy will be with H.G. Bishop Elarion',
-  },
-  {
-    message:
-      'قداس يوم الجمعة مع نيافة الأنبا إيلاريون',
-  },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
 /** How many times the announcement set repeats inside each marquee half. */
