@@ -42,7 +42,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/gallery/gallery').then((m) => m.Gallery),
   },
 
-  <!-- Galleries -->
+  // Galleries
   
   {
     path: 'gallery/BishopPhilopateer2026',
