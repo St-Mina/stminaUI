@@ -85,12 +85,12 @@ export class Home {
     },
     {
       src: 'assets/images/imgAssets/StMinaHome.png',
-      alt: 'St. Mina Veneration',
+      alt: 'St. Mina Image',
     },
     {
       src: 'assets/images/imgAssets/ClergyImage.jpg',
       alt: 'St. Mina clergy during worship',
-      className: 'clergy-worship-slide',
+      className: 'Clergy Slide',
     },
   ];
 
@@ -106,8 +106,12 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/Carnival.jpg',
+    src: 'assets/announcements/pre-deacons.JPG',
     alt: 'Church announcement 1',
+  },
+  {
+    src: 'assets/announcements/Carnival.jpg',
+    alt: 'Church announcement 2',
   },
   {
     src: 'assets/announcements/IMG_2096.jpeg',
