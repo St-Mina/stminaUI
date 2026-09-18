@@ -30,6 +30,11 @@ export class Gallery {
       slug: 'BishopPhilopateer2026',
       image: 'assets/gallery/BishopPhilopateer2026/DSC_3063.JPG'
     }
+    {
+      title: "H.G. Bishop Makar's Visit (2026)",
+      slug: 'BishopMakar2026',
+      image: 'assets/gallery/BishopMakar2026/21.jpg'
+    }
   ];
 
   filteredGalleries = computed(() => {
