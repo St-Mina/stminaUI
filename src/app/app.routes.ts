@@ -41,9 +41,16 @@ export const routes: Routes = [
     path: 'gallery',
     loadComponent: () => import('./pages/gallery/gallery').then((m) => m.Gallery),
   },
+
+  <!-- Galleries -->
+  
   {
-  path: 'gallery/BishopPhilopateer2026',
-  loadComponent: () => import('./pages/gallery/BishopPhilopateer2026/component').then((m) => m.BishopPhilopateer2026),
+    path: 'gallery/BishopPhilopateer2026',
+    loadComponent: () => import('./pages/gallery/BishopPhilopateer2026/component').then((m) => m.BishopPhilopateer2026),
+  },
+  {
+    path: 'gallery/BishopMakar2026',
+    loadComponent: () => import('./pages/gallery/BishopMakar2026/component').then((m) => m.BishopMakar2026),
   },
   {
     path: '**',
