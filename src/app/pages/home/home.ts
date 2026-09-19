@@ -66,44 +66,48 @@ export class Home {
 
 readonly announcementSlides = [
   {
+    src: 'assets/announcements/MSGirls.JPG',
+    alt: 'Church announcement',
+  },
+  {
     src: 'assets/announcements/pre-deacons.JPG',
-    alt: 'Church announcement 1',
+    alt: 'Church announcement',
   },
   {
     src: 'assets/announcements/Carnival.jpg',
-    alt: 'Church announcement 2',
+    alt: 'Church announcement',
   },
   {
     src: 'assets/announcements/IMG_2096.jpeg',
-    alt: 'Church announcement 3',
+    alt: 'Church announcement',
   },
   {
     src: 'assets/announcements/IMG_2097.jpeg',
-    alt: 'Church announcement 4',
+    alt: 'Church announcement',
   },
   {
     src: 'assets/announcements/IMG_2098.jpeg',
-    alt: 'Church announcement 5',
+    alt: 'Church announcement',
   },
      {
     src: 'assets/announcements/IMG_2099.jpeg',
-    alt: 'Church announcement 6',
+    alt: 'Church announcement',
   }, 
   {
     src: 'assets/announcements/Convention.JPG',
-    alt: 'Church announcement 7',
+    alt: 'Church announcement',
   },
   {
     src: 'assets/announcements/BoldCon.JPG',
-    alt: 'Church announcement 8',
+    alt: 'Church announcement',
   },
   {
     src: 'assets/announcements/IMG_2105.jpeg',
-    alt: 'Church announcement 9',
+    alt: 'Church announcement',
   },
   {
     src: 'assets/announcements/IMG_2108.jpeg',
-    alt: 'Church announcement 10',
+    alt: 'Church announcement',
   },
 ];
 
