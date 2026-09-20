@@ -6,11 +6,11 @@ export interface HeroAnnouncementItem {
 export const heroAnnouncements = [
   {
     message:
-      'St. Mark Festival Carnival Registeration is open',
+      'One Liturgy next Sunday (Feast of the Cross)',
   },
   {
     message:
-      'التسجيل مفتوح لكرنفال مهرجان الكرازة',
+     ,'قداس واحد الأحد القادم (عيد الصليب)'
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
