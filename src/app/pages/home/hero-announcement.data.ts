@@ -5,13 +5,12 @@ export interface HeroAnnouncementItem {
 /** Add or edit entries for urgent parish notices (e.g. liturgy cancellations). */
 export const heroAnnouncements = [
   {
-    message:
-      'One Liturgy next Sunday (Feast of the Cross)',
+    message: 'One Liturgy next Sunday (Feast of the Cross)',
   },
   {
-    message:
-     ,'قداس واحد الأحد القادم (عيد الصليب)'
+    message: 'قداس واحد الأحد القادم (عيد الصليب)',
   },
+] as const satisfies readonly HeroAnnouncementItem[];
 ] as const satisfies readonly HeroAnnouncementItem[];
 
 /** How many times the announcement set repeats inside each marquee half. */
