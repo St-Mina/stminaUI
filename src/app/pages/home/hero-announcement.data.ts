@@ -11,7 +11,6 @@ export const heroAnnouncements = [
     message: 'قداس واحد الأحد القادم (عيد الصليب)',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
-] as const satisfies readonly HeroAnnouncementItem[];
 
 /** How many times the announcement set repeats inside each marquee half. */
 export const heroAnnouncementMarqueeCycleCount = 6;
