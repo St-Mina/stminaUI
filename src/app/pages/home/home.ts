@@ -77,6 +77,7 @@ readonly announcementSlides = [
     src: 'assets/announcements/IMG_2096.jpeg',
     alt: 'Church announcement',
   },
+  {
   src: 'assets/announcements/TEACH.JPG',
     alt: 'Church announcement',
   },
@@ -92,7 +93,7 @@ readonly announcementSlides = [
     src: 'assets/announcements/IMG_2098.jpeg',
     alt: 'Church announcement',
   },
-     {
+  {
     src: 'assets/announcements/IMG_2099.jpeg',
     alt: 'Church announcement',
   }, 
