@@ -105,6 +105,7 @@ readonly announcementSlides = [
     src: 'assets/announcements/IMG_2108.jpeg',
     alt: 'Church announcement',
   },
+];
 
 announcementIndex = 0;
 
