@@ -70,6 +70,10 @@ readonly announcementSlides = [
     alt: 'Church announcement',
   },
   {
+    src: 'assets/announcements/PriestsVisit.JPG',
+    alt: 'Church announcement',
+  },
+  {
     src: 'assets/announcements/MSGirls.JPG',
     alt: 'Church announcement',
   },
