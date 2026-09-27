@@ -5,10 +5,10 @@ export interface HeroAnnouncementItem {
 /** Add or edit entries for urgent parish notices (e.g. liturgy cancellations). */
 export const heroAnnouncements = [
   {
-    message: 'One Liturgy next Sunday at 7 am (Feast of the Cross)',
+    message: 'St. Mark Festival Carnival on Saturday (October 3) | 12:00 pm to 5:00 pm',
   },
   {
-    message: 'قداس واحد الأحد القادم الساعة ٧ص (عيد الصليب)',
+    message: 'كرنفال مهرجان الكرازة يوم السبت (٣ أكتوبر) | من الساعة 12:00 ظهراً - 5:00 مساءً',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
