@@ -112,6 +112,7 @@ readonly announcementSlides = [
 ];
 
 announcementIndex = 0;
+private touchStartX = 0;
 
   readonly latestNewsCards = latestNewsCards;
   readonly heroAnnouncements = heroAnnouncements;
@@ -201,6 +202,17 @@ showNextAnnouncement(): void {
 
 showAnnouncement(index: number): void {
   this.announcementIndex = index;
+}
+
+onAnnouncementTouchStart(event: TouchEvent): void {
+  this.touchStartX = event.changedTouches[0].clientX;
+}
+
+onAnnouncementTouchEnd(event: TouchEvent): void {
+  const difference = event.changedTouches[0].clientX - this.touchStartX;
+
+  if (difference > 50) this.showPreviousAnnouncement();
+  if (difference < -50) this.showNextAnnouncement();
 }
 
   isClergyExpanded(name: string): boolean {
