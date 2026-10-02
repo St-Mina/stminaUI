@@ -112,7 +112,11 @@
         &#10094;
       </button>
 
-      <div class="announcement-image-wrapper">
+        <div
+          class="announcement-image-wrapper"
+          (touchstart)="onAnnouncementTouchStart($event)"
+          (touchend)="onAnnouncementTouchEnd($event)"
+         >
         <img
           class="announcement-image"
           [src]="announcementSlides[announcementIndex].src"
