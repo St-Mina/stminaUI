@@ -10,9 +10,6 @@ export const heroAnnouncements = [
   {
    message: 'zeffy.com/ticketing/st-minas-shop'
   },
-  {
-    message: 'يسرنا تجديد فصول مدرسة الأحد. و نطلب مساعدتكم في شراء بعض اللوازم اللازمة لإكمال تجهيز الفصول',
-  },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
 /** How many times the announcement set repeats inside each marquee half. */
