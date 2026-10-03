@@ -5,10 +5,13 @@ export interface HeroAnnouncementItem {
 /** Add or edit entries for urgent parish notices (e.g. liturgy cancellations). */
 export const heroAnnouncements = [
   {
-    message: 'St. Mark Festival Carnival | Saturday (October 3) | 12:00 pm to 5:00 pm',
+    message: 'We are excited to be renovating our Sunday School classrooms, and we are asking for your help with purchasing some of the items needed to complete the classrooms',
   },
   {
-    message: 'كرنفال مهرجان الكرازة | يوم السبت (٣ أكتوبر) | من الساعة 12:00 ظهراً - 5:00 مساءً',
+   message: 'zeffy.com/ticketing/st-minas-shop'
+  },
+  {
+    message: 'يسرنا تجديد فصول مدرسة الأحد. و نطلب مساعدتكم في شراء بعض اللوازم اللازمة لإكمال تجهيز الفصول',
   },
 ] as const satisfies readonly HeroAnnouncementItem[];
 
