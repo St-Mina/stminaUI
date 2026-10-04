@@ -162,6 +162,30 @@ $bg-light: #F5F5F5;
     }
   }
 
+.featured-website-message {
+  width: 100%;
+  max-width: 620px;
+  margin-bottom: 1.75rem;
+
+  p {
+    margin: 0 0 0.9rem;
+    color: rgba($navy, 0.72);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+
+  .message-greeting {
+    margin-bottom: 0.4rem;
+    color: $navy;
+    font-weight: 700;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
   .featured-website-link {
     display: inline-flex;
     align-items: center;
