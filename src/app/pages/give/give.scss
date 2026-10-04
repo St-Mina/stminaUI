@@ -119,7 +119,7 @@ $bg-light: #F5F5F5;
     max-width: 520px;
     height: 240px;
 
-    margin: 0 auto 2rem;
+    margin: 0 auto 2.4rem;
 
     overflow: hidden;
     border-radius: 22px;
@@ -143,48 +143,42 @@ $bg-light: #F5F5F5;
     align-items: center;
 
     h2 {
-      margin: 0 0 1.25rem;
+      margin: 0 0 1.6rem;
 
       color: $navy;
-      font-size: clamp(1.6rem, 3vw, 2.1rem);
-      line-height: 1.15;
+      font-size: clamp(1.5rem, 2.6vw, 1.95rem);
+      line-height: 1.16;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+  }
+
+  .featured-website-message {
+    width: 100%;
+    max-width: 620px;
+    margin-bottom: 1.9rem;
+
+    p {
+      margin: 0 0 1rem;
+
+      color: rgba($navy, 0.7);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      text-align: left;
+    }
+
+    .message-greeting {
+      margin-bottom: 0.7rem;
+
+      color: $gold;
+      font-size: 1.08rem;
       font-weight: 700;
     }
 
-    p {
-      margin: 0 0 1.75rem;
-
-      color: rgba($navy, 0.68);
-      font-size: 1.05rem;
-      line-height: 1.6;
-
-      max-width: 590px;
+    p:last-child {
+      margin-bottom: 0;
     }
   }
-
-.featured-website-message {
-  width: 100%;
-  max-width: 620px;
-  margin-bottom: 1.75rem;
-
-  p {
-    margin: 0 0 0.9rem;
-    color: rgba($navy, 0.72);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    text-align: left;
-  }
-
-  .message-greeting {
-    margin-bottom: 0.4rem;
-    color: $navy;
-    font-weight: 700;
-  }
-
-  p:last-child {
-    margin-bottom: 0;
-  }
-}
 
   .featured-website-link {
     display: inline-flex;
@@ -228,20 +222,30 @@ $bg-light: #F5F5F5;
 
     .featured-website-logo {
       height: 190px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.9rem;
       border-radius: 18px;
     }
 
     .featured-website-content {
       h2 {
-        font-size: 1.7rem;
-        margin-bottom: 1rem;
+        font-size: 1.45rem;
+        line-height: 1.18;
+        margin-bottom: 1.35rem;
       }
+    }
+
+    .featured-website-message {
+      margin-bottom: 1.6rem;
 
       p {
         font-size: 0.98rem;
         line-height: 1.55;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.9rem;
+      }
+
+      .message-greeting {
+        font-size: 1rem;
+        margin-bottom: 0.55rem;
       }
     }
 
