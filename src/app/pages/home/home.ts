@@ -66,10 +66,6 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/PriestsVisit.JPG',
-    alt: 'Church announcement',
-  },
-  {
     src: 'assets/announcements/MSGirlsRetreat.JPG',
     alt: 'Church announcement',
   },
