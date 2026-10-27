@@ -66,7 +66,15 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/FallFestival.JPG',
+    src: 'assets/announcements/DeaconsMeeting.JPG',
+    alt: 'Church announcement',
+  },
+  {
+    src: 'assets/announcements/HolyFamilyEnglish.PNG',
+    alt: 'Church announcement',
+  },
+  {
+    src: 'assets/announcements/HolyFamilyArabic.PNG',
     alt: 'Church announcement',
   },
   {
@@ -78,11 +86,11 @@ readonly announcementSlides = [
     alt: 'Church announcement',
   },
   {
-    src: 'assets/announcements/MSGirls.JPG',
+    src: 'assets/announcements/HSGirlsConvention.JPG',
     alt: 'Church announcement',
   },
   {
-    src: 'assets/announcements/HSGirlsConvention.JPG',
+    src: 'assets/announcements/NewYearRetreat.JPG',
     alt: 'Church announcement',
   },
   {
