@@ -66,10 +66,6 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/DeaconsMeeting.JPG',
-    alt: 'Church announcement',
-  },
-  {
     src: 'assets/announcements/HolyFamilyEnglish.PNG',
     alt: 'Church announcement',
   },
