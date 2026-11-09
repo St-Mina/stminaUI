@@ -66,6 +66,10 @@ export class Home {
 
 readonly announcementSlides = [
   {
+    src: 'assets/announcements/HSTasbeha.PNG',
+    alt: 'Church announcement',
+  },
+  {
     src: 'assets/announcements/HolyFamilyEnglish.PNG',
     alt: 'Church announcement',
   },
@@ -83,10 +87,6 @@ readonly announcementSlides = [
   },
   {
     src: 'assets/announcements/NewYearRetreat.JPG',
-    alt: 'Church announcement',
-  },
-  {
-    src: 'assets/announcements/Encounter.JPG',
     alt: 'Church announcement',
   },
   {
