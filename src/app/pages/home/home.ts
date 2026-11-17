@@ -66,7 +66,7 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/HSTasbeha.PNG',
+    src: 'assets/announcements/StMinaRevival.JPG',
     alt: 'Church announcement',
   },
   {
