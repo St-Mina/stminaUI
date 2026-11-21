@@ -78,14 +78,6 @@ readonly announcementSlides = [
     alt: 'Church announcement',
   },
   {
-    src: 'assets/announcements/HolyFamilyEnglish.PNG',
-    alt: 'Church announcement',
-  },
-  {
-    src: 'assets/announcements/HolyFamilyArabic.PNG',
-    alt: 'Church announcement',
-  },
-  {
     src: 'assets/announcements/MSBoysConvention.JPG',
     alt: 'Church announcement',
   },
