@@ -66,7 +66,7 @@ export class Home {
 
 readonly announcementSlides = [
   {
-    src: 'assets/announcements/MSBoysConvention.JPG',
+    src: 'assets/announcements/ServantsMeeting.JPG',
     alt: 'Church announcement',
   },
   {
